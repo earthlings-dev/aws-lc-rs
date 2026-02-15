@@ -1,7 +1,7 @@
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX-License-Identifier: Apache-2.0 OR ISC
 
-#![allow(deprecated, dead_code)]
+#![allow(dead_code)]
 
 #[cfg(feature = "ring-sig-verify")]
 use aws_lc_rs::{test, test_file};
@@ -182,11 +182,8 @@ macro_rules! benchmark_ecdsa {
         msg: &[u8],
         signature: &[u8],
     ) {
-        let public_key = untrusted::Input::from(public_key);
-        let msg = untrusted::Input::from(msg);
-        let signature = untrusted::Input::from(signature);
         verification_alg
-            .verify(public_key, msg, signature)
+            .verify_sig(public_key, msg, signature)
             .expect("verification failed");
     }
 }

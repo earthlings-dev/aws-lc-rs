@@ -3606,7 +3606,7 @@ impl Default for aes_key_st {
     }
 }
 pub type AES_KEY = aes_key_st;
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_AES_set_encrypt_key"]
     pub fn AES_set_encrypt_key(
         key: *const u8,
@@ -3614,7 +3614,7 @@ extern "C" {
         aeskey: *mut AES_KEY,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_AES_set_decrypt_key"]
     pub fn AES_set_decrypt_key(
         key: *const u8,
@@ -3622,15 +3622,15 @@ extern "C" {
         aeskey: *mut AES_KEY,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_AES_encrypt"]
     pub fn AES_encrypt(in_: *const u8, out: *mut u8, key: *const AES_KEY);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_AES_decrypt"]
     pub fn AES_decrypt(in_: *const u8, out: *mut u8, key: *const AES_KEY);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_AES_ctr128_encrypt"]
     pub fn AES_ctr128_encrypt(
         in_: *const u8,
@@ -3642,7 +3642,7 @@ extern "C" {
         num: *mut ::std::os::raw::c_uint,
     );
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_AES_ecb_encrypt"]
     pub fn AES_ecb_encrypt(
         in_: *const u8,
@@ -3651,7 +3651,7 @@ extern "C" {
         enc: ::std::os::raw::c_int,
     );
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_AES_cbc_encrypt"]
     pub fn AES_cbc_encrypt(
         in_: *const u8,
@@ -3662,7 +3662,7 @@ extern "C" {
         enc: ::std::os::raw::c_int,
     );
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_AES_ofb128_encrypt"]
     pub fn AES_ofb128_encrypt(
         in_: *const u8,
@@ -3673,7 +3673,7 @@ extern "C" {
         num: *mut ::std::os::raw::c_int,
     );
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_AES_cfb1_encrypt"]
     pub fn AES_cfb1_encrypt(
         in_: *const u8,
@@ -3685,7 +3685,7 @@ extern "C" {
         enc: ::std::os::raw::c_int,
     );
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_AES_cfb8_encrypt"]
     pub fn AES_cfb8_encrypt(
         in_: *const u8,
@@ -3697,7 +3697,7 @@ extern "C" {
         enc: ::std::os::raw::c_int,
     );
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_AES_cfb128_encrypt"]
     pub fn AES_cfb128_encrypt(
         in_: *const u8,
@@ -3709,7 +3709,7 @@ extern "C" {
         enc: ::std::os::raw::c_int,
     );
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_AES_wrap_key"]
     pub fn AES_wrap_key(
         key: *const AES_KEY,
@@ -3719,7 +3719,7 @@ extern "C" {
         in_len: usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_AES_unwrap_key"]
     pub fn AES_unwrap_key(
         key: *const AES_KEY,
@@ -3729,7 +3729,7 @@ extern "C" {
         in_len: usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_AES_wrap_key_padded"]
     pub fn AES_wrap_key_padded(
         key: *const AES_KEY,
@@ -3740,7 +3740,7 @@ extern "C" {
         in_len: usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_AES_unwrap_key_padded"]
     pub fn AES_unwrap_key_padded(
         key: *const AES_KEY,
@@ -4017,11 +4017,11 @@ impl Default for buf_mem_st {
         }
     }
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_SHA1_Init"]
     pub fn SHA1_Init(sha: *mut SHA_CTX) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_SHA1_Update"]
     pub fn SHA1_Update(
         sha: *mut SHA_CTX,
@@ -4029,15 +4029,15 @@ extern "C" {
         len: usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_SHA1_Final"]
     pub fn SHA1_Final(out: *mut u8, sha: *mut SHA_CTX) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_SHA1"]
     pub fn SHA1(data: *const u8, len: usize, out: *mut u8) -> *mut u8;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_SHA1_Transform"]
     pub fn SHA1_Transform(sha: *mut SHA_CTX, block: *const u8);
 }
@@ -4099,11 +4099,11 @@ impl Default for sha_state_st {
         }
     }
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_SHA224_Init"]
     pub fn SHA224_Init(sha: *mut SHA256_CTX) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_SHA224_Update"]
     pub fn SHA224_Update(
         sha: *mut SHA256_CTX,
@@ -4111,19 +4111,19 @@ extern "C" {
         len: usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_SHA224_Final"]
     pub fn SHA224_Final(out: *mut u8, sha: *mut SHA256_CTX) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_SHA224"]
     pub fn SHA224(data: *const u8, len: usize, out: *mut u8) -> *mut u8;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_SHA256_Init"]
     pub fn SHA256_Init(sha: *mut SHA256_CTX) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_SHA256_Update"]
     pub fn SHA256_Update(
         sha: *mut SHA256_CTX,
@@ -4131,19 +4131,19 @@ extern "C" {
         len: usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_SHA256_Final"]
     pub fn SHA256_Final(out: *mut u8, sha: *mut SHA256_CTX) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_SHA256"]
     pub fn SHA256(data: *const u8, len: usize, out: *mut u8) -> *mut u8;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_SHA256_Transform"]
     pub fn SHA256_Transform(sha: *mut SHA256_CTX, block: *const u8);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_SHA256_TransformBlocks"]
     pub fn SHA256_TransformBlocks(state: *mut u32, data: *const u8, num_blocks: usize);
 }
@@ -4211,11 +4211,11 @@ impl Default for sha256_state_st {
         }
     }
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_SHA384_Init"]
     pub fn SHA384_Init(sha: *mut SHA512_CTX) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_SHA384_Update"]
     pub fn SHA384_Update(
         sha: *mut SHA512_CTX,
@@ -4223,19 +4223,19 @@ extern "C" {
         len: usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_SHA384_Final"]
     pub fn SHA384_Final(out: *mut u8, sha: *mut SHA512_CTX) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_SHA384"]
     pub fn SHA384(data: *const u8, len: usize, out: *mut u8) -> *mut u8;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_SHA512_Init"]
     pub fn SHA512_Init(sha: *mut SHA512_CTX) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_SHA512_Update"]
     pub fn SHA512_Update(
         sha: *mut SHA512_CTX,
@@ -4243,15 +4243,15 @@ extern "C" {
         len: usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_SHA512_Final"]
     pub fn SHA512_Final(out: *mut u8, sha: *mut SHA512_CTX) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_SHA512"]
     pub fn SHA512(data: *const u8, len: usize, out: *mut u8) -> *mut u8;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_SHA512_Transform"]
     pub fn SHA512_Transform(sha: *mut SHA512_CTX, block: *const u8);
 }
@@ -4319,11 +4319,11 @@ impl Default for sha512_state_st {
         }
     }
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_SHA512_224_Init"]
     pub fn SHA512_224_Init(sha: *mut SHA512_CTX) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_SHA512_224_Update"]
     pub fn SHA512_224_Update(
         sha: *mut SHA512_CTX,
@@ -4331,19 +4331,19 @@ extern "C" {
         len: usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_SHA512_224_Final"]
     pub fn SHA512_224_Final(out: *mut u8, sha: *mut SHA512_CTX) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_SHA512_224"]
     pub fn SHA512_224(data: *const u8, len: usize, out: *mut u8) -> *mut u8;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_SHA512_256_Init"]
     pub fn SHA512_256_Init(sha: *mut SHA512_CTX) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_SHA512_256_Update"]
     pub fn SHA512_256_Update(
         sha: *mut SHA512_CTX,
@@ -4351,42 +4351,42 @@ extern "C" {
         len: usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_SHA512_256_Final"]
     pub fn SHA512_256_Final(out: *mut u8, sha: *mut SHA512_CTX) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_SHA512_256"]
     pub fn SHA512_256(data: *const u8, len: usize, out: *mut u8) -> *mut u8;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_OPENSSL_malloc"]
     pub fn OPENSSL_malloc(size: usize) -> *mut ::std::os::raw::c_void;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_OPENSSL_zalloc"]
     pub fn OPENSSL_zalloc(size: usize) -> *mut ::std::os::raw::c_void;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_OPENSSL_calloc"]
     pub fn OPENSSL_calloc(num: usize, size: usize) -> *mut ::std::os::raw::c_void;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_OPENSSL_realloc"]
     pub fn OPENSSL_realloc(
         ptr: *mut ::std::os::raw::c_void,
         new_size: usize,
     ) -> *mut ::std::os::raw::c_void;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_OPENSSL_free"]
     pub fn OPENSSL_free(ptr: *mut ::std::os::raw::c_void);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_OPENSSL_cleanse"]
     pub fn OPENSSL_cleanse(ptr: *mut ::std::os::raw::c_void, len: usize);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CRYPTO_memcmp"]
     pub fn CRYPTO_memcmp(
         a: *const ::std::os::raw::c_void,
@@ -4394,62 +4394,62 @@ extern "C" {
         len: usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_OPENSSL_hash32"]
     pub fn OPENSSL_hash32(ptr: *const ::std::os::raw::c_void, len: usize) -> u32;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_OPENSSL_strhash"]
     pub fn OPENSSL_strhash(s: *const ::std::os::raw::c_char) -> u32;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_OPENSSL_strdup"]
     pub fn OPENSSL_strdup(s: *const ::std::os::raw::c_char) -> *mut ::std::os::raw::c_char;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_OPENSSL_strnlen"]
     pub fn OPENSSL_strnlen(s: *const ::std::os::raw::c_char, len: usize) -> usize;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_OPENSSL_isalpha"]
     pub fn OPENSSL_isalpha(c: ::std::os::raw::c_int) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_OPENSSL_isdigit"]
     pub fn OPENSSL_isdigit(c: ::std::os::raw::c_int) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_OPENSSL_isxdigit"]
     pub fn OPENSSL_isxdigit(c: ::std::os::raw::c_int) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_OPENSSL_fromxdigit"]
     pub fn OPENSSL_fromxdigit(out: *mut u8, c: ::std::os::raw::c_int) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_OPENSSL_hexstr2buf"]
     pub fn OPENSSL_hexstr2buf(str_: *const ::std::os::raw::c_char, len: *mut usize) -> *mut u8;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_OPENSSL_isalnum"]
     pub fn OPENSSL_isalnum(c: ::std::os::raw::c_int) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_OPENSSL_tolower"]
     pub fn OPENSSL_tolower(c: ::std::os::raw::c_int) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_OPENSSL_isspace"]
     pub fn OPENSSL_isspace(c: ::std::os::raw::c_int) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_OPENSSL_strcasecmp"]
     pub fn OPENSSL_strcasecmp(
         a: *const ::std::os::raw::c_char,
         b: *const ::std::os::raw::c_char,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_OPENSSL_strncasecmp"]
     pub fn OPENSSL_strncasecmp(
         a: *const ::std::os::raw::c_char,
@@ -4457,7 +4457,7 @@ extern "C" {
         n: usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BIO_snprintf"]
     pub fn BIO_snprintf(
         buf: *mut ::std::os::raw::c_char,
@@ -4466,7 +4466,7 @@ extern "C" {
         ...
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BIO_vsnprintf"]
     pub fn BIO_vsnprintf(
         buf: *mut ::std::os::raw::c_char,
@@ -4475,7 +4475,7 @@ extern "C" {
         args: *mut __va_list_tag,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_OPENSSL_vasprintf"]
     pub fn OPENSSL_vasprintf(
         str_: *mut *mut ::std::os::raw::c_char,
@@ -4483,7 +4483,7 @@ extern "C" {
         args: *mut __va_list_tag,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_OPENSSL_asprintf"]
     pub fn OPENSSL_asprintf(
         str_: *mut *mut ::std::os::raw::c_char,
@@ -4491,21 +4491,21 @@ extern "C" {
         ...
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_OPENSSL_strndup"]
     pub fn OPENSSL_strndup(
         str_: *const ::std::os::raw::c_char,
         size: usize,
     ) -> *mut ::std::os::raw::c_char;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_OPENSSL_memdup"]
     pub fn OPENSSL_memdup(
         data: *const ::std::os::raw::c_void,
         size: usize,
     ) -> *mut ::std::os::raw::c_void;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_OPENSSL_strlcpy"]
     pub fn OPENSSL_strlcpy(
         dst: *mut ::std::os::raw::c_char,
@@ -4513,7 +4513,7 @@ extern "C" {
         dst_size: usize,
     ) -> usize;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_OPENSSL_strlcat"]
     pub fn OPENSSL_strlcat(
         dst: *mut ::std::os::raw::c_char,
@@ -4521,7 +4521,7 @@ extern "C" {
         dst_size: usize,
     ) -> usize;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CRYPTO_malloc"]
     pub fn CRYPTO_malloc(
         size: usize,
@@ -4529,7 +4529,7 @@ extern "C" {
         line: ::std::os::raw::c_int,
     ) -> *mut ::std::os::raw::c_void;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CRYPTO_realloc"]
     pub fn CRYPTO_realloc(
         ptr: *mut ::std::os::raw::c_void,
@@ -4538,7 +4538,7 @@ extern "C" {
         line: ::std::os::raw::c_int,
     ) -> *mut ::std::os::raw::c_void;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CRYPTO_free"]
     pub fn CRYPTO_free(
         ptr: *mut ::std::os::raw::c_void,
@@ -4546,11 +4546,11 @@ extern "C" {
         line: ::std::os::raw::c_int,
     );
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_OPENSSL_clear_free"]
     pub fn OPENSSL_clear_free(ptr: *mut ::std::os::raw::c_void, len: usize);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CRYPTO_set_mem_functions"]
     pub fn CRYPTO_set_mem_functions(
         m: ::std::option::Option<
@@ -4577,59 +4577,59 @@ extern "C" {
         >,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CRYPTO_secure_malloc_init"]
     pub fn CRYPTO_secure_malloc_init(size: usize, min_size: usize) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CRYPTO_secure_malloc_initialized"]
     pub fn CRYPTO_secure_malloc_initialized() -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CRYPTO_secure_used"]
     pub fn CRYPTO_secure_used() -> usize;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_OPENSSL_secure_malloc"]
     pub fn OPENSSL_secure_malloc(size: usize) -> *mut ::std::os::raw::c_void;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_OPENSSL_secure_zalloc"]
     pub fn OPENSSL_secure_zalloc(size: usize) -> *mut ::std::os::raw::c_void;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_OPENSSL_secure_clear_free"]
     pub fn OPENSSL_secure_clear_free(ptr: *mut ::std::os::raw::c_void, len: usize);
 }
 pub type CRYPTO_refcount_t = u32;
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CRYPTO_library_init"]
     pub fn CRYPTO_library_init();
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CRYPTO_is_confidential_build"]
     pub fn CRYPTO_is_confidential_build() -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CRYPTO_has_asm"]
     pub fn CRYPTO_has_asm() -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BORINGSSL_self_test"]
     pub fn BORINGSSL_self_test() -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     pub fn BORINGSSL_integrity_test() -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CRYPTO_pre_sandbox_init"]
     pub fn CRYPTO_pre_sandbox_init();
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_FIPS_mode"]
     pub fn FIPS_mode() -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_FIPS_is_entropy_cpu_jitter"]
     pub fn FIPS_is_entropy_cpu_jitter() -> ::std::os::raw::c_int;
 }
@@ -4639,117 +4639,117 @@ pub const fips_counter_t_fips_counter_evp_aes_128_ctr: fips_counter_t = 2;
 pub const fips_counter_t_fips_counter_evp_aes_256_ctr: fips_counter_t = 3;
 pub const fips_counter_t_fips_counter_max: fips_counter_t = 3;
 pub type fips_counter_t = ::std::os::raw::c_uint;
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_FIPS_read_counter"]
     pub fn FIPS_read_counter(counter: fips_counter_t) -> usize;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_OpenSSL_version"]
     pub fn OpenSSL_version(which: ::std::os::raw::c_int) -> *const ::std::os::raw::c_char;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_SSLeay_version"]
     pub fn SSLeay_version(which: ::std::os::raw::c_int) -> *const ::std::os::raw::c_char;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_SSLeay"]
     pub fn SSLeay() -> ::std::os::raw::c_ulong;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_OpenSSL_version_num"]
     pub fn OpenSSL_version_num() -> ::std::os::raw::c_ulong;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_awslc_api_version_num"]
     pub fn awslc_api_version_num() -> ::std::os::raw::c_ulong;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CRYPTO_malloc_init"]
     pub fn CRYPTO_malloc_init() -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_OPENSSL_malloc_init"]
     pub fn OPENSSL_malloc_init() -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_ENGINE_load_builtin_engines"]
     pub fn ENGINE_load_builtin_engines();
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_ENGINE_register_all_ciphers"]
     pub fn ENGINE_register_all_ciphers();
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_ENGINE_register_all_digests"]
     pub fn ENGINE_register_all_digests();
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_ENGINE_register_all_complete"]
     pub fn ENGINE_register_all_complete() -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_OPENSSL_load_builtin_modules"]
     pub fn OPENSSL_load_builtin_modules();
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_OPENSSL_init_crypto"]
     pub fn OPENSSL_init_crypto(
         opts: u64,
         settings: *const OPENSSL_INIT_SETTINGS,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_OPENSSL_init"]
     pub fn OPENSSL_init();
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_OPENSSL_cleanup"]
     pub fn OPENSSL_cleanup();
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_FIPS_mode_set"]
     pub fn FIPS_mode_set(on: ::std::os::raw::c_int) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CRYPTO_mem_ctrl"]
     pub fn CRYPTO_mem_ctrl(mode: ::std::os::raw::c_int) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_ERR_load_BIO_strings"]
     pub fn ERR_load_BIO_strings();
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_ERR_load_ERR_strings"]
     pub fn ERR_load_ERR_strings();
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_ERR_load_CRYPTO_strings"]
     pub fn ERR_load_CRYPTO_strings();
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_ERR_load_crypto_strings"]
     pub fn ERR_load_crypto_strings();
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_ERR_load_RAND_strings"]
     pub fn ERR_load_RAND_strings();
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_ERR_free_strings"]
     pub fn ERR_free_strings();
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_ERR_get_error"]
     pub fn ERR_get_error() -> u32;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_ERR_get_error_line"]
     pub fn ERR_get_error_line(
         file: *mut *const ::std::os::raw::c_char,
         line: *mut ::std::os::raw::c_int,
     ) -> u32;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_ERR_get_error_line_data"]
     pub fn ERR_get_error_line_data(
         file: *mut *const ::std::os::raw::c_char,
@@ -4758,18 +4758,18 @@ extern "C" {
         flags: *mut ::std::os::raw::c_int,
     ) -> u32;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_ERR_peek_error"]
     pub fn ERR_peek_error() -> u32;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_ERR_peek_error_line"]
     pub fn ERR_peek_error_line(
         file: *mut *const ::std::os::raw::c_char,
         line: *mut ::std::os::raw::c_int,
     ) -> u32;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_ERR_peek_error_line_data"]
     pub fn ERR_peek_error_line_data(
         file: *mut *const ::std::os::raw::c_char,
@@ -4778,18 +4778,18 @@ extern "C" {
         flags: *mut ::std::os::raw::c_int,
     ) -> u32;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_ERR_peek_last_error"]
     pub fn ERR_peek_last_error() -> u32;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_ERR_peek_last_error_line"]
     pub fn ERR_peek_last_error_line(
         file: *mut *const ::std::os::raw::c_char,
         line: *mut ::std::os::raw::c_int,
     ) -> u32;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_ERR_peek_last_error_line_data"]
     pub fn ERR_peek_last_error_line_data(
         file: *mut *const ::std::os::raw::c_char,
@@ -4798,7 +4798,7 @@ extern "C" {
         flags: *mut ::std::os::raw::c_int,
     ) -> u32;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_ERR_error_string_n"]
     pub fn ERR_error_string_n(
         packed_error: u32,
@@ -4806,11 +4806,11 @@ extern "C" {
         len: usize,
     ) -> *mut ::std::os::raw::c_char;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_ERR_lib_error_string"]
     pub fn ERR_lib_error_string(packed_error: u32) -> *const ::std::os::raw::c_char;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_ERR_reason_error_string"]
     pub fn ERR_reason_error_string(packed_error: u32) -> *const ::std::os::raw::c_char;
 }
@@ -4821,53 +4821,53 @@ pub type ERR_print_errors_callback_t = ::std::option::Option<
         ctx: *mut ::std::os::raw::c_void,
     ) -> ::std::os::raw::c_int,
 >;
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_ERR_print_errors_cb"]
     pub fn ERR_print_errors_cb(
         callback: ERR_print_errors_callback_t,
         ctx: *mut ::std::os::raw::c_void,
     );
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_ERR_clear_error"]
     pub fn ERR_clear_error();
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_ERR_set_mark"]
     pub fn ERR_set_mark() -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_ERR_pop_to_mark"]
     pub fn ERR_pop_to_mark() -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_ERR_get_next_error_library"]
     pub fn ERR_get_next_error_library() -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_ERR_remove_state"]
     pub fn ERR_remove_state(pid: ::std::os::raw::c_ulong);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_ERR_remove_thread_state"]
     pub fn ERR_remove_thread_state(tid: *const CRYPTO_THREADID);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_ERR_func_error_string"]
     pub fn ERR_func_error_string(packed_error: u32) -> *const ::std::os::raw::c_char;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_ERR_error_string"]
     pub fn ERR_error_string(
         packed_error: u32,
         buf: *mut ::std::os::raw::c_char,
     ) -> *mut ::std::os::raw::c_char;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_ERR_clear_system_error"]
     pub fn ERR_clear_system_error();
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_ERR_put_error"]
     pub fn ERR_put_error(
         library: ::std::os::raw::c_int,
@@ -4877,15 +4877,15 @@ extern "C" {
         line: ::std::os::raw::c_uint,
     );
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_ERR_add_error_data"]
     pub fn ERR_add_error_data(count: ::std::os::raw::c_uint, ...);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_ERR_add_error_dataf"]
     pub fn ERR_add_error_dataf(format: *const ::std::os::raw::c_char, ...);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_ERR_set_error_data"]
     pub fn ERR_set_error_data(data: *mut ::std::os::raw::c_char, flags: ::std::os::raw::c_int);
 }
@@ -5220,197 +5220,197 @@ impl Default for bio_st {
     }
 }
 pub type BN_ULONG = u64;
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_new"]
     pub fn BN_new() -> *mut BIGNUM;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_init"]
     pub fn BN_init(bn: *mut BIGNUM);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_free"]
     pub fn BN_free(bn: *mut BIGNUM);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_clear_free"]
     pub fn BN_clear_free(bn: *mut BIGNUM);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_dup"]
     pub fn BN_dup(src: *const BIGNUM) -> *mut BIGNUM;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_copy"]
     pub fn BN_copy(dest: *mut BIGNUM, src: *const BIGNUM) -> *mut BIGNUM;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_clear"]
     pub fn BN_clear(bn: *mut BIGNUM);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_value_one"]
     pub fn BN_value_one() -> *const BIGNUM;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_num_bits"]
     pub fn BN_num_bits(bn: *const BIGNUM) -> ::std::os::raw::c_uint;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_num_bytes"]
     pub fn BN_num_bytes(bn: *const BIGNUM) -> ::std::os::raw::c_uint;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_get_minimal_width"]
     pub fn BN_get_minimal_width(bn: *const BIGNUM) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_zero"]
     pub fn BN_zero(bn: *mut BIGNUM);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_one"]
     pub fn BN_one(bn: *mut BIGNUM) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_set_word"]
     pub fn BN_set_word(bn: *mut BIGNUM, value: BN_ULONG) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_set_u64"]
     pub fn BN_set_u64(bn: *mut BIGNUM, value: u64) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_set_negative"]
     pub fn BN_set_negative(bn: *mut BIGNUM, sign: ::std::os::raw::c_int);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_is_negative"]
     pub fn BN_is_negative(bn: *const BIGNUM) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_bin2bn"]
     pub fn BN_bin2bn(in_: *const u8, len: usize, ret: *mut BIGNUM) -> *mut BIGNUM;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_bn2bin"]
     pub fn BN_bn2bin(in_: *const BIGNUM, out: *mut u8) -> usize;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_le2bn"]
     pub fn BN_le2bn(in_: *const u8, len: usize, ret: *mut BIGNUM) -> *mut BIGNUM;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_bn2le_padded"]
     pub fn BN_bn2le_padded(out: *mut u8, len: usize, in_: *const BIGNUM) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_bn2bin_padded"]
     pub fn BN_bn2bin_padded(out: *mut u8, len: usize, in_: *const BIGNUM) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_bn2cbb_padded"]
     pub fn BN_bn2cbb_padded(out: *mut CBB, len: usize, in_: *const BIGNUM)
         -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_bn2hex"]
     pub fn BN_bn2hex(bn: *const BIGNUM) -> *mut ::std::os::raw::c_char;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_hex2bn"]
     pub fn BN_hex2bn(
         outp: *mut *mut BIGNUM,
         in_: *const ::std::os::raw::c_char,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_bn2dec"]
     pub fn BN_bn2dec(a: *const BIGNUM) -> *mut ::std::os::raw::c_char;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_dec2bn"]
     pub fn BN_dec2bn(
         outp: *mut *mut BIGNUM,
         in_: *const ::std::os::raw::c_char,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_asc2bn"]
     pub fn BN_asc2bn(
         outp: *mut *mut BIGNUM,
         in_: *const ::std::os::raw::c_char,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_print"]
     pub fn BN_print(bio: *mut BIO, a: *const BIGNUM) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_get_word"]
     pub fn BN_get_word(bn: *const BIGNUM) -> BN_ULONG;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_get_u64"]
     pub fn BN_get_u64(bn: *const BIGNUM, out: *mut u64) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_get_flags"]
     pub fn BN_get_flags(bn: *const BIGNUM, flags: ::std::os::raw::c_int) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_parse_asn1_unsigned"]
     pub fn BN_parse_asn1_unsigned(cbs: *mut CBS, ret: *mut BIGNUM) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_marshal_asn1"]
     pub fn BN_marshal_asn1(cbb: *mut CBB, bn: *const BIGNUM) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_CTX_new"]
     pub fn BN_CTX_new() -> *mut BN_CTX;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_CTX_free"]
     pub fn BN_CTX_free(ctx: *mut BN_CTX);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_CTX_start"]
     pub fn BN_CTX_start(ctx: *mut BN_CTX);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_CTX_get"]
     pub fn BN_CTX_get(ctx: *mut BN_CTX) -> *mut BIGNUM;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_CTX_end"]
     pub fn BN_CTX_end(ctx: *mut BN_CTX);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_add"]
     pub fn BN_add(r: *mut BIGNUM, a: *const BIGNUM, b: *const BIGNUM) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_uadd"]
     pub fn BN_uadd(r: *mut BIGNUM, a: *const BIGNUM, b: *const BIGNUM) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_add_word"]
     pub fn BN_add_word(a: *mut BIGNUM, w: BN_ULONG) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_sub"]
     pub fn BN_sub(r: *mut BIGNUM, a: *const BIGNUM, b: *const BIGNUM) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_usub"]
     pub fn BN_usub(r: *mut BIGNUM, a: *const BIGNUM, b: *const BIGNUM) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_sub_word"]
     pub fn BN_sub_word(a: *mut BIGNUM, w: BN_ULONG) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_mul"]
     pub fn BN_mul(
         r: *mut BIGNUM,
@@ -5419,15 +5419,15 @@ extern "C" {
         ctx: *mut BN_CTX,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_mul_word"]
     pub fn BN_mul_word(bn: *mut BIGNUM, w: BN_ULONG) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_sqr"]
     pub fn BN_sqr(r: *mut BIGNUM, a: *const BIGNUM, ctx: *mut BN_CTX) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_div"]
     pub fn BN_div(
         quotient: *mut BIGNUM,
@@ -5437,11 +5437,11 @@ extern "C" {
         ctx: *mut BN_CTX,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_div_word"]
     pub fn BN_div_word(numerator: *mut BIGNUM, divisor: BN_ULONG) -> BN_ULONG;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_sqrt"]
     pub fn BN_sqrt(
         out_sqrt: *mut BIGNUM,
@@ -5449,47 +5449,47 @@ extern "C" {
         ctx: *mut BN_CTX,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_cmp"]
     pub fn BN_cmp(a: *const BIGNUM, b: *const BIGNUM) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_cmp_word"]
     pub fn BN_cmp_word(a: *const BIGNUM, b: BN_ULONG) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_ucmp"]
     pub fn BN_ucmp(a: *const BIGNUM, b: *const BIGNUM) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_equal_consttime"]
     pub fn BN_equal_consttime(a: *const BIGNUM, b: *const BIGNUM) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_abs_is_word"]
     pub fn BN_abs_is_word(bn: *const BIGNUM, w: BN_ULONG) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_is_zero"]
     pub fn BN_is_zero(bn: *const BIGNUM) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_is_one"]
     pub fn BN_is_one(bn: *const BIGNUM) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_is_word"]
     pub fn BN_is_word(bn: *const BIGNUM, w: BN_ULONG) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_is_odd"]
     pub fn BN_is_odd(bn: *const BIGNUM) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_is_pow2"]
     pub fn BN_is_pow2(a: *const BIGNUM) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_lshift"]
     pub fn BN_lshift(
         r: *mut BIGNUM,
@@ -5497,11 +5497,11 @@ extern "C" {
         n: ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_lshift1"]
     pub fn BN_lshift1(r: *mut BIGNUM, a: *const BIGNUM) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_rshift"]
     pub fn BN_rshift(
         r: *mut BIGNUM,
@@ -5509,43 +5509,43 @@ extern "C" {
         n: ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_rshift1"]
     pub fn BN_rshift1(r: *mut BIGNUM, a: *const BIGNUM) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_set_bit"]
     pub fn BN_set_bit(a: *mut BIGNUM, n: ::std::os::raw::c_int) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_clear_bit"]
     pub fn BN_clear_bit(a: *mut BIGNUM, n: ::std::os::raw::c_int) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_is_bit_set"]
     pub fn BN_is_bit_set(a: *const BIGNUM, n: ::std::os::raw::c_int) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_mask_bits"]
     pub fn BN_mask_bits(a: *mut BIGNUM, n: ::std::os::raw::c_int) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_count_low_zero_bits"]
     pub fn BN_count_low_zero_bits(bn: *const BIGNUM) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_mod_word"]
     pub fn BN_mod_word(a: *const BIGNUM, w: BN_ULONG) -> BN_ULONG;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_mod_pow2"]
     pub fn BN_mod_pow2(r: *mut BIGNUM, a: *const BIGNUM, e: usize) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_nnmod_pow2"]
     pub fn BN_nnmod_pow2(r: *mut BIGNUM, a: *const BIGNUM, e: usize) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_nnmod"]
     pub fn BN_nnmod(
         rem: *mut BIGNUM,
@@ -5554,7 +5554,7 @@ extern "C" {
         ctx: *mut BN_CTX,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_mod_add"]
     pub fn BN_mod_add(
         r: *mut BIGNUM,
@@ -5564,7 +5564,7 @@ extern "C" {
         ctx: *mut BN_CTX,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_mod_add_quick"]
     pub fn BN_mod_add_quick(
         r: *mut BIGNUM,
@@ -5573,7 +5573,7 @@ extern "C" {
         m: *const BIGNUM,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_mod_sub"]
     pub fn BN_mod_sub(
         r: *mut BIGNUM,
@@ -5583,7 +5583,7 @@ extern "C" {
         ctx: *mut BN_CTX,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_mod_sub_quick"]
     pub fn BN_mod_sub_quick(
         r: *mut BIGNUM,
@@ -5592,7 +5592,7 @@ extern "C" {
         m: *const BIGNUM,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_mod_mul"]
     pub fn BN_mod_mul(
         r: *mut BIGNUM,
@@ -5602,7 +5602,7 @@ extern "C" {
         ctx: *mut BN_CTX,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_mod_sqr"]
     pub fn BN_mod_sqr(
         r: *mut BIGNUM,
@@ -5611,7 +5611,7 @@ extern "C" {
         ctx: *mut BN_CTX,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_mod_lshift"]
     pub fn BN_mod_lshift(
         r: *mut BIGNUM,
@@ -5621,7 +5621,7 @@ extern "C" {
         ctx: *mut BN_CTX,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_mod_lshift_quick"]
     pub fn BN_mod_lshift_quick(
         r: *mut BIGNUM,
@@ -5630,7 +5630,7 @@ extern "C" {
         m: *const BIGNUM,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_mod_lshift1"]
     pub fn BN_mod_lshift1(
         r: *mut BIGNUM,
@@ -5639,7 +5639,7 @@ extern "C" {
         ctx: *mut BN_CTX,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_mod_lshift1_quick"]
     pub fn BN_mod_lshift1_quick(
         r: *mut BIGNUM,
@@ -5647,7 +5647,7 @@ extern "C" {
         m: *const BIGNUM,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_mod_sqrt"]
     pub fn BN_mod_sqrt(
         in_: *mut BIGNUM,
@@ -5656,7 +5656,7 @@ extern "C" {
         ctx: *mut BN_CTX,
     ) -> *mut BIGNUM;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_rand"]
     pub fn BN_rand(
         rnd: *mut BIGNUM,
@@ -5665,7 +5665,7 @@ extern "C" {
         bottom: ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_pseudo_rand"]
     pub fn BN_pseudo_rand(
         rnd: *mut BIGNUM,
@@ -5674,11 +5674,11 @@ extern "C" {
         bottom: ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_rand_range"]
     pub fn BN_rand_range(rnd: *mut BIGNUM, range: *const BIGNUM) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_rand_range_ex"]
     pub fn BN_rand_range_ex(
         r: *mut BIGNUM,
@@ -5686,7 +5686,7 @@ extern "C" {
         max_exclusive: *const BIGNUM,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_pseudo_rand_range"]
     pub fn BN_pseudo_rand_range(rnd: *mut BIGNUM, range: *const BIGNUM) -> ::std::os::raw::c_int;
 }
@@ -5789,15 +5789,15 @@ impl Default for bn_gencb_st {
         }
     }
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_GENCB_new"]
     pub fn BN_GENCB_new() -> *mut BN_GENCB;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_GENCB_free"]
     pub fn BN_GENCB_free(callback: *mut BN_GENCB);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_GENCB_set"]
     pub fn BN_GENCB_set(
         callback: *mut BN_GENCB,
@@ -5811,7 +5811,7 @@ extern "C" {
         arg: *mut ::std::os::raw::c_void,
     );
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_GENCB_call"]
     pub fn BN_GENCB_call(
         callback: *mut BN_GENCB,
@@ -5819,11 +5819,11 @@ extern "C" {
         n: ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_GENCB_get_arg"]
     pub fn BN_GENCB_get_arg(callback: *const BN_GENCB) -> *mut ::std::os::raw::c_void;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_generate_prime_ex"]
     pub fn BN_generate_prime_ex(
         ret: *mut BIGNUM,
@@ -5838,7 +5838,7 @@ pub const bn_primality_result_t_bn_probably_prime: bn_primality_result_t = 0;
 pub const bn_primality_result_t_bn_composite: bn_primality_result_t = 1;
 pub const bn_primality_result_t_bn_non_prime_power_composite: bn_primality_result_t = 2;
 pub type bn_primality_result_t = ::std::os::raw::c_uint;
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_enhanced_miller_rabin_primality_test"]
     pub fn BN_enhanced_miller_rabin_primality_test(
         out_result: *mut bn_primality_result_t,
@@ -5848,7 +5848,7 @@ extern "C" {
         cb: *mut BN_GENCB,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_primality_test"]
     pub fn BN_primality_test(
         is_probably_prime: *mut ::std::os::raw::c_int,
@@ -5859,7 +5859,7 @@ extern "C" {
         cb: *mut BN_GENCB,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_is_prime_fasttest_ex"]
     pub fn BN_is_prime_fasttest_ex(
         candidate: *const BIGNUM,
@@ -5869,7 +5869,7 @@ extern "C" {
         cb: *mut BN_GENCB,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_is_prime_ex"]
     pub fn BN_is_prime_ex(
         candidate: *const BIGNUM,
@@ -5878,7 +5878,7 @@ extern "C" {
         cb: *mut BN_GENCB,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_gcd"]
     pub fn BN_gcd(
         r: *mut BIGNUM,
@@ -5887,7 +5887,7 @@ extern "C" {
         ctx: *mut BN_CTX,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_mod_inverse"]
     pub fn BN_mod_inverse(
         out: *mut BIGNUM,
@@ -5896,7 +5896,7 @@ extern "C" {
         ctx: *mut BN_CTX,
     ) -> *mut BIGNUM;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_mod_inverse_blinded"]
     pub fn BN_mod_inverse_blinded(
         out: *mut BIGNUM,
@@ -5906,7 +5906,7 @@ extern "C" {
         ctx: *mut BN_CTX,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_mod_inverse_odd"]
     pub fn BN_mod_inverse_odd(
         out: *mut BIGNUM,
@@ -5916,23 +5916,23 @@ extern "C" {
         ctx: *mut BN_CTX,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_MONT_CTX_new_for_modulus"]
     pub fn BN_MONT_CTX_new_for_modulus(mod_: *const BIGNUM, ctx: *mut BN_CTX) -> *mut BN_MONT_CTX;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_MONT_CTX_new_consttime"]
     pub fn BN_MONT_CTX_new_consttime(mod_: *const BIGNUM, ctx: *mut BN_CTX) -> *mut BN_MONT_CTX;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_MONT_CTX_free"]
     pub fn BN_MONT_CTX_free(mont: *mut BN_MONT_CTX);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_MONT_CTX_copy"]
     pub fn BN_MONT_CTX_copy(to: *mut BN_MONT_CTX, from: *const BN_MONT_CTX) -> *mut BN_MONT_CTX;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_to_montgomery"]
     pub fn BN_to_montgomery(
         ret: *mut BIGNUM,
@@ -5941,7 +5941,7 @@ extern "C" {
         ctx: *mut BN_CTX,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_from_montgomery"]
     pub fn BN_from_montgomery(
         ret: *mut BIGNUM,
@@ -5950,7 +5950,7 @@ extern "C" {
         ctx: *mut BN_CTX,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_mod_mul_montgomery"]
     pub fn BN_mod_mul_montgomery(
         r: *mut BIGNUM,
@@ -5960,7 +5960,7 @@ extern "C" {
         ctx: *mut BN_CTX,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_exp"]
     pub fn BN_exp(
         r: *mut BIGNUM,
@@ -5969,7 +5969,7 @@ extern "C" {
         ctx: *mut BN_CTX,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_mod_exp"]
     pub fn BN_mod_exp(
         r: *mut BIGNUM,
@@ -5979,7 +5979,7 @@ extern "C" {
         ctx: *mut BN_CTX,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_mod_exp_mont"]
     pub fn BN_mod_exp_mont(
         r: *mut BIGNUM,
@@ -5990,7 +5990,7 @@ extern "C" {
         mont: *const BN_MONT_CTX,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_mod_exp_mont_consttime"]
     pub fn BN_mod_exp_mont_consttime(
         rr: *mut BIGNUM,
@@ -6001,7 +6001,7 @@ extern "C" {
         mont: *const BN_MONT_CTX,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_GENCB_set_old"]
     pub fn BN_GENCB_set_old(
         callback: *mut BN_GENCB,
@@ -6015,15 +6015,15 @@ extern "C" {
         cb_arg: *mut ::std::os::raw::c_void,
     );
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_bn2mpi"]
     pub fn BN_bn2mpi(in_: *const BIGNUM, out: *mut u8) -> usize;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_mpi2bn"]
     pub fn BN_mpi2bn(in_: *const u8, len: usize, out: *mut BIGNUM) -> *mut BIGNUM;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_mod_exp_mont_word"]
     pub fn BN_mod_exp_mont_word(
         r: *mut BIGNUM,
@@ -6034,7 +6034,7 @@ extern "C" {
         mont: *const BN_MONT_CTX,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_mod_exp2_mont"]
     pub fn BN_mod_exp2_mont(
         r: *mut BIGNUM,
@@ -6047,11 +6047,11 @@ extern "C" {
         mont: *const BN_MONT_CTX,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_MONT_CTX_new"]
     pub fn BN_MONT_CTX_new() -> *mut BN_MONT_CTX;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_MONT_CTX_set"]
     pub fn BN_MONT_CTX_set(
         mont: *mut BN_MONT_CTX,
@@ -6059,7 +6059,7 @@ extern "C" {
         ctx: *mut BN_CTX,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_bn2binpad"]
     pub fn BN_bn2binpad(
         in_: *const BIGNUM,
@@ -6067,15 +6067,15 @@ extern "C" {
         len: ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_secure_new"]
     pub fn BN_secure_new() -> *mut BIGNUM;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_CTX_secure_new"]
     pub fn BN_CTX_secure_new() -> *mut BN_CTX;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_mod_exp_mont_consttime_x2"]
     pub fn BN_mod_exp_mont_consttime_x2(
         rr1: *mut BIGNUM,
@@ -6091,7 +6091,7 @@ extern "C" {
         ctx: *mut BN_CTX,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_set_flags"]
     pub fn BN_set_flags(b: *mut BIGNUM, n: ::std::os::raw::c_int);
 }
@@ -6199,7 +6199,7 @@ impl Default for bn_mont_ctx_st {
         }
     }
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_BN_num_bits_word"]
     pub fn BN_num_bits_word(l: BN_ULONG) -> ::std::os::raw::c_uint;
 }
@@ -6731,23 +6731,23 @@ impl Default for cbs_st {
         }
     }
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBS_init"]
     pub fn CBS_init(cbs: *mut CBS, data: *const u8, len: usize);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBS_skip"]
     pub fn CBS_skip(cbs: *mut CBS, len: usize) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBS_data"]
     pub fn CBS_data(cbs: *const CBS) -> *const u8;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBS_len"]
     pub fn CBS_len(cbs: *const CBS) -> usize;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBS_stow"]
     pub fn CBS_stow(
         cbs: *const CBS,
@@ -6755,86 +6755,86 @@ extern "C" {
         out_len: *mut usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBS_strdup"]
     pub fn CBS_strdup(
         cbs: *const CBS,
         out_ptr: *mut *mut ::std::os::raw::c_char,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBS_contains_zero_byte"]
     pub fn CBS_contains_zero_byte(cbs: *const CBS) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBS_mem_equal"]
     pub fn CBS_mem_equal(cbs: *const CBS, data: *const u8, len: usize) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBS_get_u8"]
     pub fn CBS_get_u8(cbs: *mut CBS, out: *mut u8) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBS_get_u16"]
     pub fn CBS_get_u16(cbs: *mut CBS, out: *mut u16) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBS_get_u16le"]
     pub fn CBS_get_u16le(cbs: *mut CBS, out: *mut u16) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBS_get_u24"]
     pub fn CBS_get_u24(cbs: *mut CBS, out: *mut u32) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBS_get_u32"]
     pub fn CBS_get_u32(cbs: *mut CBS, out: *mut u32) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBS_get_u32le"]
     pub fn CBS_get_u32le(cbs: *mut CBS, out: *mut u32) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBS_get_u64"]
     pub fn CBS_get_u64(cbs: *mut CBS, out: *mut u64) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBS_get_u64le"]
     pub fn CBS_get_u64le(cbs: *mut CBS, out: *mut u64) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBS_get_last_u8"]
     pub fn CBS_get_last_u8(cbs: *mut CBS, out: *mut u8) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBS_get_bytes"]
     pub fn CBS_get_bytes(cbs: *mut CBS, out: *mut CBS, len: usize) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBS_copy_bytes"]
     pub fn CBS_copy_bytes(cbs: *mut CBS, out: *mut u8, len: usize) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBS_get_u8_length_prefixed"]
     pub fn CBS_get_u8_length_prefixed(cbs: *mut CBS, out: *mut CBS) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBS_get_u16_length_prefixed"]
     pub fn CBS_get_u16_length_prefixed(cbs: *mut CBS, out: *mut CBS) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBS_get_u24_length_prefixed"]
     pub fn CBS_get_u24_length_prefixed(cbs: *mut CBS, out: *mut CBS) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBS_get_until_first"]
     pub fn CBS_get_until_first(cbs: *mut CBS, out: *mut CBS, c: u8) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBS_get_u64_decimal"]
     pub fn CBS_get_u64_decimal(cbs: *mut CBS, out: *mut u64) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBS_get_asn1"]
     pub fn CBS_get_asn1(
         cbs: *mut CBS,
@@ -6842,7 +6842,7 @@ extern "C" {
         tag_value: CBS_ASN1_TAG,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBS_get_asn1_element"]
     pub fn CBS_get_asn1_element(
         cbs: *mut CBS,
@@ -6850,11 +6850,11 @@ extern "C" {
         tag_value: CBS_ASN1_TAG,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBS_peek_asn1_tag"]
     pub fn CBS_peek_asn1_tag(cbs: *const CBS, tag_value: CBS_ASN1_TAG) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBS_get_any_asn1"]
     pub fn CBS_get_any_asn1(
         cbs: *mut CBS,
@@ -6862,7 +6862,7 @@ extern "C" {
         out_tag: *mut CBS_ASN1_TAG,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBS_get_any_asn1_element"]
     pub fn CBS_get_any_asn1_element(
         cbs: *mut CBS,
@@ -6871,7 +6871,7 @@ extern "C" {
         out_header_len: *mut usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBS_get_any_ber_asn1_element"]
     pub fn CBS_get_any_ber_asn1_element(
         cbs: *mut CBS,
@@ -6882,22 +6882,22 @@ extern "C" {
         out_indefinite: *mut ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBS_get_asn1_uint64"]
     pub fn CBS_get_asn1_uint64(cbs: *mut CBS, out: *mut u64) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBS_get_asn1_int64"]
     pub fn CBS_get_asn1_int64(cbs: *mut CBS, out: *mut i64) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBS_get_asn1_bool"]
     pub fn CBS_get_asn1_bool(
         cbs: *mut CBS,
         out: *mut ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBS_get_optional_asn1"]
     pub fn CBS_get_optional_asn1(
         cbs: *mut CBS,
@@ -6906,7 +6906,7 @@ extern "C" {
         tag: CBS_ASN1_TAG,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBS_get_optional_asn1_octet_string"]
     pub fn CBS_get_optional_asn1_octet_string(
         cbs: *mut CBS,
@@ -6915,7 +6915,7 @@ extern "C" {
         tag: CBS_ASN1_TAG,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBS_get_optional_asn1_uint64"]
     pub fn CBS_get_optional_asn1_uint64(
         cbs: *mut CBS,
@@ -6924,7 +6924,7 @@ extern "C" {
         default_value: u64,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBS_get_optional_asn1_bool"]
     pub fn CBS_get_optional_asn1_bool(
         cbs: *mut CBS,
@@ -6933,37 +6933,37 @@ extern "C" {
         default_value: ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBS_is_valid_asn1_bitstring"]
     pub fn CBS_is_valid_asn1_bitstring(cbs: *const CBS) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBS_asn1_bitstring_has_bit"]
     pub fn CBS_asn1_bitstring_has_bit(
         cbs: *const CBS,
         bit: ::std::os::raw::c_uint,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBS_is_valid_asn1_integer"]
     pub fn CBS_is_valid_asn1_integer(
         cbs: *const CBS,
         out_is_negative: *mut ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBS_is_unsigned_asn1_integer"]
     pub fn CBS_is_unsigned_asn1_integer(cbs: *const CBS) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBS_is_valid_asn1_oid"]
     pub fn CBS_is_valid_asn1_oid(cbs: *const CBS) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBS_asn1_oid_to_text"]
     pub fn CBS_asn1_oid_to_text(cbs: *const CBS) -> *mut ::std::os::raw::c_char;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBS_get_optional_asn1_int64"]
     pub fn CBS_get_optional_asn1_int64(
         cbs: *mut CBS,
@@ -7282,23 +7282,23 @@ impl Default for cbb_st {
         }
     }
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBB_zero"]
     pub fn CBB_zero(cbb: *mut CBB);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBB_init"]
     pub fn CBB_init(cbb: *mut CBB, initial_capacity: usize) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBB_init_fixed"]
     pub fn CBB_init_fixed(cbb: *mut CBB, buf: *mut u8, len: usize) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBB_cleanup"]
     pub fn CBB_cleanup(cbb: *mut CBB);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBB_finish"]
     pub fn CBB_finish(
         cbb: *mut CBB,
@@ -7306,40 +7306,40 @@ extern "C" {
         out_len: *mut usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBB_flush"]
     pub fn CBB_flush(cbb: *mut CBB) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBB_data"]
     pub fn CBB_data(cbb: *const CBB) -> *const u8;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBB_len"]
     pub fn CBB_len(cbb: *const CBB) -> usize;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBB_add_u8_length_prefixed"]
     pub fn CBB_add_u8_length_prefixed(
         cbb: *mut CBB,
         out_contents: *mut CBB,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBB_add_u16_length_prefixed"]
     pub fn CBB_add_u16_length_prefixed(
         cbb: *mut CBB,
         out_contents: *mut CBB,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBB_add_u24_length_prefixed"]
     pub fn CBB_add_u24_length_prefixed(
         cbb: *mut CBB,
         out_contents: *mut CBB,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBB_add_asn1"]
     pub fn CBB_add_asn1(
         cbb: *mut CBB,
@@ -7347,15 +7347,15 @@ extern "C" {
         tag: CBS_ASN1_TAG,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBB_add_bytes"]
     pub fn CBB_add_bytes(cbb: *mut CBB, data: *const u8, len: usize) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBB_add_zeros"]
     pub fn CBB_add_zeros(cbb: *mut CBB, len: usize) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBB_add_space"]
     pub fn CBB_add_space(
         cbb: *mut CBB,
@@ -7363,55 +7363,55 @@ extern "C" {
         len: usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBB_reserve"]
     pub fn CBB_reserve(cbb: *mut CBB, out_data: *mut *mut u8, len: usize) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBB_did_write"]
     pub fn CBB_did_write(cbb: *mut CBB, len: usize) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBB_add_u8"]
     pub fn CBB_add_u8(cbb: *mut CBB, value: u8) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBB_add_u16"]
     pub fn CBB_add_u16(cbb: *mut CBB, value: u16) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBB_add_u16le"]
     pub fn CBB_add_u16le(cbb: *mut CBB, value: u16) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBB_add_u24"]
     pub fn CBB_add_u24(cbb: *mut CBB, value: u32) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBB_add_u32"]
     pub fn CBB_add_u32(cbb: *mut CBB, value: u32) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBB_add_u32le"]
     pub fn CBB_add_u32le(cbb: *mut CBB, value: u32) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBB_add_u64"]
     pub fn CBB_add_u64(cbb: *mut CBB, value: u64) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBB_add_u64le"]
     pub fn CBB_add_u64le(cbb: *mut CBB, value: u64) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBB_discard_child"]
     pub fn CBB_discard_child(cbb: *mut CBB);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBB_add_asn1_uint64"]
     pub fn CBB_add_asn1_uint64(cbb: *mut CBB, value: u64) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBB_add_asn1_uint64_with_tag"]
     pub fn CBB_add_asn1_uint64_with_tag(
         cbb: *mut CBB,
@@ -7419,11 +7419,11 @@ extern "C" {
         tag: CBS_ASN1_TAG,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBB_add_asn1_int64"]
     pub fn CBB_add_asn1_int64(cbb: *mut CBB, value: i64) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBB_add_asn1_int64_with_tag"]
     pub fn CBB_add_asn1_int64_with_tag(
         cbb: *mut CBB,
@@ -7431,7 +7431,7 @@ extern "C" {
         tag: CBS_ASN1_TAG,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBB_add_asn1_octet_string"]
     pub fn CBB_add_asn1_octet_string(
         cbb: *mut CBB,
@@ -7439,11 +7439,11 @@ extern "C" {
         data_len: usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBB_add_asn1_bool"]
     pub fn CBB_add_asn1_bool(cbb: *mut CBB, value: ::std::os::raw::c_int) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBB_add_asn1_oid_from_text"]
     pub fn CBB_add_asn1_oid_from_text(
         cbb: *mut CBB,
@@ -7451,38 +7451,38 @@ extern "C" {
         len: usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CBB_flush_asn1_set_of"]
     pub fn CBB_flush_asn1_set_of(cbb: *mut CBB) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     pub fn CBS_get_utf8(cbs: *mut CBS, out: *mut u32) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     pub fn CBS_get_latin1(cbs: *mut CBS, out: *mut u32) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     pub fn CBS_get_ucs2_be(cbs: *mut CBS, out: *mut u32) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     pub fn CBS_get_utf32_be(cbs: *mut CBS, out: *mut u32) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     pub fn CBB_get_utf8_len(u: u32) -> usize;
 }
-extern "C" {
+unsafe extern "C" {
     pub fn CBB_add_utf8(cbb: *mut CBB, u: u32) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     pub fn CBB_add_latin1(cbb: *mut CBB, u: u32) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     pub fn CBB_add_ucs2_be(cbb: *mut CBB, u: u32) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     pub fn CBB_add_utf32_be(cbb: *mut CBB, u: u32) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CRYPTO_chacha_20"]
     pub fn CRYPTO_chacha_20(
         out: *mut u8,
@@ -7493,122 +7493,122 @@ extern "C" {
         counter: u32,
     );
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_rc4"]
     pub fn EVP_rc4() -> *const EVP_CIPHER;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_des_cbc"]
     pub fn EVP_des_cbc() -> *const EVP_CIPHER;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_des_ecb"]
     pub fn EVP_des_ecb() -> *const EVP_CIPHER;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_des_ede"]
     pub fn EVP_des_ede() -> *const EVP_CIPHER;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_des_ede3"]
     pub fn EVP_des_ede3() -> *const EVP_CIPHER;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_des_ede_cbc"]
     pub fn EVP_des_ede_cbc() -> *const EVP_CIPHER;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_des_ede3_cbc"]
     pub fn EVP_des_ede3_cbc() -> *const EVP_CIPHER;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_aes_128_ecb"]
     pub fn EVP_aes_128_ecb() -> *const EVP_CIPHER;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_aes_128_cbc"]
     pub fn EVP_aes_128_cbc() -> *const EVP_CIPHER;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_aes_128_ctr"]
     pub fn EVP_aes_128_ctr() -> *const EVP_CIPHER;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_aes_128_ofb"]
     pub fn EVP_aes_128_ofb() -> *const EVP_CIPHER;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_aes_256_ecb"]
     pub fn EVP_aes_256_ecb() -> *const EVP_CIPHER;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_aes_256_cbc"]
     pub fn EVP_aes_256_cbc() -> *const EVP_CIPHER;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_aes_256_ctr"]
     pub fn EVP_aes_256_ctr() -> *const EVP_CIPHER;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_aes_256_ofb"]
     pub fn EVP_aes_256_ofb() -> *const EVP_CIPHER;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_aes_256_xts"]
     pub fn EVP_aes_256_xts() -> *const EVP_CIPHER;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_aes_256_wrap"]
     pub fn EVP_aes_256_wrap() -> *const EVP_CIPHER;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_enc_null"]
     pub fn EVP_enc_null() -> *const EVP_CIPHER;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_rc2_cbc"]
     pub fn EVP_rc2_cbc() -> *const EVP_CIPHER;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_rc2_40_cbc"]
     pub fn EVP_rc2_40_cbc() -> *const EVP_CIPHER;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_chacha20_poly1305"]
     pub fn EVP_chacha20_poly1305() -> *const EVP_CIPHER;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_get_cipherbynid"]
     pub fn EVP_get_cipherbynid(nid: ::std::os::raw::c_int) -> *const EVP_CIPHER;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_CIPHER_CTX_init"]
     pub fn EVP_CIPHER_CTX_init(ctx: *mut EVP_CIPHER_CTX);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_CIPHER_CTX_new"]
     pub fn EVP_CIPHER_CTX_new() -> *mut EVP_CIPHER_CTX;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_CIPHER_CTX_cleanup"]
     pub fn EVP_CIPHER_CTX_cleanup(ctx: *mut EVP_CIPHER_CTX) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_CIPHER_CTX_free"]
     pub fn EVP_CIPHER_CTX_free(ctx: *mut EVP_CIPHER_CTX);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_CIPHER_CTX_copy"]
     pub fn EVP_CIPHER_CTX_copy(
         out: *mut EVP_CIPHER_CTX,
         in_: *const EVP_CIPHER_CTX,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_CIPHER_CTX_reset"]
     pub fn EVP_CIPHER_CTX_reset(ctx: *mut EVP_CIPHER_CTX) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_CipherInit_ex"]
     pub fn EVP_CipherInit_ex(
         ctx: *mut EVP_CIPHER_CTX,
@@ -7619,7 +7619,7 @@ extern "C" {
         enc: ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_EncryptInit_ex"]
     pub fn EVP_EncryptInit_ex(
         ctx: *mut EVP_CIPHER_CTX,
@@ -7629,7 +7629,7 @@ extern "C" {
         iv: *const u8,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_DecryptInit_ex"]
     pub fn EVP_DecryptInit_ex(
         ctx: *mut EVP_CIPHER_CTX,
@@ -7639,7 +7639,7 @@ extern "C" {
         iv: *const u8,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_EncryptUpdate"]
     pub fn EVP_EncryptUpdate(
         ctx: *mut EVP_CIPHER_CTX,
@@ -7649,7 +7649,7 @@ extern "C" {
         in_len: ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_EncryptFinal_ex"]
     pub fn EVP_EncryptFinal_ex(
         ctx: *mut EVP_CIPHER_CTX,
@@ -7657,7 +7657,7 @@ extern "C" {
         out_len: *mut ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_DecryptUpdate"]
     pub fn EVP_DecryptUpdate(
         ctx: *mut EVP_CIPHER_CTX,
@@ -7667,7 +7667,7 @@ extern "C" {
         in_len: ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_DecryptFinal_ex"]
     pub fn EVP_DecryptFinal_ex(
         ctx: *mut EVP_CIPHER_CTX,
@@ -7675,7 +7675,7 @@ extern "C" {
         out_len: *mut ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_CipherUpdate"]
     pub fn EVP_CipherUpdate(
         ctx: *mut EVP_CIPHER_CTX,
@@ -7685,7 +7685,7 @@ extern "C" {
         in_len: ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_CipherFinal_ex"]
     pub fn EVP_CipherFinal_ex(
         ctx: *mut EVP_CIPHER_CTX,
@@ -7693,47 +7693,47 @@ extern "C" {
         out_len: *mut ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_CIPHER_CTX_cipher"]
     pub fn EVP_CIPHER_CTX_cipher(ctx: *const EVP_CIPHER_CTX) -> *const EVP_CIPHER;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_CIPHER_CTX_nid"]
     pub fn EVP_CIPHER_CTX_nid(ctx: *const EVP_CIPHER_CTX) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_CIPHER_CTX_encrypting"]
     pub fn EVP_CIPHER_CTX_encrypting(ctx: *const EVP_CIPHER_CTX) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_CIPHER_CTX_block_size"]
     pub fn EVP_CIPHER_CTX_block_size(ctx: *const EVP_CIPHER_CTX) -> ::std::os::raw::c_uint;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_CIPHER_CTX_key_length"]
     pub fn EVP_CIPHER_CTX_key_length(ctx: *const EVP_CIPHER_CTX) -> ::std::os::raw::c_uint;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_CIPHER_CTX_iv_length"]
     pub fn EVP_CIPHER_CTX_iv_length(ctx: *const EVP_CIPHER_CTX) -> ::std::os::raw::c_uint;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_CIPHER_CTX_get_app_data"]
     pub fn EVP_CIPHER_CTX_get_app_data(ctx: *const EVP_CIPHER_CTX) -> *mut ::std::os::raw::c_void;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_CIPHER_CTX_set_app_data"]
     pub fn EVP_CIPHER_CTX_set_app_data(ctx: *mut EVP_CIPHER_CTX, data: *mut ::std::os::raw::c_void);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_CIPHER_CTX_flags"]
     pub fn EVP_CIPHER_CTX_flags(ctx: *const EVP_CIPHER_CTX) -> u32;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_CIPHER_CTX_mode"]
     pub fn EVP_CIPHER_CTX_mode(ctx: *const EVP_CIPHER_CTX) -> u32;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_CIPHER_CTX_ctrl"]
     pub fn EVP_CIPHER_CTX_ctrl(
         ctx: *mut EVP_CIPHER_CTX,
@@ -7742,49 +7742,49 @@ extern "C" {
         ptr: *mut ::std::os::raw::c_void,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_CIPHER_CTX_set_padding"]
     pub fn EVP_CIPHER_CTX_set_padding(
         ctx: *mut EVP_CIPHER_CTX,
         pad: ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_CIPHER_CTX_set_key_length"]
     pub fn EVP_CIPHER_CTX_set_key_length(
         ctx: *mut EVP_CIPHER_CTX,
         key_len: ::std::os::raw::c_uint,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_CIPHER_nid"]
     pub fn EVP_CIPHER_nid(cipher: *const EVP_CIPHER) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_CIPHER_name"]
     pub fn EVP_CIPHER_name(cipher: *const EVP_CIPHER) -> *const ::std::os::raw::c_char;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_CIPHER_block_size"]
     pub fn EVP_CIPHER_block_size(cipher: *const EVP_CIPHER) -> ::std::os::raw::c_uint;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_CIPHER_key_length"]
     pub fn EVP_CIPHER_key_length(cipher: *const EVP_CIPHER) -> ::std::os::raw::c_uint;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_CIPHER_iv_length"]
     pub fn EVP_CIPHER_iv_length(cipher: *const EVP_CIPHER) -> ::std::os::raw::c_uint;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_CIPHER_flags"]
     pub fn EVP_CIPHER_flags(cipher: *const EVP_CIPHER) -> u32;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_CIPHER_mode"]
     pub fn EVP_CIPHER_mode(cipher: *const EVP_CIPHER) -> u32;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_BytesToKey"]
     pub fn EVP_BytesToKey(
         type_: *const EVP_CIPHER,
@@ -7797,23 +7797,23 @@ extern "C" {
         iv: *mut u8,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_aes_128_cbc_hmac_sha1"]
     pub fn EVP_aes_128_cbc_hmac_sha1() -> *const EVP_CIPHER;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_aes_256_cbc_hmac_sha1"]
     pub fn EVP_aes_256_cbc_hmac_sha1() -> *const EVP_CIPHER;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_aes_128_cbc_hmac_sha256"]
     pub fn EVP_aes_128_cbc_hmac_sha256() -> *const EVP_CIPHER;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_aes_256_cbc_hmac_sha256"]
     pub fn EVP_aes_256_cbc_hmac_sha256() -> *const EVP_CIPHER;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_CipherInit"]
     pub fn EVP_CipherInit(
         ctx: *mut EVP_CIPHER_CTX,
@@ -7823,7 +7823,7 @@ extern "C" {
         enc: ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_EncryptInit"]
     pub fn EVP_EncryptInit(
         ctx: *mut EVP_CIPHER_CTX,
@@ -7832,7 +7832,7 @@ extern "C" {
         iv: *const u8,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_DecryptInit"]
     pub fn EVP_DecryptInit(
         ctx: *mut EVP_CIPHER_CTX,
@@ -7841,7 +7841,7 @@ extern "C" {
         iv: *const u8,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_CipherFinal"]
     pub fn EVP_CipherFinal(
         ctx: *mut EVP_CIPHER_CTX,
@@ -7849,7 +7849,7 @@ extern "C" {
         out_len: *mut ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_EncryptFinal"]
     pub fn EVP_EncryptFinal(
         ctx: *mut EVP_CIPHER_CTX,
@@ -7857,7 +7857,7 @@ extern "C" {
         out_len: *mut ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_DecryptFinal"]
     pub fn EVP_DecryptFinal(
         ctx: *mut EVP_CIPHER_CTX,
@@ -7865,7 +7865,7 @@ extern "C" {
         out_len: *mut ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_Cipher"]
     pub fn EVP_Cipher(
         ctx: *mut EVP_CIPHER_CTX,
@@ -7874,135 +7874,135 @@ extern "C" {
         in_len: usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_get_cipherbyname"]
     pub fn EVP_get_cipherbyname(name: *const ::std::os::raw::c_char) -> *const EVP_CIPHER;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_aes_128_gcm"]
     pub fn EVP_aes_128_gcm() -> *const EVP_CIPHER;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_aes_256_gcm"]
     pub fn EVP_aes_256_gcm() -> *const EVP_CIPHER;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_aes_128_ccm"]
     pub fn EVP_aes_128_ccm() -> *const EVP_CIPHER;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_aes_192_ccm"]
     pub fn EVP_aes_192_ccm() -> *const EVP_CIPHER;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_aes_256_ccm"]
     pub fn EVP_aes_256_ccm() -> *const EVP_CIPHER;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_aes_192_ecb"]
     pub fn EVP_aes_192_ecb() -> *const EVP_CIPHER;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_aes_192_cbc"]
     pub fn EVP_aes_192_cbc() -> *const EVP_CIPHER;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_aes_192_ctr"]
     pub fn EVP_aes_192_ctr() -> *const EVP_CIPHER;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_aes_192_gcm"]
     pub fn EVP_aes_192_gcm() -> *const EVP_CIPHER;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_aes_192_ofb"]
     pub fn EVP_aes_192_ofb() -> *const EVP_CIPHER;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_des_ede3_ecb"]
     pub fn EVP_des_ede3_ecb() -> *const EVP_CIPHER;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_aes_128_cfb128"]
     pub fn EVP_aes_128_cfb128() -> *const EVP_CIPHER;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_aes_128_cfb"]
     pub fn EVP_aes_128_cfb() -> *const EVP_CIPHER;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_aes_128_cfb1"]
     pub fn EVP_aes_128_cfb1() -> *const EVP_CIPHER;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_aes_128_cfb8"]
     pub fn EVP_aes_128_cfb8() -> *const EVP_CIPHER;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_aes_192_cfb128"]
     pub fn EVP_aes_192_cfb128() -> *const EVP_CIPHER;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_aes_192_cfb"]
     pub fn EVP_aes_192_cfb() -> *const EVP_CIPHER;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_aes_192_cfb1"]
     pub fn EVP_aes_192_cfb1() -> *const EVP_CIPHER;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_aes_192_cfb8"]
     pub fn EVP_aes_192_cfb8() -> *const EVP_CIPHER;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_aes_256_cfb128"]
     pub fn EVP_aes_256_cfb128() -> *const EVP_CIPHER;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_aes_256_cfb"]
     pub fn EVP_aes_256_cfb() -> *const EVP_CIPHER;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_aes_256_cfb1"]
     pub fn EVP_aes_256_cfb1() -> *const EVP_CIPHER;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_aes_256_cfb8"]
     pub fn EVP_aes_256_cfb8() -> *const EVP_CIPHER;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_bf_ecb"]
     pub fn EVP_bf_ecb() -> *const EVP_CIPHER;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_bf_cbc"]
     pub fn EVP_bf_cbc() -> *const EVP_CIPHER;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_bf_cfb"]
     pub fn EVP_bf_cfb() -> *const EVP_CIPHER;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_bf_cfb64"]
     pub fn EVP_bf_cfb64() -> *const EVP_CIPHER;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_bf_ofb"]
     pub fn EVP_bf_ofb() -> *const EVP_CIPHER;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_cast5_ecb"]
     pub fn EVP_cast5_ecb() -> *const EVP_CIPHER;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_cast5_cbc"]
     pub fn EVP_cast5_cbc() -> *const EVP_CIPHER;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_CIPHER_CTX_set_flags"]
     pub fn EVP_CIPHER_CTX_set_flags(ctx: *const EVP_CIPHER_CTX, flags: u32);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_add_cipher_alias"]
     pub fn EVP_add_cipher_alias(
         a: *const ::std::os::raw::c_char,
@@ -8162,7 +8162,7 @@ impl Default for evp_cipher_info_st {
     }
 }
 pub type EVP_CIPHER_INFO = evp_cipher_info_st;
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_AES_CMAC"]
     pub fn AES_CMAC(
         out: *mut u8,
@@ -8172,19 +8172,19 @@ extern "C" {
         in_len: usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CMAC_CTX_new"]
     pub fn CMAC_CTX_new() -> *mut CMAC_CTX;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CMAC_CTX_free"]
     pub fn CMAC_CTX_free(ctx: *mut CMAC_CTX);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CMAC_CTX_copy"]
     pub fn CMAC_CTX_copy(out: *mut CMAC_CTX, in_: *const CMAC_CTX) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CMAC_Init"]
     pub fn CMAC_Init(
         ctx: *mut CMAC_CTX,
@@ -8194,15 +8194,15 @@ extern "C" {
         engine: *mut ENGINE,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CMAC_Reset"]
     pub fn CMAC_Reset(ctx: *mut CMAC_CTX) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CMAC_Update"]
     pub fn CMAC_Update(ctx: *mut CMAC_CTX, in_: *const u8, in_len: usize) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CMAC_Final"]
     pub fn CMAC_Final(
         ctx: *mut CMAC_CTX,
@@ -8210,7 +8210,7 @@ extern "C" {
         out_len: *mut usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CMAC_CTX_get0_cipher_ctx"]
     pub fn CMAC_CTX_get0_cipher_ctx(ctx: *mut CMAC_CTX) -> *mut EVP_CIPHER_CTX;
 }
@@ -8300,11 +8300,11 @@ impl Default for conf_st {
         }
     }
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_X25519_keypair"]
     pub fn X25519_keypair(out_public_value: *mut u8, out_private_key: *mut u8);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_X25519"]
     pub fn X25519(
         out_shared_key: *mut u8,
@@ -8312,15 +8312,15 @@ extern "C" {
         peer_public_value: *const u8,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_X25519_public_from_private"]
     pub fn X25519_public_from_private(out_public_value: *mut u8, private_key: *const u8);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_ED25519_keypair"]
     pub fn ED25519_keypair(out_public_key: *mut u8, out_private_key: *mut u8);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_ED25519_sign"]
     pub fn ED25519_sign(
         out_sig: *mut u8,
@@ -8329,7 +8329,7 @@ extern "C" {
         private_key: *const u8,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_ED25519_verify"]
     pub fn ED25519_verify(
         message: *const u8,
@@ -8338,7 +8338,7 @@ extern "C" {
         public_key: *const u8,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_ED25519ctx_sign"]
     pub fn ED25519ctx_sign(
         out_sig: *mut u8,
@@ -8349,7 +8349,7 @@ extern "C" {
         context_len: usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_ED25519ctx_verify"]
     pub fn ED25519ctx_verify(
         message: *const u8,
@@ -8360,7 +8360,7 @@ extern "C" {
         context_len: usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_ED25519ph_sign"]
     pub fn ED25519ph_sign(
         out_sig: *mut u8,
@@ -8371,7 +8371,7 @@ extern "C" {
         context_len: usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_ED25519ph_verify"]
     pub fn ED25519ph_verify(
         message: *const u8,
@@ -8382,7 +8382,7 @@ extern "C" {
         context_len: usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_ED25519ph_sign_digest"]
     pub fn ED25519ph_sign_digest(
         out_sig: *mut u8,
@@ -8392,7 +8392,7 @@ extern "C" {
         context_len: usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_ED25519ph_verify_digest"]
     pub fn ED25519ph_verify_digest(
         digest: *const u8,
@@ -8402,7 +8402,7 @@ extern "C" {
         context_len: usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_ED25519_keypair_from_seed"]
     pub fn ED25519_keypair_from_seed(
         out_public_key: *mut u8,
@@ -8413,7 +8413,7 @@ extern "C" {
 pub const spake2_role_t_spake2_role_alice: spake2_role_t = 0;
 pub const spake2_role_t_spake2_role_bob: spake2_role_t = 1;
 pub type spake2_role_t = ::std::os::raw::c_uint;
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_SPAKE2_CTX_new"]
     pub fn SPAKE2_CTX_new(
         my_role: spake2_role_t,
@@ -8423,11 +8423,11 @@ extern "C" {
         their_name_len: usize,
     ) -> *mut SPAKE2_CTX;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_SPAKE2_CTX_free"]
     pub fn SPAKE2_CTX_free(ctx: *mut SPAKE2_CTX);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_SPAKE2_generate_msg"]
     pub fn SPAKE2_generate_msg(
         ctx: *mut SPAKE2_CTX,
@@ -8438,7 +8438,7 @@ extern "C" {
         password_len: usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_SPAKE2_process_msg"]
     pub fn SPAKE2_process_msg(
         ctx: *mut SPAKE2_CTX,
@@ -8449,122 +8449,122 @@ extern "C" {
         their_msg_len: usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_md4"]
     pub fn EVP_md4() -> *const EVP_MD;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_md5"]
     pub fn EVP_md5() -> *const EVP_MD;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_ripemd160"]
     pub fn EVP_ripemd160() -> *const EVP_MD;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_sha1"]
     pub fn EVP_sha1() -> *const EVP_MD;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_sha224"]
     pub fn EVP_sha224() -> *const EVP_MD;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_sha256"]
     pub fn EVP_sha256() -> *const EVP_MD;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_sha384"]
     pub fn EVP_sha384() -> *const EVP_MD;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_sha512"]
     pub fn EVP_sha512() -> *const EVP_MD;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_sha512_224"]
     pub fn EVP_sha512_224() -> *const EVP_MD;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_sha512_256"]
     pub fn EVP_sha512_256() -> *const EVP_MD;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_sha3_224"]
     pub fn EVP_sha3_224() -> *const EVP_MD;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_sha3_256"]
     pub fn EVP_sha3_256() -> *const EVP_MD;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_sha3_384"]
     pub fn EVP_sha3_384() -> *const EVP_MD;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_sha3_512"]
     pub fn EVP_sha3_512() -> *const EVP_MD;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_shake128"]
     pub fn EVP_shake128() -> *const EVP_MD;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_shake256"]
     pub fn EVP_shake256() -> *const EVP_MD;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_blake2b256"]
     pub fn EVP_blake2b256() -> *const EVP_MD;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_md5_sha1"]
     pub fn EVP_md5_sha1() -> *const EVP_MD;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_get_digestbynid"]
     pub fn EVP_get_digestbynid(nid: ::std::os::raw::c_int) -> *const EVP_MD;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_get_digestbyobj"]
     pub fn EVP_get_digestbyobj(obj: *const ASN1_OBJECT) -> *const EVP_MD;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_MD_CTX_init"]
     pub fn EVP_MD_CTX_init(ctx: *mut EVP_MD_CTX);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_MD_CTX_new"]
     pub fn EVP_MD_CTX_new() -> *mut EVP_MD_CTX;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_MD_CTX_cleanup"]
     pub fn EVP_MD_CTX_cleanup(ctx: *mut EVP_MD_CTX) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_MD_CTX_cleanse"]
     pub fn EVP_MD_CTX_cleanse(ctx: *mut EVP_MD_CTX);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_MD_CTX_free"]
     pub fn EVP_MD_CTX_free(ctx: *mut EVP_MD_CTX);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_MD_CTX_copy_ex"]
     pub fn EVP_MD_CTX_copy_ex(
         out: *mut EVP_MD_CTX,
         in_: *const EVP_MD_CTX,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_MD_CTX_move"]
     pub fn EVP_MD_CTX_move(out: *mut EVP_MD_CTX, in_: *mut EVP_MD_CTX);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_MD_CTX_reset"]
     pub fn EVP_MD_CTX_reset(ctx: *mut EVP_MD_CTX) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_DigestInit_ex"]
     pub fn EVP_DigestInit_ex(
         ctx: *mut EVP_MD_CTX,
@@ -8572,11 +8572,11 @@ extern "C" {
         engine: *mut ENGINE,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_DigestInit"]
     pub fn EVP_DigestInit(ctx: *mut EVP_MD_CTX, type_: *const EVP_MD) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_DigestUpdate"]
     pub fn EVP_DigestUpdate(
         ctx: *mut EVP_MD_CTX,
@@ -8584,7 +8584,7 @@ extern "C" {
         len: usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_DigestFinal_ex"]
     pub fn EVP_DigestFinal_ex(
         ctx: *mut EVP_MD_CTX,
@@ -8592,7 +8592,7 @@ extern "C" {
         out_size: *mut ::std::os::raw::c_uint,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_DigestFinal"]
     pub fn EVP_DigestFinal(
         ctx: *mut EVP_MD_CTX,
@@ -8600,7 +8600,7 @@ extern "C" {
         out_size: *mut ::std::os::raw::c_uint,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_Digest"]
     pub fn EVP_Digest(
         data: *const ::std::os::raw::c_void,
@@ -8611,63 +8611,63 @@ extern "C" {
         impl_: *mut ENGINE,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_MD_type"]
     pub fn EVP_MD_type(md: *const EVP_MD) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_MD_flags"]
     pub fn EVP_MD_flags(md: *const EVP_MD) -> u32;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_MD_size"]
     pub fn EVP_MD_size(md: *const EVP_MD) -> usize;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_MD_block_size"]
     pub fn EVP_MD_block_size(md: *const EVP_MD) -> usize;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_MD_CTX_md"]
     pub fn EVP_MD_CTX_md(ctx: *const EVP_MD_CTX) -> *const EVP_MD;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_MD_CTX_size"]
     pub fn EVP_MD_CTX_size(ctx: *const EVP_MD_CTX) -> usize;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_MD_CTX_block_size"]
     pub fn EVP_MD_CTX_block_size(ctx: *const EVP_MD_CTX) -> usize;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_MD_CTX_type"]
     pub fn EVP_MD_CTX_type(ctx: *const EVP_MD_CTX) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_parse_digest_algorithm"]
     pub fn EVP_parse_digest_algorithm(cbs: *mut CBS) -> *const EVP_MD;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_marshal_digest_algorithm"]
     pub fn EVP_marshal_digest_algorithm(cbb: *mut CBB, md: *const EVP_MD) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_MD_CTX_copy"]
     pub fn EVP_MD_CTX_copy(out: *mut EVP_MD_CTX, in_: *const EVP_MD_CTX) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_get_digestbyname"]
     pub fn EVP_get_digestbyname(arg1: *const ::std::os::raw::c_char) -> *const EVP_MD;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_MD_CTX_create"]
     pub fn EVP_MD_CTX_create() -> *mut EVP_MD_CTX;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_MD_CTX_destroy"]
     pub fn EVP_MD_CTX_destroy(ctx: *mut EVP_MD_CTX);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_DigestFinalXOF"]
     pub fn EVP_DigestFinalXOF(
         ctx: *mut EVP_MD_CTX,
@@ -8675,7 +8675,7 @@ extern "C" {
         len: usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_DigestSqueeze"]
     pub fn EVP_DigestSqueeze(
         ctx: *mut EVP_MD_CTX,
@@ -8683,23 +8683,23 @@ extern "C" {
         len: usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_MD_meth_get_flags"]
     pub fn EVP_MD_meth_get_flags(md: *const EVP_MD) -> u32;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_MD_nid"]
     pub fn EVP_MD_nid(md: *const EVP_MD) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_MD_CTX_set_pkey_ctx"]
     pub fn EVP_MD_CTX_set_pkey_ctx(ctx: *mut EVP_MD_CTX, pctx: *mut EVP_PKEY_CTX);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_MD_CTX_get_pkey_ctx"]
     pub fn EVP_MD_CTX_get_pkey_ctx(ctx: *const EVP_MD_CTX) -> *mut EVP_PKEY_CTX;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_MD_CTX_pkey_ctx"]
     pub fn EVP_MD_CTX_pkey_ctx(ctx: *const EVP_MD_CTX) -> *mut EVP_PKEY_CTX;
 }
@@ -8778,23 +8778,23 @@ impl Default for env_md_ctx_st {
         }
     }
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_MD_unstable_sha3_enable"]
     pub fn EVP_MD_unstable_sha3_enable(enable: bool);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_MD_unstable_sha3_is_enabled"]
     pub fn EVP_MD_unstable_sha3_is_enabled() -> bool;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_MD_CTX_set_flags"]
     pub fn EVP_MD_CTX_set_flags(ctx: *mut EVP_MD_CTX, flags: ::std::os::raw::c_int);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_add_digest"]
     pub fn EVP_add_digest(digest: *const EVP_MD) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_md_null"]
     pub fn EVP_md_null() -> *const EVP_MD;
 }
@@ -8845,35 +8845,35 @@ pub enum point_conversion_form_t {
     POINT_CONVERSION_UNCOMPRESSED = 4,
     POINT_CONVERSION_HYBRID = 6,
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_group_p224"]
     pub fn EC_group_p224() -> *const EC_GROUP;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_group_p256"]
     pub fn EC_group_p256() -> *const EC_GROUP;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_group_p384"]
     pub fn EC_group_p384() -> *const EC_GROUP;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_group_p521"]
     pub fn EC_group_p521() -> *const EC_GROUP;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_group_secp256k1"]
     pub fn EC_group_secp256k1() -> *const EC_GROUP;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_GROUP_new_by_curve_name"]
     pub fn EC_GROUP_new_by_curve_name(nid: ::std::os::raw::c_int) -> *mut EC_GROUP;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_GROUP_new_by_curve_name_mutable"]
     pub fn EC_GROUP_new_by_curve_name_mutable(nid: ::std::os::raw::c_int) -> *mut EC_GROUP;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_GROUP_cmp"]
     pub fn EC_GROUP_cmp(
         a: *const EC_GROUP,
@@ -8881,19 +8881,19 @@ extern "C" {
         ignored: *mut BN_CTX,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_GROUP_get0_generator"]
     pub fn EC_GROUP_get0_generator(group: *const EC_GROUP) -> *const EC_POINT;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_GROUP_get0_order"]
     pub fn EC_GROUP_get0_order(group: *const EC_GROUP) -> *const BIGNUM;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_GROUP_order_bits"]
     pub fn EC_GROUP_order_bits(group: *const EC_GROUP) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_GROUP_get_cofactor"]
     pub fn EC_GROUP_get_cofactor(
         group: *const EC_GROUP,
@@ -8901,7 +8901,7 @@ extern "C" {
         ctx: *mut BN_CTX,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_GROUP_get_curve_GFp"]
     pub fn EC_GROUP_get_curve_GFp(
         group: *const EC_GROUP,
@@ -8911,53 +8911,53 @@ extern "C" {
         ctx: *mut BN_CTX,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_GROUP_get_curve_name"]
     pub fn EC_GROUP_get_curve_name(group: *const EC_GROUP) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_GROUP_get_degree"]
     pub fn EC_GROUP_get_degree(group: *const EC_GROUP) -> ::std::os::raw::c_uint;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_curve_nid2nist"]
     pub fn EC_curve_nid2nist(nid: ::std::os::raw::c_int) -> *const ::std::os::raw::c_char;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_curve_nist2nid"]
     pub fn EC_curve_nist2nid(name: *const ::std::os::raw::c_char) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_POINT_new"]
     pub fn EC_POINT_new(group: *const EC_GROUP) -> *mut EC_POINT;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_POINT_free"]
     pub fn EC_POINT_free(point: *mut EC_POINT);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_POINT_copy"]
     pub fn EC_POINT_copy(dest: *mut EC_POINT, src: *const EC_POINT) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_POINT_dup"]
     pub fn EC_POINT_dup(src: *const EC_POINT, group: *const EC_GROUP) -> *mut EC_POINT;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_POINT_set_to_infinity"]
     pub fn EC_POINT_set_to_infinity(
         group: *const EC_GROUP,
         point: *mut EC_POINT,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_POINT_is_at_infinity"]
     pub fn EC_POINT_is_at_infinity(
         group: *const EC_GROUP,
         point: *const EC_POINT,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_POINT_is_on_curve"]
     pub fn EC_POINT_is_on_curve(
         group: *const EC_GROUP,
@@ -8965,7 +8965,7 @@ extern "C" {
         ctx: *mut BN_CTX,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_POINT_cmp"]
     pub fn EC_POINT_cmp(
         group: *const EC_GROUP,
@@ -8974,7 +8974,7 @@ extern "C" {
         ctx: *mut BN_CTX,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_POINT_get_affine_coordinates_GFp"]
     pub fn EC_POINT_get_affine_coordinates_GFp(
         group: *const EC_GROUP,
@@ -8984,7 +8984,7 @@ extern "C" {
         ctx: *mut BN_CTX,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_POINT_get_affine_coordinates"]
     pub fn EC_POINT_get_affine_coordinates(
         group: *const EC_GROUP,
@@ -8994,7 +8994,7 @@ extern "C" {
         ctx: *mut BN_CTX,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_POINT_set_affine_coordinates_GFp"]
     pub fn EC_POINT_set_affine_coordinates_GFp(
         group: *const EC_GROUP,
@@ -9004,7 +9004,7 @@ extern "C" {
         ctx: *mut BN_CTX,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_POINT_set_affine_coordinates"]
     pub fn EC_POINT_set_affine_coordinates(
         group: *const EC_GROUP,
@@ -9014,7 +9014,7 @@ extern "C" {
         ctx: *mut BN_CTX,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_POINT_point2oct"]
     pub fn EC_POINT_point2oct(
         group: *const EC_GROUP,
@@ -9025,7 +9025,7 @@ extern "C" {
         ctx: *mut BN_CTX,
     ) -> usize;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_POINT_point2cbb"]
     pub fn EC_POINT_point2cbb(
         out: *mut CBB,
@@ -9035,7 +9035,7 @@ extern "C" {
         ctx: *mut BN_CTX,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_POINT_oct2point"]
     pub fn EC_POINT_oct2point(
         group: *const EC_GROUP,
@@ -9045,7 +9045,7 @@ extern "C" {
         ctx: *mut BN_CTX,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_POINT_set_compressed_coordinates_GFp"]
     pub fn EC_POINT_set_compressed_coordinates_GFp(
         group: *const EC_GROUP,
@@ -9055,7 +9055,7 @@ extern "C" {
         ctx: *mut BN_CTX,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_POINT_add"]
     pub fn EC_POINT_add(
         group: *const EC_GROUP,
@@ -9065,7 +9065,7 @@ extern "C" {
         ctx: *mut BN_CTX,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_POINT_dbl"]
     pub fn EC_POINT_dbl(
         group: *const EC_GROUP,
@@ -9074,7 +9074,7 @@ extern "C" {
         ctx: *mut BN_CTX,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_POINT_invert"]
     pub fn EC_POINT_invert(
         group: *const EC_GROUP,
@@ -9082,7 +9082,7 @@ extern "C" {
         ctx: *mut BN_CTX,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_POINT_mul"]
     pub fn EC_POINT_mul(
         group: *const EC_GROUP,
@@ -9093,7 +9093,7 @@ extern "C" {
         ctx: *mut BN_CTX,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_hash_to_curve_p256_xmd_sha256_sswu"]
     pub fn EC_hash_to_curve_p256_xmd_sha256_sswu(
         group: *const EC_GROUP,
@@ -9104,7 +9104,7 @@ extern "C" {
         msg_len: usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_hash_to_curve_p384_xmd_sha384_sswu"]
     pub fn EC_hash_to_curve_p384_xmd_sha384_sswu(
         group: *const EC_GROUP,
@@ -9115,15 +9115,15 @@ extern "C" {
         msg_len: usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_GROUP_free"]
     pub fn EC_GROUP_free(group: *mut EC_GROUP);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_GROUP_dup"]
     pub fn EC_GROUP_dup(group: *const EC_GROUP) -> *mut EC_GROUP;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_GROUP_new_curve_GFp"]
     pub fn EC_GROUP_new_curve_GFp(
         p: *const BIGNUM,
@@ -9132,7 +9132,7 @@ extern "C" {
         ctx: *mut BN_CTX,
     ) -> *mut EC_GROUP;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_GROUP_set_generator"]
     pub fn EC_GROUP_set_generator(
         group: *mut EC_GROUP,
@@ -9141,7 +9141,7 @@ extern "C" {
         cofactor: *const BIGNUM,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_POINT_point2bn"]
     pub fn EC_POINT_point2bn(
         group: *const EC_GROUP,
@@ -9151,7 +9151,7 @@ extern "C" {
         ctx: *mut BN_CTX,
     ) -> *mut BIGNUM;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_POINT_bn2point"]
     pub fn EC_POINT_bn2point(
         group: *const EC_GROUP,
@@ -9160,7 +9160,7 @@ extern "C" {
         ctx: *mut BN_CTX,
     ) -> *mut EC_POINT;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_GROUP_get_order"]
     pub fn EC_GROUP_get_order(
         group: *const EC_GROUP,
@@ -9208,16 +9208,16 @@ impl Default for EC_builtin_curve {
         }
     }
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_get_builtin_curves"]
     pub fn EC_get_builtin_curves(out_curves: *mut EC_builtin_curve, max_num_curves: usize)
         -> usize;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_POINT_clear_free"]
     pub fn EC_POINT_clear_free(point: *mut EC_POINT);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_GROUP_set_seed"]
     pub fn EC_GROUP_set_seed(
         group: *mut EC_GROUP,
@@ -9225,15 +9225,15 @@ extern "C" {
         len: usize,
     ) -> usize;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_GROUP_get0_seed"]
     pub fn EC_GROUP_get0_seed(group: *const EC_GROUP) -> *mut ::std::os::raw::c_uchar;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_GROUP_get_seed_len"]
     pub fn EC_GROUP_get_seed_len(group: *const EC_GROUP) -> usize;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_ECPKParameters_print"]
     pub fn ECPKParameters_print(
         bio: *mut BIO,
@@ -9241,23 +9241,23 @@ extern "C" {
         offset: ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_GROUP_set_asn1_flag"]
     pub fn EC_GROUP_set_asn1_flag(group: *mut EC_GROUP, flag: ::std::os::raw::c_int);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_GROUP_get_asn1_flag"]
     pub fn EC_GROUP_get_asn1_flag(group: *const EC_GROUP) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_GROUP_set_point_conversion_form"]
     pub fn EC_GROUP_set_point_conversion_form(group: *mut EC_GROUP, form: point_conversion_form_t);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_GROUP_get_point_conversion_form"]
     pub fn EC_GROUP_get_point_conversion_form(group: *const EC_GROUP) -> point_conversion_form_t;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_KEY_decoded_from_explicit_params"]
     pub fn EC_KEY_decoded_from_explicit_params(key: *const EC_KEY) -> ::std::os::raw::c_int;
 }
@@ -9267,91 +9267,91 @@ pub struct ec_method_st {
     _unused: [u8; 0],
 }
 pub type EC_METHOD = ec_method_st;
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_GROUP_method_of"]
     pub fn EC_GROUP_method_of(group: *const EC_GROUP) -> *const EC_METHOD;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_METHOD_get_field_type"]
     pub fn EC_METHOD_get_field_type(meth: *const EC_METHOD) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_KEY_new"]
     pub fn EC_KEY_new() -> *mut EC_KEY;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_KEY_new_method"]
     pub fn EC_KEY_new_method(engine: *const ENGINE) -> *mut EC_KEY;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_KEY_new_by_curve_name"]
     pub fn EC_KEY_new_by_curve_name(nid: ::std::os::raw::c_int) -> *mut EC_KEY;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_KEY_free"]
     pub fn EC_KEY_free(key: *mut EC_KEY);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_KEY_dup"]
     pub fn EC_KEY_dup(src: *const EC_KEY) -> *mut EC_KEY;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_KEY_up_ref"]
     pub fn EC_KEY_up_ref(key: *mut EC_KEY) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_KEY_is_opaque"]
     pub fn EC_KEY_is_opaque(key: *const EC_KEY) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_KEY_get0_group"]
     pub fn EC_KEY_get0_group(key: *const EC_KEY) -> *const EC_GROUP;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_KEY_set_group"]
     pub fn EC_KEY_set_group(key: *mut EC_KEY, group: *const EC_GROUP) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_KEY_get0_private_key"]
     pub fn EC_KEY_get0_private_key(key: *const EC_KEY) -> *const BIGNUM;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_KEY_set_private_key"]
     pub fn EC_KEY_set_private_key(key: *mut EC_KEY, priv_: *const BIGNUM) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_KEY_get0_public_key"]
     pub fn EC_KEY_get0_public_key(key: *const EC_KEY) -> *const EC_POINT;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_KEY_set_public_key"]
     pub fn EC_KEY_set_public_key(key: *mut EC_KEY, pub_: *const EC_POINT) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_KEY_get_enc_flags"]
     pub fn EC_KEY_get_enc_flags(key: *const EC_KEY) -> ::std::os::raw::c_uint;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_KEY_set_enc_flags"]
     pub fn EC_KEY_set_enc_flags(key: *mut EC_KEY, flags: ::std::os::raw::c_uint);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_KEY_get_conv_form"]
     pub fn EC_KEY_get_conv_form(key: *const EC_KEY) -> point_conversion_form_t;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_KEY_set_conv_form"]
     pub fn EC_KEY_set_conv_form(key: *mut EC_KEY, cform: point_conversion_form_t);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_KEY_check_key"]
     pub fn EC_KEY_check_key(key: *const EC_KEY) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_KEY_check_fips"]
     pub fn EC_KEY_check_fips(key: *const EC_KEY) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_KEY_set_public_key_affine_coordinates"]
     pub fn EC_KEY_set_public_key_affine_coordinates(
         key: *mut EC_KEY,
@@ -9359,7 +9359,7 @@ extern "C" {
         y: *const BIGNUM,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_KEY_key2buf"]
     pub fn EC_KEY_key2buf(
         key: *const EC_KEY,
@@ -9368,15 +9368,15 @@ extern "C" {
         ctx: *mut BN_CTX,
     ) -> usize;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_KEY_generate_key"]
     pub fn EC_KEY_generate_key(key: *mut EC_KEY) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_KEY_generate_key_fips"]
     pub fn EC_KEY_generate_key_fips(key: *mut EC_KEY) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_KEY_derive_from_secret"]
     pub fn EC_KEY_derive_from_secret(
         group: *const EC_GROUP,
@@ -9384,11 +9384,11 @@ extern "C" {
         secret_len: usize,
     ) -> *mut EC_KEY;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_KEY_parse_private_key"]
     pub fn EC_KEY_parse_private_key(cbs: *mut CBS, group: *const EC_GROUP) -> *mut EC_KEY;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_KEY_marshal_private_key"]
     pub fn EC_KEY_marshal_private_key(
         cbb: *mut CBB,
@@ -9396,22 +9396,22 @@ extern "C" {
         enc_flags: ::std::os::raw::c_uint,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_KEY_parse_curve_name"]
     pub fn EC_KEY_parse_curve_name(cbs: *mut CBS) -> *mut EC_GROUP;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_KEY_marshal_curve_name"]
     pub fn EC_KEY_marshal_curve_name(
         cbb: *mut CBB,
         group: *const EC_GROUP,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_KEY_parse_parameters"]
     pub fn EC_KEY_parse_parameters(cbs: *mut CBS) -> *mut EC_GROUP;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_KEY_get_ex_new_index"]
     pub fn EC_KEY_get_ex_new_index(
         argl: ::std::os::raw::c_long,
@@ -9421,7 +9421,7 @@ extern "C" {
         free_func: CRYPTO_EX_free,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_KEY_set_ex_data"]
     pub fn EC_KEY_set_ex_data(
         r: *mut EC_KEY,
@@ -9429,14 +9429,14 @@ extern "C" {
         arg: *mut ::std::os::raw::c_void,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_KEY_get_ex_data"]
     pub fn EC_KEY_get_ex_data(
         r: *const EC_KEY,
         idx: ::std::os::raw::c_int,
     ) -> *mut ::std::os::raw::c_void;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_d2i_ECPrivateKey"]
     pub fn d2i_ECPrivateKey(
         out_key: *mut *mut EC_KEY,
@@ -9444,11 +9444,11 @@ extern "C" {
         len: ::std::os::raw::c_long,
     ) -> *mut EC_KEY;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_i2d_ECPrivateKey"]
     pub fn i2d_ECPrivateKey(key: *const EC_KEY, outp: *mut *mut u8) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_d2i_ECParameters"]
     pub fn d2i_ECParameters(
         out_key: *mut *mut EC_KEY,
@@ -9456,19 +9456,19 @@ extern "C" {
         len: ::std::os::raw::c_long,
     ) -> *mut EC_KEY;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_i2d_ECParameters"]
     pub fn i2d_ECParameters(key: *const EC_KEY, outp: *mut *mut u8) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_d2i_ECPKParameters_bio"]
     pub fn d2i_ECPKParameters_bio(bio: *mut BIO, out_group: *mut *mut EC_GROUP) -> *mut EC_GROUP;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_i2d_ECPKParameters_bio"]
     pub fn i2d_ECPKParameters_bio(bio: *mut BIO, group: *const EC_GROUP) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_o2i_ECPublicKey"]
     pub fn o2i_ECPublicKey(
         out_key: *mut *mut EC_KEY,
@@ -9476,38 +9476,38 @@ extern "C" {
         len: ::std::os::raw::c_long,
     ) -> *mut EC_KEY;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_i2o_ECPublicKey"]
     pub fn i2o_ECPublicKey(
         key: *const EC_KEY,
         outp: *mut *mut ::std::os::raw::c_uchar,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_KEY_get_default_method"]
     pub fn EC_KEY_get_default_method() -> *const EC_KEY_METHOD;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_KEY_OpenSSL"]
     pub fn EC_KEY_OpenSSL() -> *const EC_KEY_METHOD;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_KEY_METHOD_new"]
     pub fn EC_KEY_METHOD_new(eckey_meth: *const EC_KEY_METHOD) -> *mut EC_KEY_METHOD;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_KEY_METHOD_free"]
     pub fn EC_KEY_METHOD_free(eckey_meth: *mut EC_KEY_METHOD);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_KEY_set_method"]
     pub fn EC_KEY_set_method(ec: *mut EC_KEY, meth: *const EC_KEY_METHOD) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_KEY_get_method"]
     pub fn EC_KEY_get_method(ec: *const EC_KEY) -> *const EC_KEY_METHOD;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_KEY_METHOD_set_sign_awslc"]
     pub fn EC_KEY_METHOD_set_sign_awslc(
         meth: *mut EC_KEY_METHOD,
@@ -9534,7 +9534,7 @@ extern "C" {
         >,
     );
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_KEY_METHOD_set_init_awslc"]
     pub fn EC_KEY_METHOD_set_init_awslc(
         meth: *mut EC_KEY_METHOD,
@@ -9544,18 +9544,18 @@ extern "C" {
         finish: ::std::option::Option<unsafe extern "C" fn(key: *mut EC_KEY)>,
     );
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_KEY_METHOD_set_flags"]
     pub fn EC_KEY_METHOD_set_flags(
         meth: *mut EC_KEY_METHOD,
         flags: ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EC_KEY_set_asn1_flag"]
     pub fn EC_KEY_set_asn1_flag(key: *mut EC_KEY, flag: ::std::os::raw::c_int);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_ECDH_compute_key"]
     pub fn ECDH_compute_key(
         out: *mut ::std::os::raw::c_void,
@@ -9572,7 +9572,7 @@ extern "C" {
         >,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_ECDH_compute_key_fips"]
     pub fn ECDH_compute_key_fips(
         out: *mut u8,
@@ -9581,7 +9581,7 @@ extern "C" {
         priv_key: *const EC_KEY,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_ECDSA_sign"]
     pub fn ECDSA_sign(
         type_: ::std::os::raw::c_int,
@@ -9592,7 +9592,7 @@ extern "C" {
         key: *const EC_KEY,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_ECDSA_verify"]
     pub fn ECDSA_verify(
         type_: ::std::os::raw::c_int,
@@ -9603,7 +9603,7 @@ extern "C" {
         key: *const EC_KEY,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_ECDSA_size"]
     pub fn ECDSA_size(key: *const EC_KEY) -> usize;
 }
@@ -9647,23 +9647,23 @@ impl Default for ecdsa_sig_st {
         }
     }
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_ECDSA_SIG_new"]
     pub fn ECDSA_SIG_new() -> *mut ECDSA_SIG;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_ECDSA_SIG_free"]
     pub fn ECDSA_SIG_free(sig: *mut ECDSA_SIG);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_ECDSA_SIG_get0_r"]
     pub fn ECDSA_SIG_get0_r(sig: *const ECDSA_SIG) -> *const BIGNUM;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_ECDSA_SIG_get0_s"]
     pub fn ECDSA_SIG_get0_s(sig: *const ECDSA_SIG) -> *const BIGNUM;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_ECDSA_SIG_get0"]
     pub fn ECDSA_SIG_get0(
         sig: *const ECDSA_SIG,
@@ -9671,7 +9671,7 @@ extern "C" {
         out_s: *mut *const BIGNUM,
     );
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_ECDSA_SIG_set0"]
     pub fn ECDSA_SIG_set0(
         sig: *mut ECDSA_SIG,
@@ -9679,7 +9679,7 @@ extern "C" {
         s: *mut BIGNUM,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_ECDSA_do_sign"]
     pub fn ECDSA_do_sign(
         digest: *const u8,
@@ -9687,7 +9687,7 @@ extern "C" {
         key: *const EC_KEY,
     ) -> *mut ECDSA_SIG;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_ECDSA_do_verify"]
     pub fn ECDSA_do_verify(
         digest: *const u8,
@@ -9696,19 +9696,19 @@ extern "C" {
         key: *const EC_KEY,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_ECDSA_SIG_parse"]
     pub fn ECDSA_SIG_parse(cbs: *mut CBS) -> *mut ECDSA_SIG;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_ECDSA_SIG_from_bytes"]
     pub fn ECDSA_SIG_from_bytes(in_: *const u8, in_len: usize) -> *mut ECDSA_SIG;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_ECDSA_SIG_marshal"]
     pub fn ECDSA_SIG_marshal(cbb: *mut CBB, sig: *const ECDSA_SIG) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_ECDSA_SIG_to_bytes"]
     pub fn ECDSA_SIG_to_bytes(
         out_bytes: *mut *mut u8,
@@ -9716,11 +9716,11 @@ extern "C" {
         sig: *const ECDSA_SIG,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_ECDSA_SIG_max_len"]
     pub fn ECDSA_SIG_max_len(order_len: usize) -> usize;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_ECDSA_sign_with_nonce_and_leak_private_key_for_testing"]
     pub fn ECDSA_sign_with_nonce_and_leak_private_key_for_testing(
         digest: *const u8,
@@ -9730,7 +9730,7 @@ extern "C" {
         nonce_len: usize,
     ) -> *mut ECDSA_SIG;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_d2i_ECDSA_SIG"]
     pub fn d2i_ECDSA_SIG(
         out: *mut *mut ECDSA_SIG,
@@ -9738,83 +9738,83 @@ extern "C" {
         len: ::std::os::raw::c_long,
     ) -> *mut ECDSA_SIG;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_i2d_ECDSA_SIG"]
     pub fn i2d_ECDSA_SIG(sig: *const ECDSA_SIG, outp: *mut *mut u8) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_aead_aes_128_gcm"]
     pub fn EVP_aead_aes_128_gcm() -> *const EVP_AEAD;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_aead_aes_192_gcm"]
     pub fn EVP_aead_aes_192_gcm() -> *const EVP_AEAD;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_aead_aes_256_gcm"]
     pub fn EVP_aead_aes_256_gcm() -> *const EVP_AEAD;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_aead_chacha20_poly1305"]
     pub fn EVP_aead_chacha20_poly1305() -> *const EVP_AEAD;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_aead_xchacha20_poly1305"]
     pub fn EVP_aead_xchacha20_poly1305() -> *const EVP_AEAD;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_aead_aes_128_ctr_hmac_sha256"]
     pub fn EVP_aead_aes_128_ctr_hmac_sha256() -> *const EVP_AEAD;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_aead_aes_256_ctr_hmac_sha256"]
     pub fn EVP_aead_aes_256_ctr_hmac_sha256() -> *const EVP_AEAD;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_aead_aes_128_gcm_siv"]
     pub fn EVP_aead_aes_128_gcm_siv() -> *const EVP_AEAD;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_aead_aes_256_gcm_siv"]
     pub fn EVP_aead_aes_256_gcm_siv() -> *const EVP_AEAD;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_aead_aes_128_gcm_randnonce"]
     pub fn EVP_aead_aes_128_gcm_randnonce() -> *const EVP_AEAD;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_aead_aes_256_gcm_randnonce"]
     pub fn EVP_aead_aes_256_gcm_randnonce() -> *const EVP_AEAD;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_aead_aes_128_ccm_bluetooth"]
     pub fn EVP_aead_aes_128_ccm_bluetooth() -> *const EVP_AEAD;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_aead_aes_128_ccm_bluetooth_8"]
     pub fn EVP_aead_aes_128_ccm_bluetooth_8() -> *const EVP_AEAD;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_aead_aes_128_ccm_matter"]
     pub fn EVP_aead_aes_128_ccm_matter() -> *const EVP_AEAD;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_has_aes_hardware"]
     pub fn EVP_has_aes_hardware() -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_AEAD_key_length"]
     pub fn EVP_AEAD_key_length(aead: *const EVP_AEAD) -> usize;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_AEAD_nonce_length"]
     pub fn EVP_AEAD_nonce_length(aead: *const EVP_AEAD) -> usize;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_AEAD_max_overhead"]
     pub fn EVP_AEAD_max_overhead(aead: *const EVP_AEAD) -> usize;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_AEAD_max_tag_len"]
     pub fn EVP_AEAD_max_tag_len(aead: *const EVP_AEAD) -> usize;
 }
@@ -9917,11 +9917,11 @@ impl Default for evp_aead_ctx_st {
         }
     }
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_AEAD_CTX_zero"]
     pub fn EVP_AEAD_CTX_zero(ctx: *mut EVP_AEAD_CTX);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_AEAD_CTX_new"]
     pub fn EVP_AEAD_CTX_new(
         aead: *const EVP_AEAD,
@@ -9930,11 +9930,11 @@ extern "C" {
         tag_len: usize,
     ) -> *mut EVP_AEAD_CTX;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_AEAD_CTX_free"]
     pub fn EVP_AEAD_CTX_free(ctx: *mut EVP_AEAD_CTX);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_AEAD_CTX_init"]
     pub fn EVP_AEAD_CTX_init(
         ctx: *mut EVP_AEAD_CTX,
@@ -9945,11 +9945,11 @@ extern "C" {
         impl_: *mut ENGINE,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_AEAD_CTX_cleanup"]
     pub fn EVP_AEAD_CTX_cleanup(ctx: *mut EVP_AEAD_CTX);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_AEAD_CTX_seal"]
     pub fn EVP_AEAD_CTX_seal(
         ctx: *const EVP_AEAD_CTX,
@@ -9964,7 +9964,7 @@ extern "C" {
         ad_len: usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_AEAD_CTX_open"]
     pub fn EVP_AEAD_CTX_open(
         ctx: *const EVP_AEAD_CTX,
@@ -9979,7 +9979,7 @@ extern "C" {
         ad_len: usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_AEAD_CTX_seal_scatter"]
     pub fn EVP_AEAD_CTX_seal_scatter(
         ctx: *const EVP_AEAD_CTX,
@@ -9997,7 +9997,7 @@ extern "C" {
         ad_len: usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_AEAD_CTX_open_gather"]
     pub fn EVP_AEAD_CTX_open_gather(
         ctx: *const EVP_AEAD_CTX,
@@ -10012,70 +10012,70 @@ extern "C" {
         ad_len: usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_AEAD_CTX_aead"]
     pub fn EVP_AEAD_CTX_aead(ctx: *const EVP_AEAD_CTX) -> *const EVP_AEAD;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_aead_aes_128_cbc_sha1_tls"]
     pub fn EVP_aead_aes_128_cbc_sha1_tls() -> *const EVP_AEAD;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_aead_aes_128_cbc_sha1_tls_implicit_iv"]
     pub fn EVP_aead_aes_128_cbc_sha1_tls_implicit_iv() -> *const EVP_AEAD;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_aead_aes_256_cbc_sha1_tls"]
     pub fn EVP_aead_aes_256_cbc_sha1_tls() -> *const EVP_AEAD;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_aead_aes_256_cbc_sha1_tls_implicit_iv"]
     pub fn EVP_aead_aes_256_cbc_sha1_tls_implicit_iv() -> *const EVP_AEAD;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_aead_aes_128_cbc_sha256_tls"]
     pub fn EVP_aead_aes_128_cbc_sha256_tls() -> *const EVP_AEAD;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_aead_aes_128_cbc_sha256_tls_implicit_iv"]
     pub fn EVP_aead_aes_128_cbc_sha256_tls_implicit_iv() -> *const EVP_AEAD;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_aead_aes_256_cbc_sha384_tls"]
     pub fn EVP_aead_aes_256_cbc_sha384_tls() -> *const EVP_AEAD;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_aead_des_ede3_cbc_sha1_tls"]
     pub fn EVP_aead_des_ede3_cbc_sha1_tls() -> *const EVP_AEAD;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_aead_des_ede3_cbc_sha1_tls_implicit_iv"]
     pub fn EVP_aead_des_ede3_cbc_sha1_tls_implicit_iv() -> *const EVP_AEAD;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_aead_null_sha1_tls"]
     pub fn EVP_aead_null_sha1_tls() -> *const EVP_AEAD;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_aead_aes_128_gcm_tls12"]
     pub fn EVP_aead_aes_128_gcm_tls12() -> *const EVP_AEAD;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_aead_aes_256_gcm_tls12"]
     pub fn EVP_aead_aes_256_gcm_tls12() -> *const EVP_AEAD;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_aead_aes_128_gcm_tls13"]
     pub fn EVP_aead_aes_128_gcm_tls13() -> *const EVP_AEAD;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_aead_aes_256_gcm_tls13"]
     pub fn EVP_aead_aes_256_gcm_tls13() -> *const EVP_AEAD;
 }
 pub const evp_aead_direction_t_evp_aead_open: evp_aead_direction_t = 0;
 pub const evp_aead_direction_t_evp_aead_seal: evp_aead_direction_t = 1;
 pub type evp_aead_direction_t = ::std::os::raw::c_uint;
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_AEAD_CTX_init_with_direction"]
     pub fn EVP_AEAD_CTX_init_with_direction(
         ctx: *mut EVP_AEAD_CTX,
@@ -10086,7 +10086,7 @@ extern "C" {
         dir: evp_aead_direction_t,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_AEAD_CTX_get_iv"]
     pub fn EVP_AEAD_CTX_get_iv(
         ctx: *const EVP_AEAD_CTX,
@@ -10094,7 +10094,7 @@ extern "C" {
         out_len: *mut usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_AEAD_CTX_tag_len"]
     pub fn EVP_AEAD_CTX_tag_len(
         ctx: *const EVP_AEAD_CTX,
@@ -10103,7 +10103,7 @@ extern "C" {
         extra_in_len: usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_AEAD_get_iv_from_ipv4_nanosecs"]
     pub fn EVP_AEAD_get_iv_from_ipv4_nanosecs(
         ipv4_address: u32,
@@ -10169,7 +10169,7 @@ impl Default for md5_state_st {
         }
     }
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_HMAC"]
     pub fn HMAC(
         evp_md: *const EVP_MD,
@@ -10181,27 +10181,27 @@ extern "C" {
         out_len: *mut ::std::os::raw::c_uint,
     ) -> *mut u8;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_HMAC_CTX_init"]
     pub fn HMAC_CTX_init(ctx: *mut HMAC_CTX);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_HMAC_CTX_new"]
     pub fn HMAC_CTX_new() -> *mut HMAC_CTX;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_HMAC_CTX_cleanup"]
     pub fn HMAC_CTX_cleanup(ctx: *mut HMAC_CTX);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_HMAC_CTX_cleanse"]
     pub fn HMAC_CTX_cleanse(ctx: *mut HMAC_CTX);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_HMAC_CTX_free"]
     pub fn HMAC_CTX_free(ctx: *mut HMAC_CTX);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_HMAC_Init_ex"]
     pub fn HMAC_Init_ex(
         ctx: *mut HMAC_CTX,
@@ -10211,7 +10211,7 @@ extern "C" {
         impl_: *mut ENGINE,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_HMAC_Update"]
     pub fn HMAC_Update(
         ctx: *mut HMAC_CTX,
@@ -10219,7 +10219,7 @@ extern "C" {
         data_len: usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_HMAC_Final"]
     pub fn HMAC_Final(
         ctx: *mut HMAC_CTX,
@@ -10227,27 +10227,27 @@ extern "C" {
         out_len: *mut ::std::os::raw::c_uint,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_HMAC_size"]
     pub fn HMAC_size(ctx: *const HMAC_CTX) -> usize;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_HMAC_CTX_get_md"]
     pub fn HMAC_CTX_get_md(ctx: *const HMAC_CTX) -> *const EVP_MD;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_HMAC_CTX_copy_ex"]
     pub fn HMAC_CTX_copy_ex(dest: *mut HMAC_CTX, src: *const HMAC_CTX) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_HMAC_CTX_reset"]
     pub fn HMAC_CTX_reset(ctx: *mut HMAC_CTX);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_HMAC_set_precomputed_key_export"]
     pub fn HMAC_set_precomputed_key_export(ctx: *mut HMAC_CTX) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_HMAC_get_precomputed_key"]
     pub fn HMAC_get_precomputed_key(
         ctx: *mut HMAC_CTX,
@@ -10255,7 +10255,7 @@ extern "C" {
         out_len: *mut usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_HMAC_Init_from_precomputed_key"]
     pub fn HMAC_Init_from_precomputed_key(
         ctx: *mut HMAC_CTX,
@@ -10264,7 +10264,7 @@ extern "C" {
         md: *const EVP_MD,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_HMAC_Init"]
     pub fn HMAC_Init(
         ctx: *mut HMAC_CTX,
@@ -10273,7 +10273,7 @@ extern "C" {
         md: *const EVP_MD,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_HMAC_CTX_copy"]
     pub fn HMAC_CTX_copy(dest: *mut HMAC_CTX, src: *const HMAC_CTX) -> ::std::os::raw::c_int;
 }
@@ -10405,62 +10405,62 @@ impl Default for hmac_ctx_st {
         }
     }
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_new"]
     pub fn EVP_PKEY_new() -> *mut EVP_PKEY;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_free"]
     pub fn EVP_PKEY_free(pkey: *mut EVP_PKEY);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_up_ref"]
     pub fn EVP_PKEY_up_ref(pkey: *mut EVP_PKEY) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_is_opaque"]
     pub fn EVP_PKEY_is_opaque(pkey: *const EVP_PKEY) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_cmp"]
     pub fn EVP_PKEY_cmp(a: *const EVP_PKEY, b: *const EVP_PKEY) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_copy_parameters"]
     pub fn EVP_PKEY_copy_parameters(
         to: *mut EVP_PKEY,
         from: *const EVP_PKEY,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_missing_parameters"]
     pub fn EVP_PKEY_missing_parameters(pkey: *const EVP_PKEY) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_size"]
     pub fn EVP_PKEY_size(pkey: *const EVP_PKEY) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_bits"]
     pub fn EVP_PKEY_bits(pkey: *const EVP_PKEY) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_id"]
     pub fn EVP_PKEY_id(pkey: *const EVP_PKEY) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_MD_get0_name"]
     pub fn EVP_MD_get0_name(md: *const EVP_MD) -> *const ::std::os::raw::c_char;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_MD_name"]
     pub fn EVP_MD_name(md: *const EVP_MD) -> *const ::std::os::raw::c_char;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_get_pw_prompt"]
     pub fn EVP_get_pw_prompt() -> *mut ::std::os::raw::c_char;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_read_pw_string"]
     pub fn EVP_read_pw_string(
         buf: *mut ::std::os::raw::c_char,
@@ -10469,7 +10469,7 @@ extern "C" {
         verify: ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_read_pw_string_min"]
     pub fn EVP_read_pw_string_min(
         buf: *mut ::std::os::raw::c_char,
@@ -10479,92 +10479,92 @@ extern "C" {
         verify: ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_set1_RSA"]
     pub fn EVP_PKEY_set1_RSA(pkey: *mut EVP_PKEY, key: *mut RSA) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_assign_RSA"]
     pub fn EVP_PKEY_assign_RSA(pkey: *mut EVP_PKEY, key: *mut RSA) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_get0_RSA"]
     pub fn EVP_PKEY_get0_RSA(pkey: *const EVP_PKEY) -> *mut RSA;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_get1_RSA"]
     pub fn EVP_PKEY_get1_RSA(pkey: *const EVP_PKEY) -> *mut RSA;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_set1_DSA"]
     pub fn EVP_PKEY_set1_DSA(pkey: *mut EVP_PKEY, key: *mut DSA) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_assign_DSA"]
     pub fn EVP_PKEY_assign_DSA(pkey: *mut EVP_PKEY, key: *mut DSA) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_get0_DSA"]
     pub fn EVP_PKEY_get0_DSA(pkey: *const EVP_PKEY) -> *mut DSA;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_get1_DSA"]
     pub fn EVP_PKEY_get1_DSA(pkey: *const EVP_PKEY) -> *mut DSA;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_set1_EC_KEY"]
     pub fn EVP_PKEY_set1_EC_KEY(pkey: *mut EVP_PKEY, key: *mut EC_KEY) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_assign_EC_KEY"]
     pub fn EVP_PKEY_assign_EC_KEY(pkey: *mut EVP_PKEY, key: *mut EC_KEY) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_get0_EC_KEY"]
     pub fn EVP_PKEY_get0_EC_KEY(pkey: *const EVP_PKEY) -> *mut EC_KEY;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_get1_EC_KEY"]
     pub fn EVP_PKEY_get1_EC_KEY(pkey: *const EVP_PKEY) -> *mut EC_KEY;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_set1_DH"]
     pub fn EVP_PKEY_set1_DH(pkey: *mut EVP_PKEY, key: *mut DH) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_assign_DH"]
     pub fn EVP_PKEY_assign_DH(pkey: *mut EVP_PKEY, key: *mut DH) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_get0_DH"]
     pub fn EVP_PKEY_get0_DH(pkey: *const EVP_PKEY) -> *mut DH;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_get1_DH"]
     pub fn EVP_PKEY_get1_DH(pkey: *const EVP_PKEY) -> *mut DH;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_CTX_set_dh_paramgen_prime_len"]
     pub fn EVP_PKEY_CTX_set_dh_paramgen_prime_len(
         ctx: *mut EVP_PKEY_CTX,
         pbits: ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_CTX_set_dh_paramgen_generator"]
     pub fn EVP_PKEY_CTX_set_dh_paramgen_generator(
         ctx: *mut EVP_PKEY_CTX,
         gen_: ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_set_type"]
     pub fn EVP_PKEY_set_type(
         pkey: *mut EVP_PKEY,
         type_: ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_set_type_str"]
     pub fn EVP_PKEY_set_type_str(
         pkey: *mut EVP_PKEY,
@@ -10572,33 +10572,33 @@ extern "C" {
         len: ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_cmp_parameters"]
     pub fn EVP_PKEY_cmp_parameters(a: *const EVP_PKEY, b: *const EVP_PKEY)
         -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_parse_public_key"]
     pub fn EVP_parse_public_key(cbs: *mut CBS) -> *mut EVP_PKEY;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_marshal_public_key"]
     pub fn EVP_marshal_public_key(cbb: *mut CBB, key: *const EVP_PKEY) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_parse_private_key"]
     pub fn EVP_parse_private_key(cbs: *mut CBS) -> *mut EVP_PKEY;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_marshal_private_key"]
     pub fn EVP_marshal_private_key(cbb: *mut CBB, key: *const EVP_PKEY) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_marshal_private_key_v2"]
     pub fn EVP_marshal_private_key_v2(cbb: *mut CBB, key: *const EVP_PKEY)
         -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_new_raw_private_key"]
     pub fn EVP_PKEY_new_raw_private_key(
         type_: ::std::os::raw::c_int,
@@ -10607,7 +10607,7 @@ extern "C" {
         len: usize,
     ) -> *mut EVP_PKEY;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_new_raw_public_key"]
     pub fn EVP_PKEY_new_raw_public_key(
         type_: ::std::os::raw::c_int,
@@ -10616,7 +10616,7 @@ extern "C" {
         len: usize,
     ) -> *mut EVP_PKEY;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_get_raw_private_key"]
     pub fn EVP_PKEY_get_raw_private_key(
         pkey: *const EVP_PKEY,
@@ -10624,7 +10624,7 @@ extern "C" {
         out_len: *mut usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_get_raw_public_key"]
     pub fn EVP_PKEY_get_raw_public_key(
         pkey: *const EVP_PKEY,
@@ -10632,7 +10632,7 @@ extern "C" {
         out_len: *mut usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_DigestSignInit"]
     pub fn EVP_DigestSignInit(
         ctx: *mut EVP_MD_CTX,
@@ -10642,7 +10642,7 @@ extern "C" {
         pkey: *mut EVP_PKEY,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_DigestSignUpdate"]
     pub fn EVP_DigestSignUpdate(
         ctx: *mut EVP_MD_CTX,
@@ -10650,7 +10650,7 @@ extern "C" {
         len: usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_DigestSignFinal"]
     pub fn EVP_DigestSignFinal(
         ctx: *mut EVP_MD_CTX,
@@ -10658,7 +10658,7 @@ extern "C" {
         out_sig_len: *mut usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_DigestSign"]
     pub fn EVP_DigestSign(
         ctx: *mut EVP_MD_CTX,
@@ -10668,7 +10668,7 @@ extern "C" {
         data_len: usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_DigestVerifyInit"]
     pub fn EVP_DigestVerifyInit(
         ctx: *mut EVP_MD_CTX,
@@ -10678,7 +10678,7 @@ extern "C" {
         pkey: *mut EVP_PKEY,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_DigestVerifyUpdate"]
     pub fn EVP_DigestVerifyUpdate(
         ctx: *mut EVP_MD_CTX,
@@ -10686,7 +10686,7 @@ extern "C" {
         len: usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_DigestVerifyFinal"]
     pub fn EVP_DigestVerifyFinal(
         ctx: *mut EVP_MD_CTX,
@@ -10694,7 +10694,7 @@ extern "C" {
         sig_len: usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_DigestVerify"]
     pub fn EVP_DigestVerify(
         ctx: *mut EVP_MD_CTX,
@@ -10704,7 +10704,7 @@ extern "C" {
         len: usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_SignInit_ex"]
     pub fn EVP_SignInit_ex(
         ctx: *mut EVP_MD_CTX,
@@ -10712,11 +10712,11 @@ extern "C" {
         impl_: *mut ENGINE,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_SignInit"]
     pub fn EVP_SignInit(ctx: *mut EVP_MD_CTX, type_: *const EVP_MD) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_SignUpdate"]
     pub fn EVP_SignUpdate(
         ctx: *mut EVP_MD_CTX,
@@ -10724,7 +10724,7 @@ extern "C" {
         len: usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_SignFinal"]
     pub fn EVP_SignFinal(
         ctx: *const EVP_MD_CTX,
@@ -10733,7 +10733,7 @@ extern "C" {
         pkey: *mut EVP_PKEY,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_VerifyInit_ex"]
     pub fn EVP_VerifyInit_ex(
         ctx: *mut EVP_MD_CTX,
@@ -10741,11 +10741,11 @@ extern "C" {
         impl_: *mut ENGINE,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_VerifyInit"]
     pub fn EVP_VerifyInit(ctx: *mut EVP_MD_CTX, type_: *const EVP_MD) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_VerifyUpdate"]
     pub fn EVP_VerifyUpdate(
         ctx: *mut EVP_MD_CTX,
@@ -10753,7 +10753,7 @@ extern "C" {
         len: usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_VerifyFinal"]
     pub fn EVP_VerifyFinal(
         ctx: *mut EVP_MD_CTX,
@@ -10762,7 +10762,7 @@ extern "C" {
         pkey: *mut EVP_PKEY,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_print_public"]
     pub fn EVP_PKEY_print_public(
         out: *mut BIO,
@@ -10771,7 +10771,7 @@ extern "C" {
         pctx: *mut ASN1_PCTX,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_print_private"]
     pub fn EVP_PKEY_print_private(
         out: *mut BIO,
@@ -10780,7 +10780,7 @@ extern "C" {
         pctx: *mut ASN1_PCTX,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_print_params"]
     pub fn EVP_PKEY_print_params(
         out: *mut BIO,
@@ -10789,7 +10789,7 @@ extern "C" {
         pctx: *mut ASN1_PCTX,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_PKCS5_PBKDF2_HMAC"]
     pub fn PKCS5_PBKDF2_HMAC(
         password: *const ::std::os::raw::c_char,
@@ -10802,7 +10802,7 @@ extern "C" {
         out_key: *mut u8,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_PKCS5_PBKDF2_HMAC_SHA1"]
     pub fn PKCS5_PBKDF2_HMAC_SHA1(
         password: *const ::std::os::raw::c_char,
@@ -10814,7 +10814,7 @@ extern "C" {
         out_key: *mut u8,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PBE_scrypt"]
     pub fn EVP_PBE_scrypt(
         password: *const ::std::os::raw::c_char,
@@ -10829,31 +10829,31 @@ extern "C" {
         key_len: usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_CTX_new"]
     pub fn EVP_PKEY_CTX_new(pkey: *mut EVP_PKEY, e: *mut ENGINE) -> *mut EVP_PKEY_CTX;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_CTX_new_id"]
     pub fn EVP_PKEY_CTX_new_id(id: ::std::os::raw::c_int, e: *mut ENGINE) -> *mut EVP_PKEY_CTX;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_CTX_free"]
     pub fn EVP_PKEY_CTX_free(ctx: *mut EVP_PKEY_CTX);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_CTX_dup"]
     pub fn EVP_PKEY_CTX_dup(ctx: *mut EVP_PKEY_CTX) -> *mut EVP_PKEY_CTX;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_CTX_get0_pkey"]
     pub fn EVP_PKEY_CTX_get0_pkey(ctx: *mut EVP_PKEY_CTX) -> *mut EVP_PKEY;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_sign_init"]
     pub fn EVP_PKEY_sign_init(ctx: *mut EVP_PKEY_CTX) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_sign"]
     pub fn EVP_PKEY_sign(
         ctx: *mut EVP_PKEY_CTX,
@@ -10863,11 +10863,11 @@ extern "C" {
         digest_len: usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_verify_init"]
     pub fn EVP_PKEY_verify_init(ctx: *mut EVP_PKEY_CTX) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_verify"]
     pub fn EVP_PKEY_verify(
         ctx: *mut EVP_PKEY_CTX,
@@ -10877,11 +10877,11 @@ extern "C" {
         digest_len: usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_encrypt_init"]
     pub fn EVP_PKEY_encrypt_init(ctx: *mut EVP_PKEY_CTX) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_encrypt"]
     pub fn EVP_PKEY_encrypt(
         ctx: *mut EVP_PKEY_CTX,
@@ -10891,11 +10891,11 @@ extern "C" {
         in_len: usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_decrypt_init"]
     pub fn EVP_PKEY_decrypt_init(ctx: *mut EVP_PKEY_CTX) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_decrypt"]
     pub fn EVP_PKEY_decrypt(
         ctx: *mut EVP_PKEY_CTX,
@@ -10905,11 +10905,11 @@ extern "C" {
         in_len: usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_verify_recover_init"]
     pub fn EVP_PKEY_verify_recover_init(ctx: *mut EVP_PKEY_CTX) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_verify_recover"]
     pub fn EVP_PKEY_verify_recover(
         ctx: *mut EVP_PKEY_CTX,
@@ -10919,18 +10919,18 @@ extern "C" {
         siglen: usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_derive_init"]
     pub fn EVP_PKEY_derive_init(ctx: *mut EVP_PKEY_CTX) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_derive_set_peer"]
     pub fn EVP_PKEY_derive_set_peer(
         ctx: *mut EVP_PKEY_CTX,
         peer: *mut EVP_PKEY,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_derive"]
     pub fn EVP_PKEY_derive(
         ctx: *mut EVP_PKEY_CTX,
@@ -10938,30 +10938,30 @@ extern "C" {
         out_key_len: *mut usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_check"]
     pub fn EVP_PKEY_check(ctx: *mut EVP_PKEY_CTX) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_public_check"]
     pub fn EVP_PKEY_public_check(ctx: *mut EVP_PKEY_CTX) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_param_check"]
     pub fn EVP_PKEY_param_check(ctx: *mut EVP_PKEY_CTX) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_keygen_init"]
     pub fn EVP_PKEY_keygen_init(ctx: *mut EVP_PKEY_CTX) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_keygen"]
     pub fn EVP_PKEY_keygen(
         ctx: *mut EVP_PKEY_CTX,
         out_pkey: *mut *mut EVP_PKEY,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_encapsulate"]
     pub fn EVP_PKEY_encapsulate(
         ctx: *mut EVP_PKEY_CTX,
@@ -10971,7 +10971,7 @@ extern "C" {
         shared_secret_len: *mut usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_decapsulate"]
     pub fn EVP_PKEY_decapsulate(
         ctx: *mut EVP_PKEY_CTX,
@@ -10981,32 +10981,32 @@ extern "C" {
         ciphertext_len: usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_paramgen_init"]
     pub fn EVP_PKEY_paramgen_init(ctx: *mut EVP_PKEY_CTX) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_paramgen"]
     pub fn EVP_PKEY_paramgen(
         ctx: *mut EVP_PKEY_CTX,
         out_pkey: *mut *mut EVP_PKEY,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_CTX_set_signature_md"]
     pub fn EVP_PKEY_CTX_set_signature_md(
         ctx: *mut EVP_PKEY_CTX,
         md: *const EVP_MD,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_CTX_get_signature_md"]
     pub fn EVP_PKEY_CTX_get_signature_md(
         ctx: *mut EVP_PKEY_CTX,
         out_md: *mut *const EVP_MD,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_CTX_set_signature_context"]
     pub fn EVP_PKEY_CTX_set_signature_context(
         ctx: *mut EVP_PKEY_CTX,
@@ -11014,7 +11014,7 @@ extern "C" {
         context_len: usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_CTX_get0_signature_context"]
     pub fn EVP_PKEY_CTX_get0_signature_context(
         ctx: *mut EVP_PKEY_CTX,
@@ -11022,77 +11022,77 @@ extern "C" {
         context_len: *mut usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_CTX_set_rsa_padding"]
     pub fn EVP_PKEY_CTX_set_rsa_padding(
         ctx: *mut EVP_PKEY_CTX,
         padding: ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_CTX_get_rsa_padding"]
     pub fn EVP_PKEY_CTX_get_rsa_padding(
         ctx: *mut EVP_PKEY_CTX,
         out_padding: *mut ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_CTX_set_rsa_pss_saltlen"]
     pub fn EVP_PKEY_CTX_set_rsa_pss_saltlen(
         ctx: *mut EVP_PKEY_CTX,
         salt_len: ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_CTX_get_rsa_pss_saltlen"]
     pub fn EVP_PKEY_CTX_get_rsa_pss_saltlen(
         ctx: *mut EVP_PKEY_CTX,
         out_salt_len: *mut ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_CTX_set_rsa_keygen_bits"]
     pub fn EVP_PKEY_CTX_set_rsa_keygen_bits(
         ctx: *mut EVP_PKEY_CTX,
         bits: ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_CTX_set_rsa_keygen_pubexp"]
     pub fn EVP_PKEY_CTX_set_rsa_keygen_pubexp(
         ctx: *mut EVP_PKEY_CTX,
         e: *mut BIGNUM,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_CTX_set_rsa_oaep_md"]
     pub fn EVP_PKEY_CTX_set_rsa_oaep_md(
         ctx: *mut EVP_PKEY_CTX,
         md: *const EVP_MD,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_CTX_get_rsa_oaep_md"]
     pub fn EVP_PKEY_CTX_get_rsa_oaep_md(
         ctx: *mut EVP_PKEY_CTX,
         out_md: *mut *const EVP_MD,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_CTX_set_rsa_mgf1_md"]
     pub fn EVP_PKEY_CTX_set_rsa_mgf1_md(
         ctx: *mut EVP_PKEY_CTX,
         md: *const EVP_MD,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_CTX_get_rsa_mgf1_md"]
     pub fn EVP_PKEY_CTX_get_rsa_mgf1_md(
         ctx: *mut EVP_PKEY_CTX,
         out_md: *mut *const EVP_MD,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_CTX_set0_rsa_oaep_label"]
     pub fn EVP_PKEY_CTX_set0_rsa_oaep_label(
         ctx: *mut EVP_PKEY_CTX,
@@ -11100,28 +11100,28 @@ extern "C" {
         label_len: usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_CTX_get0_rsa_oaep_label"]
     pub fn EVP_PKEY_CTX_get0_rsa_oaep_label(
         ctx: *mut EVP_PKEY_CTX,
         out_label: *mut *const u8,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_CTX_set_ec_paramgen_curve_nid"]
     pub fn EVP_PKEY_CTX_set_ec_paramgen_curve_nid(
         ctx: *mut EVP_PKEY_CTX,
         nid: ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_CTX_kem_set_params"]
     pub fn EVP_PKEY_CTX_kem_set_params(
         ctx: *mut EVP_PKEY_CTX,
         nid: ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_kem_new_raw_public_key"]
     pub fn EVP_PKEY_kem_new_raw_public_key(
         nid: ::std::os::raw::c_int,
@@ -11129,7 +11129,7 @@ extern "C" {
         len: usize,
     ) -> *mut EVP_PKEY;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_kem_new_raw_secret_key"]
     pub fn EVP_PKEY_kem_new_raw_secret_key(
         nid: ::std::os::raw::c_int,
@@ -11137,7 +11137,7 @@ extern "C" {
         len: usize,
     ) -> *mut EVP_PKEY;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_kem_new_raw_key"]
     pub fn EVP_PKEY_kem_new_raw_key(
         nid: ::std::os::raw::c_int,
@@ -11147,18 +11147,18 @@ extern "C" {
         len_secret: usize,
     ) -> *mut EVP_PKEY;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_kem_check_key"]
     pub fn EVP_PKEY_kem_check_key(key: *mut EVP_PKEY) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_CTX_pqdsa_set_params"]
     pub fn EVP_PKEY_CTX_pqdsa_set_params(
         ctx: *mut EVP_PKEY_CTX,
         nid: ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_pqdsa_new_raw_public_key"]
     pub fn EVP_PKEY_pqdsa_new_raw_public_key(
         nid: ::std::os::raw::c_int,
@@ -11166,7 +11166,7 @@ extern "C" {
         len: usize,
     ) -> *mut EVP_PKEY;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_pqdsa_new_raw_private_key"]
     pub fn EVP_PKEY_pqdsa_new_raw_private_key(
         nid: ::std::os::raw::c_int,
@@ -11174,29 +11174,29 @@ extern "C" {
         len: usize,
     ) -> *mut EVP_PKEY;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_CTX_set_dh_pad"]
     pub fn EVP_PKEY_CTX_set_dh_pad(
         ctx: *mut EVP_PKEY_CTX,
         pad: ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_asn1_get_count"]
     pub fn EVP_PKEY_asn1_get_count() -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_asn1_get0"]
     pub fn EVP_PKEY_asn1_get0(idx: ::std::os::raw::c_int) -> *const EVP_PKEY_ASN1_METHOD;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_asn1_find"]
     pub fn EVP_PKEY_asn1_find(
         _pe: *mut *mut ENGINE,
         type_: ::std::os::raw::c_int,
     ) -> *const EVP_PKEY_ASN1_METHOD;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_asn1_find_str"]
     pub fn EVP_PKEY_asn1_find_str(
         _pe: *mut *mut ENGINE,
@@ -11204,7 +11204,7 @@ extern "C" {
         len: ::std::os::raw::c_int,
     ) -> *const EVP_PKEY_ASN1_METHOD;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_asn1_get0_info"]
     pub fn EVP_PKEY_asn1_get0_info(
         ppkey_id: *mut ::std::os::raw::c_int,
@@ -11217,34 +11217,34 @@ extern "C" {
 }
 pub type EVP_PKEY_gen_cb =
     ::std::option::Option<unsafe extern "C" fn(ctx: *mut EVP_PKEY_CTX) -> ::std::os::raw::c_int>;
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_CTX_set_cb"]
     pub fn EVP_PKEY_CTX_set_cb(ctx: *mut EVP_PKEY_CTX, cb: EVP_PKEY_gen_cb);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_CTX_get_keygen_info"]
     pub fn EVP_PKEY_CTX_get_keygen_info(
         ctx: *mut EVP_PKEY_CTX,
         idx: ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_CTX_set_app_data"]
     pub fn EVP_PKEY_CTX_set_app_data(ctx: *mut EVP_PKEY_CTX, data: *mut ::std::os::raw::c_void);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_CTX_get_app_data"]
     pub fn EVP_PKEY_CTX_get_app_data(ctx: *mut EVP_PKEY_CTX) -> *mut ::std::os::raw::c_void;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_MD_get_pkey_type"]
     pub fn EVP_MD_get_pkey_type(md: *const EVP_MD) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_MD_pkey_type"]
     pub fn EVP_MD_pkey_type(md: *const EVP_MD) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_CIPHER_do_all_sorted"]
     pub fn EVP_CIPHER_do_all_sorted(
         callback: ::std::option::Option<
@@ -11258,7 +11258,7 @@ extern "C" {
         arg: *mut ::std::os::raw::c_void,
     );
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_MD_do_all_sorted"]
     pub fn EVP_MD_do_all_sorted(
         callback: ::std::option::Option<
@@ -11272,7 +11272,7 @@ extern "C" {
         arg: *mut ::std::os::raw::c_void,
     );
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_MD_do_all"]
     pub fn EVP_MD_do_all(
         callback: ::std::option::Option<
@@ -11286,15 +11286,15 @@ extern "C" {
         arg: *mut ::std::os::raw::c_void,
     );
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_i2d_PrivateKey"]
     pub fn i2d_PrivateKey(key: *const EVP_PKEY, outp: *mut *mut u8) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_i2d_PublicKey"]
     pub fn i2d_PublicKey(key: *const EVP_PKEY, outp: *mut *mut u8) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_d2i_PrivateKey"]
     pub fn d2i_PrivateKey(
         type_: ::std::os::raw::c_int,
@@ -11303,7 +11303,7 @@ extern "C" {
         len: ::std::os::raw::c_long,
     ) -> *mut EVP_PKEY;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_d2i_AutoPrivateKey"]
     pub fn d2i_AutoPrivateKey(
         out: *mut *mut EVP_PKEY,
@@ -11311,7 +11311,7 @@ extern "C" {
         len: ::std::os::raw::c_long,
     ) -> *mut EVP_PKEY;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_d2i_PublicKey"]
     pub fn d2i_PublicKey(
         type_: ::std::os::raw::c_int,
@@ -11320,14 +11320,14 @@ extern "C" {
         len: ::std::os::raw::c_long,
     ) -> *mut EVP_PKEY;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_CTX_set_ec_param_enc"]
     pub fn EVP_PKEY_CTX_set_ec_param_enc(
         ctx: *mut EVP_PKEY_CTX,
         encoding: ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_set1_tls_encodedpoint"]
     pub fn EVP_PKEY_set1_tls_encodedpoint(
         pkey: *mut EVP_PKEY,
@@ -11335,40 +11335,40 @@ extern "C" {
         len: usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_get1_tls_encodedpoint"]
     pub fn EVP_PKEY_get1_tls_encodedpoint(pkey: *const EVP_PKEY, out_ptr: *mut *mut u8) -> usize;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_base_id"]
     pub fn EVP_PKEY_base_id(pkey: *const EVP_PKEY) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_CTX_set_rsa_pss_keygen_md"]
     pub fn EVP_PKEY_CTX_set_rsa_pss_keygen_md(
         ctx: *mut EVP_PKEY_CTX,
         md: *const EVP_MD,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_CTX_set_rsa_pss_keygen_saltlen"]
     pub fn EVP_PKEY_CTX_set_rsa_pss_keygen_saltlen(
         ctx: *mut EVP_PKEY_CTX,
         salt_len: ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_CTX_set_rsa_pss_keygen_mgf1_md"]
     pub fn EVP_PKEY_CTX_set_rsa_pss_keygen_mgf1_md(
         ctx: *mut EVP_PKEY_CTX,
         md: *const EVP_MD,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_i2d_PUBKEY"]
     pub fn i2d_PUBKEY(pkey: *const EVP_PKEY, outp: *mut *mut u8) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_d2i_PUBKEY"]
     pub fn d2i_PUBKEY(
         out: *mut *mut EVP_PKEY,
@@ -11376,11 +11376,11 @@ extern "C" {
         len: ::std::os::raw::c_long,
     ) -> *mut EVP_PKEY;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_i2d_RSA_PUBKEY"]
     pub fn i2d_RSA_PUBKEY(rsa: *const RSA, outp: *mut *mut u8) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_d2i_RSA_PUBKEY"]
     pub fn d2i_RSA_PUBKEY(
         out: *mut *mut RSA,
@@ -11388,11 +11388,11 @@ extern "C" {
         len: ::std::os::raw::c_long,
     ) -> *mut RSA;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_i2d_DSA_PUBKEY"]
     pub fn i2d_DSA_PUBKEY(dsa: *const DSA, outp: *mut *mut u8) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_d2i_DSA_PUBKEY"]
     pub fn d2i_DSA_PUBKEY(
         out: *mut *mut DSA,
@@ -11400,11 +11400,11 @@ extern "C" {
         len: ::std::os::raw::c_long,
     ) -> *mut DSA;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_i2d_EC_PUBKEY"]
     pub fn i2d_EC_PUBKEY(ec_key: *const EC_KEY, outp: *mut *mut u8) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_d2i_EC_PUBKEY"]
     pub fn d2i_EC_PUBKEY(
         out: *mut *mut EC_KEY,
@@ -11412,7 +11412,7 @@ extern "C" {
         len: ::std::os::raw::c_long,
     ) -> *mut EC_KEY;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_assign"]
     pub fn EVP_PKEY_assign(
         pkey: *mut EVP_PKEY,
@@ -11420,11 +11420,11 @@ extern "C" {
         key: *mut ::std::os::raw::c_void,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_type"]
     pub fn EVP_PKEY_type(nid: ::std::os::raw::c_int) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_new_mac_key"]
     pub fn EVP_PKEY_new_mac_key(
         type_: ::std::os::raw::c_int,
@@ -11433,52 +11433,52 @@ extern "C" {
         mac_key_len: usize,
     ) -> *mut EVP_PKEY;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_get0"]
     pub fn EVP_PKEY_get0(pkey: *const EVP_PKEY) -> *mut ::std::os::raw::c_void;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_OpenSSL_add_all_algorithms"]
     pub fn OpenSSL_add_all_algorithms();
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_OPENSSL_add_all_algorithms_conf"]
     pub fn OPENSSL_add_all_algorithms_conf();
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_OpenSSL_add_all_ciphers"]
     pub fn OpenSSL_add_all_ciphers();
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_OpenSSL_add_all_digests"]
     pub fn OpenSSL_add_all_digests();
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_cleanup"]
     pub fn EVP_cleanup();
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_CTX_set_dsa_paramgen_bits"]
     pub fn EVP_PKEY_CTX_set_dsa_paramgen_bits(
         ctx: *mut EVP_PKEY_CTX,
         nbits: ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_CTX_set_dsa_paramgen_md"]
     pub fn EVP_PKEY_CTX_set_dsa_paramgen_md(
         ctx: *mut EVP_PKEY_CTX,
         md: *const EVP_MD,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_CTX_set_dsa_paramgen_q_bits"]
     pub fn EVP_PKEY_CTX_set_dsa_paramgen_q_bits(
         ctx: *mut EVP_PKEY_CTX,
         qbits: ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_CTX_ctrl_str"]
     pub fn EVP_PKEY_CTX_ctrl_str(
         ctx: *mut EVP_PKEY_CTX,
@@ -11486,7 +11486,7 @@ extern "C" {
         value: *const ::std::os::raw::c_char,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CRYPTO_tls1_prf"]
     pub fn CRYPTO_tls1_prf(
         digest: *const EVP_MD,
@@ -11502,7 +11502,7 @@ extern "C" {
         seed2_len: usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_SSKDF_digest"]
     pub fn SSKDF_digest(
         out_key: *mut u8,
@@ -11514,7 +11514,7 @@ extern "C" {
         info_len: usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_SSKDF_hmac"]
     pub fn SSKDF_hmac(
         out_key: *mut u8,
@@ -11528,7 +11528,7 @@ extern "C" {
         salt_len: usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_KBKDF_ctr_hmac"]
     pub fn KBKDF_ctr_hmac(
         out_key: *mut u8,
@@ -11540,21 +11540,21 @@ extern "C" {
         info_len: usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_CTX_hkdf_mode"]
     pub fn EVP_PKEY_CTX_hkdf_mode(
         ctx: *mut EVP_PKEY_CTX,
         mode: ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_CTX_set_hkdf_md"]
     pub fn EVP_PKEY_CTX_set_hkdf_md(
         ctx: *mut EVP_PKEY_CTX,
         md: *const EVP_MD,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_CTX_set1_hkdf_key"]
     pub fn EVP_PKEY_CTX_set1_hkdf_key(
         ctx: *mut EVP_PKEY_CTX,
@@ -11562,7 +11562,7 @@ extern "C" {
         key_len: usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_CTX_set1_hkdf_salt"]
     pub fn EVP_PKEY_CTX_set1_hkdf_salt(
         ctx: *mut EVP_PKEY_CTX,
@@ -11570,7 +11570,7 @@ extern "C" {
         salt_len: usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_EVP_PKEY_CTX_add1_hkdf_info"]
     pub fn EVP_PKEY_CTX_add1_hkdf_info(
         ctx: *mut EVP_PKEY_CTX,
@@ -11578,7 +11578,7 @@ extern "C" {
         info_len: usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_HKDF"]
     pub fn HKDF(
         out_key: *mut u8,
@@ -11592,7 +11592,7 @@ extern "C" {
         info_len: usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_HKDF_extract"]
     pub fn HKDF_extract(
         out_key: *mut u8,
@@ -11604,7 +11604,7 @@ extern "C" {
         salt_len: usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_HKDF_expand"]
     pub fn HKDF_expand(
         out_key: *mut u8,
@@ -12289,11 +12289,11 @@ pub struct stack_st_PKCS7_RECIP_INFO {
 pub struct stack_st_PKCS7_SIGNER_INFO {
     _unused: [u8; 0],
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_new_public_key"]
     pub fn RSA_new_public_key(n: *const BIGNUM, e: *const BIGNUM) -> *mut RSA;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_new_private_key"]
     pub fn RSA_new_private_key(
         n: *const BIGNUM,
@@ -12306,59 +12306,59 @@ extern "C" {
         iqmp: *const BIGNUM,
     ) -> *mut RSA;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_new"]
     pub fn RSA_new() -> *mut RSA;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_new_method"]
     pub fn RSA_new_method(engine: *const ENGINE) -> *mut RSA;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_free"]
     pub fn RSA_free(rsa: *mut RSA);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_up_ref"]
     pub fn RSA_up_ref(rsa: *mut RSA) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_bits"]
     pub fn RSA_bits(rsa: *const RSA) -> ::std::os::raw::c_uint;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_get0_n"]
     pub fn RSA_get0_n(rsa: *const RSA) -> *const BIGNUM;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_get0_e"]
     pub fn RSA_get0_e(rsa: *const RSA) -> *const BIGNUM;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_get0_d"]
     pub fn RSA_get0_d(rsa: *const RSA) -> *const BIGNUM;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_get0_p"]
     pub fn RSA_get0_p(rsa: *const RSA) -> *const BIGNUM;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_get0_q"]
     pub fn RSA_get0_q(rsa: *const RSA) -> *const BIGNUM;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_get0_dmp1"]
     pub fn RSA_get0_dmp1(rsa: *const RSA) -> *const BIGNUM;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_get0_dmq1"]
     pub fn RSA_get0_dmq1(rsa: *const RSA) -> *const BIGNUM;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_get0_iqmp"]
     pub fn RSA_get0_iqmp(rsa: *const RSA) -> *const BIGNUM;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_get0_key"]
     pub fn RSA_get0_key(
         rsa: *const RSA,
@@ -12367,11 +12367,11 @@ extern "C" {
         out_d: *mut *const BIGNUM,
     );
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_get0_factors"]
     pub fn RSA_get0_factors(rsa: *const RSA, out_p: *mut *const BIGNUM, out_q: *mut *const BIGNUM);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_get0_crt_params"]
     pub fn RSA_get0_crt_params(
         rsa: *const RSA,
@@ -12380,7 +12380,7 @@ extern "C" {
         out_iqmp: *mut *const BIGNUM,
     );
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_set0_key"]
     pub fn RSA_set0_key(
         rsa: *mut RSA,
@@ -12389,12 +12389,12 @@ extern "C" {
         d: *mut BIGNUM,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_set0_factors"]
     pub fn RSA_set0_factors(rsa: *mut RSA, p: *mut BIGNUM, q: *mut BIGNUM)
         -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_set0_crt_params"]
     pub fn RSA_set0_crt_params(
         rsa: *mut RSA,
@@ -12403,44 +12403,44 @@ extern "C" {
         iqmp: *mut BIGNUM,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_get_default_method"]
     pub fn RSA_get_default_method() -> *const RSA_METHOD;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_meth_new"]
     pub fn RSA_meth_new(
         name: *const ::std::os::raw::c_char,
         flags: ::std::os::raw::c_int,
     ) -> *mut RSA_METHOD;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_set_method"]
     pub fn RSA_set_method(rsa: *mut RSA, meth: *const RSA_METHOD) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_get_method"]
     pub fn RSA_get_method(rsa: *const RSA) -> *const RSA_METHOD;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_meth_free"]
     pub fn RSA_meth_free(meth: *mut RSA_METHOD);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_meth_set_init"]
     pub fn RSA_meth_set_init(
         meth: *mut RSA_METHOD,
         init: ::std::option::Option<unsafe extern "C" fn(rsa: *mut RSA) -> ::std::os::raw::c_int>,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_meth_set_finish"]
     pub fn RSA_meth_set_finish(
         meth: *mut RSA_METHOD,
         finish: ::std::option::Option<unsafe extern "C" fn(rsa: *mut RSA) -> ::std::os::raw::c_int>,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_meth_set_priv_dec"]
     pub fn RSA_meth_set_priv_dec(
         meth: *mut RSA_METHOD,
@@ -12455,7 +12455,7 @@ extern "C" {
         >,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_meth_set_priv_enc"]
     pub fn RSA_meth_set_priv_enc(
         meth: *mut RSA_METHOD,
@@ -12470,7 +12470,7 @@ extern "C" {
         >,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_meth_set_pub_dec"]
     pub fn RSA_meth_set_pub_dec(
         meth: *mut RSA_METHOD,
@@ -12485,7 +12485,7 @@ extern "C" {
         >,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_meth_set_pub_enc"]
     pub fn RSA_meth_set_pub_enc(
         meth: *mut RSA_METHOD,
@@ -12500,14 +12500,14 @@ extern "C" {
         >,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_meth_set0_app_data"]
     pub fn RSA_meth_set0_app_data(
         meth: *mut RSA_METHOD,
         app_data: *mut ::std::os::raw::c_void,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_meth_set_sign"]
     pub fn RSA_meth_set_sign(
         meth: *mut RSA_METHOD,
@@ -12523,7 +12523,7 @@ extern "C" {
         >,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_generate_key_ex"]
     pub fn RSA_generate_key_ex(
         rsa: *mut RSA,
@@ -12532,7 +12532,7 @@ extern "C" {
         cb: *mut BN_GENCB,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_generate_key_fips"]
     pub fn RSA_generate_key_fips(
         rsa: *mut RSA,
@@ -12540,7 +12540,7 @@ extern "C" {
         cb: *mut BN_GENCB,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_encrypt"]
     pub fn RSA_encrypt(
         rsa: *mut RSA,
@@ -12552,7 +12552,7 @@ extern "C" {
         padding: ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_decrypt"]
     pub fn RSA_decrypt(
         rsa: *mut RSA,
@@ -12564,7 +12564,7 @@ extern "C" {
         padding: ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_public_encrypt"]
     pub fn RSA_public_encrypt(
         flen: usize,
@@ -12574,7 +12574,7 @@ extern "C" {
         padding: ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_private_decrypt"]
     pub fn RSA_private_decrypt(
         flen: usize,
@@ -12584,7 +12584,7 @@ extern "C" {
         padding: ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_sign"]
     pub fn RSA_sign(
         hash_nid: ::std::os::raw::c_int,
@@ -12595,7 +12595,7 @@ extern "C" {
         rsa: *mut RSA,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_sign_pss_mgf1"]
     pub fn RSA_sign_pss_mgf1(
         rsa: *mut RSA,
@@ -12609,7 +12609,7 @@ extern "C" {
         salt_len: ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_sign_raw"]
     pub fn RSA_sign_raw(
         rsa: *mut RSA,
@@ -12621,7 +12621,7 @@ extern "C" {
         padding: ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_verify"]
     pub fn RSA_verify(
         hash_nid: ::std::os::raw::c_int,
@@ -12632,7 +12632,7 @@ extern "C" {
         rsa: *mut RSA,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_verify_pss_mgf1"]
     pub fn RSA_verify_pss_mgf1(
         rsa: *mut RSA,
@@ -12645,7 +12645,7 @@ extern "C" {
         sig_len: usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_verify_raw"]
     pub fn RSA_verify_raw(
         rsa: *mut RSA,
@@ -12657,7 +12657,7 @@ extern "C" {
         padding: ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_private_encrypt"]
     pub fn RSA_private_encrypt(
         flen: usize,
@@ -12667,7 +12667,7 @@ extern "C" {
         padding: ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_public_decrypt"]
     pub fn RSA_public_decrypt(
         flen: usize,
@@ -12677,31 +12677,31 @@ extern "C" {
         padding: ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_size"]
     pub fn RSA_size(rsa: *const RSA) -> ::std::os::raw::c_uint;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_is_opaque"]
     pub fn RSA_is_opaque(rsa: *const RSA) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSAPublicKey_dup"]
     pub fn RSAPublicKey_dup(rsa: *const RSA) -> *mut RSA;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSAPrivateKey_dup"]
     pub fn RSAPrivateKey_dup(rsa: *const RSA) -> *mut RSA;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_check_key"]
     pub fn RSA_check_key(rsa: *const RSA) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_check_fips"]
     pub fn RSA_check_fips(key: *mut RSA) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_verify_PKCS1_PSS_mgf1"]
     pub fn RSA_verify_PKCS1_PSS_mgf1(
         rsa: *const RSA,
@@ -12712,7 +12712,7 @@ extern "C" {
         sLen: ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_padding_add_PKCS1_PSS_mgf1"]
     pub fn RSA_padding_add_PKCS1_PSS_mgf1(
         rsa: *const RSA,
@@ -12723,7 +12723,7 @@ extern "C" {
         sLen: ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_padding_add_PKCS1_OAEP_mgf1"]
     pub fn RSA_padding_add_PKCS1_OAEP_mgf1(
         to: *mut u8,
@@ -12736,7 +12736,7 @@ extern "C" {
         mgf1md: *const EVP_MD,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_PKCS1_MGF1"]
     pub fn PKCS1_MGF1(
         out: *mut u8,
@@ -12746,7 +12746,7 @@ extern "C" {
         md: *const EVP_MD,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_add_pkcs1_prefix"]
     pub fn RSA_add_pkcs1_prefix(
         out_msg: *mut *mut u8,
@@ -12757,19 +12757,19 @@ extern "C" {
         digest_len: usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_parse_public_key"]
     pub fn RSA_parse_public_key(cbs: *mut CBS) -> *mut RSA;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_public_key_from_bytes"]
     pub fn RSA_public_key_from_bytes(in_: *const u8, in_len: usize) -> *mut RSA;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_marshal_public_key"]
     pub fn RSA_marshal_public_key(cbb: *mut CBB, rsa: *const RSA) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_public_key_to_bytes"]
     pub fn RSA_public_key_to_bytes(
         out_bytes: *mut *mut u8,
@@ -12777,19 +12777,19 @@ extern "C" {
         rsa: *const RSA,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_parse_private_key"]
     pub fn RSA_parse_private_key(cbs: *mut CBS) -> *mut RSA;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_private_key_from_bytes"]
     pub fn RSA_private_key_from_bytes(in_: *const u8, in_len: usize) -> *mut RSA;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_marshal_private_key"]
     pub fn RSA_marshal_private_key(cbb: *mut CBB, rsa: *const RSA) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_private_key_to_bytes"]
     pub fn RSA_private_key_to_bytes(
         out_bytes: *mut *mut u8,
@@ -12797,7 +12797,7 @@ extern "C" {
         rsa: *const RSA,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_new_private_key_no_crt"]
     pub fn RSA_new_private_key_no_crt(
         n: *const BIGNUM,
@@ -12805,15 +12805,15 @@ extern "C" {
         d: *const BIGNUM,
     ) -> *mut RSA;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_new_private_key_no_e"]
     pub fn RSA_new_private_key_no_e(n: *const BIGNUM, d: *const BIGNUM) -> *mut RSA;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_new_public_key_large_e"]
     pub fn RSA_new_public_key_large_e(n: *const BIGNUM, e: *const BIGNUM) -> *mut RSA;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_new_private_key_large_e"]
     pub fn RSA_new_private_key_large_e(
         n: *const BIGNUM,
@@ -12826,7 +12826,7 @@ extern "C" {
         iqmp: *const BIGNUM,
     ) -> *mut RSA;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_get_ex_new_index"]
     pub fn RSA_get_ex_new_index(
         argl: ::std::os::raw::c_long,
@@ -12836,7 +12836,7 @@ extern "C" {
         free_func: CRYPTO_EX_free,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_set_ex_data"]
     pub fn RSA_set_ex_data(
         rsa: *mut RSA,
@@ -12844,34 +12844,34 @@ extern "C" {
         arg: *mut ::std::os::raw::c_void,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_get_ex_data"]
     pub fn RSA_get_ex_data(
         rsa: *const RSA,
         idx: ::std::os::raw::c_int,
     ) -> *mut ::std::os::raw::c_void;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_flags"]
     pub fn RSA_flags(rsa: *const RSA) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_set_flags"]
     pub fn RSA_set_flags(rsa: *mut RSA, flags: ::std::os::raw::c_int);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_test_flags"]
     pub fn RSA_test_flags(rsa: *const RSA, flags: ::std::os::raw::c_int) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_blinding_on"]
     pub fn RSA_blinding_on(rsa: *mut RSA, ctx: *mut BN_CTX) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_blinding_off_temp_for_accp_compatibility"]
     pub fn RSA_blinding_off_temp_for_accp_compatibility(rsa: *mut RSA);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_pkey_ctx_ctrl"]
     pub fn RSA_pkey_ctx_ctrl(
         ctx: *mut EVP_PKEY_CTX,
@@ -12881,7 +12881,7 @@ extern "C" {
         p2: *mut ::std::os::raw::c_void,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_generate_key"]
     pub fn RSA_generate_key(
         bits: ::std::os::raw::c_int,
@@ -12890,7 +12890,7 @@ extern "C" {
         cb_arg: *mut ::std::os::raw::c_void,
     ) -> *mut RSA;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_d2i_RSAPublicKey"]
     pub fn d2i_RSAPublicKey(
         out: *mut *mut RSA,
@@ -12898,11 +12898,11 @@ extern "C" {
         len: ::std::os::raw::c_long,
     ) -> *mut RSA;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_i2d_RSAPublicKey"]
     pub fn i2d_RSAPublicKey(in_: *const RSA, outp: *mut *mut u8) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_d2i_RSAPrivateKey"]
     pub fn d2i_RSAPrivateKey(
         out: *mut *mut RSA,
@@ -12910,11 +12910,11 @@ extern "C" {
         len: ::std::os::raw::c_long,
     ) -> *mut RSA;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_i2d_RSAPrivateKey"]
     pub fn i2d_RSAPrivateKey(in_: *const RSA, outp: *mut *mut u8) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_padding_add_PKCS1_PSS"]
     pub fn RSA_padding_add_PKCS1_PSS(
         rsa: *const RSA,
@@ -12924,7 +12924,7 @@ extern "C" {
         sLen: ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_verify_PKCS1_PSS"]
     pub fn RSA_verify_PKCS1_PSS(
         rsa: *const RSA,
@@ -12934,7 +12934,7 @@ extern "C" {
         sLen: ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_padding_add_PKCS1_OAEP"]
     pub fn RSA_padding_add_PKCS1_OAEP(
         to: *mut u8,
@@ -12945,7 +12945,7 @@ extern "C" {
         param_len: usize,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_print"]
     pub fn RSA_print(
         bio: *mut BIO,
@@ -12953,11 +12953,11 @@ extern "C" {
         indent: ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_get0_pss_params"]
     pub fn RSA_get0_pss_params(rsa: *const RSA) -> *const RSA_PSS_PARAMS;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RSA_new_method_no_e"]
     pub fn RSA_new_method_no_e(engine: *const ENGINE, n: *const BIGNUM) -> *mut RSA;
 }
@@ -14131,27 +14131,27 @@ impl Default for ISSUING_DIST_POINT_st {
     }
 }
 pub type poly1305_state = [u8; 512usize];
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CRYPTO_poly1305_init"]
     pub fn CRYPTO_poly1305_init(state: *mut poly1305_state, key: *const u8);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CRYPTO_poly1305_update"]
     pub fn CRYPTO_poly1305_update(state: *mut poly1305_state, in_: *const u8, in_len: usize);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_CRYPTO_poly1305_finish"]
     pub fn CRYPTO_poly1305_finish(state: *mut poly1305_state, mac: *mut u8);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RAND_bytes"]
     pub fn RAND_bytes(buf: *mut u8, len: usize) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RAND_priv_bytes"]
     pub fn RAND_priv_bytes(buf: *mut u8, len: usize) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RAND_bytes_with_user_prediction_resistance"]
     pub fn RAND_bytes_with_user_prediction_resistance(
         out: *mut u8,
@@ -14159,59 +14159,59 @@ extern "C" {
         user_pred_resistance: *const u8,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     pub fn RAND_get_system_entropy_for_custom_prng(buf: *mut u8, len: usize);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RAND_pseudo_bytes"]
     pub fn RAND_pseudo_bytes(buf: *mut u8, len: usize) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RAND_seed"]
     pub fn RAND_seed(buf: *const ::std::os::raw::c_void, num: ::std::os::raw::c_int);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RAND_load_file"]
     pub fn RAND_load_file(
         path: *const ::std::os::raw::c_char,
         num: ::std::os::raw::c_long,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RAND_write_file"]
     pub fn RAND_write_file(file: *const ::std::os::raw::c_char) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RAND_file_name"]
     pub fn RAND_file_name(
         buf: *mut ::std::os::raw::c_char,
         num: usize,
     ) -> *const ::std::os::raw::c_char;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RAND_add"]
     pub fn RAND_add(buf: *const ::std::os::raw::c_void, num: ::std::os::raw::c_int, entropy: f64);
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RAND_egd"]
     pub fn RAND_egd(arg1: *const ::std::os::raw::c_char) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RAND_egd_bytes"]
     pub fn RAND_egd_bytes(
         arg1: *const ::std::os::raw::c_char,
         bytes: ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RAND_poll"]
     pub fn RAND_poll() -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RAND_status"]
     pub fn RAND_status() -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RAND_cleanup"]
     pub fn RAND_cleanup();
 }
@@ -14282,23 +14282,23 @@ fn bindgen_test_layout_rand_meth_st() {
         "Offset of field: rand_meth_st::status"
     );
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RAND_SSLeay"]
     pub fn RAND_SSLeay() -> *mut RAND_METHOD;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RAND_OpenSSL"]
     pub fn RAND_OpenSSL() -> *mut RAND_METHOD;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RAND_get_rand_method"]
     pub fn RAND_get_rand_method() -> *const RAND_METHOD;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RAND_set_rand_method"]
     pub fn RAND_set_rand_method(arg1: *const RAND_METHOD) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_RAND_keep_random_devices_open"]
     pub fn RAND_keep_random_devices_open(a: ::std::os::raw::c_int);
 }
@@ -14446,15 +14446,15 @@ impl Default for trust_token_st {
         }
     }
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_ERR_GET_LIB_RUST"]
     pub fn ERR_GET_LIB_RUST(packed_error: u32) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_ERR_GET_REASON_RUST"]
     pub fn ERR_GET_REASON_RUST(packed_error: u32) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     #[link_name = "\u{1}aws_lc_0_37_1_ERR_GET_FUNC_RUST"]
     pub fn ERR_GET_FUNC_RUST(packed_error: u32) -> ::std::os::raw::c_int;
 }

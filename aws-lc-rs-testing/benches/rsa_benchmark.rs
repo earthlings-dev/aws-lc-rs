@@ -1,7 +1,7 @@
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX-License-Identifier: Apache-2.0 OR ISC
 
-#![allow(deprecated, dead_code)]
+#![allow(dead_code)]
 
 use aws_lc_rs::{test, test_file};
 use criterion::{Criterion, criterion_group, criterion_main};
@@ -127,10 +127,7 @@ macro_rules! benchmark_rsa {
     }
 
     pub fn verify(rsa_params: &RsaParameters, public_key: &[u8], msg: &[u8], signature: &[u8]) {
-        let public_key = untrusted::Input::from(public_key);
-        let msg = untrusted::Input::from(msg);
-        let signature = untrusted::Input::from(signature);
-        rsa_params.verify(public_key, msg, signature).unwrap()
+        rsa_params.verify_sig(public_key, msg, signature).unwrap()
     }
 }
 
