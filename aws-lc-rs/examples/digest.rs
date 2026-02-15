@@ -106,9 +106,5 @@ fn main() -> Result<()> {
             }
         }
     }
-    if let Some(e) = error {
-        Err(e)
-    } else {
-        Ok(())
-    }
+    if let Some(e) = error { Err(e) } else { Ok(()) }
 }

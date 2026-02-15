@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0 OR ISC
 
 use crate::aws_lc::{
-    EVP_PKEY_CTX_pqdsa_set_params, EVP_PKEY_pqdsa_new_raw_private_key, EVP_PKEY, EVP_PKEY_PQDSA,
+    EVP_PKEY, EVP_PKEY_CTX_pqdsa_set_params, EVP_PKEY_PQDSA, EVP_PKEY_pqdsa_new_raw_private_key,
 };
 use crate::encoding::{AsDer, AsRawBytes, Pkcs8V1Der, PqdsaPrivateKeyRaw};
 use crate::error::{KeyRejected, Unspecified};
@@ -246,9 +246,11 @@ mod tests {
             let message = b"Test message";
             let different_message = b"Different message";
             let mut signature = vec![0; alg.signature_len()];
-            assert!(keypair
-                .sign(message, &mut signature[0..(alg.signature_len() - 1)])
-                .is_err());
+            assert!(
+                keypair
+                    .sign(message, &mut signature[0..(alg.signature_len() - 1)])
+                    .is_err()
+            );
             let sig_len = keypair.sign(message, &mut signature).unwrap();
             assert_eq!(sig_len, alg.signature_len());
             let invalid_signature = vec![0u8; alg.signature_len()];
@@ -258,33 +260,40 @@ mod tests {
             let x509_der = original_public_key.as_der().unwrap();
             let x509_public_key = UnparsedPublicKey::new(alg.0, x509_der.as_ref());
             assert!(x509_public_key.verify(message, signature.as_ref()).is_ok());
-            assert!(x509_public_key
-                .verify(different_message, signature.as_ref())
-                .is_err());
+            assert!(
+                x509_public_key
+                    .verify(different_message, signature.as_ref())
+                    .is_err()
+            );
             assert!(x509_public_key.verify(message, &invalid_signature).is_err());
 
             let raw = original_public_key.as_ref();
             let raw_public_key = UnparsedPublicKey::new(alg.0, raw);
             assert!(raw_public_key.verify(message, signature.as_ref()).is_ok());
-            assert!(raw_public_key
-                .verify(different_message, signature.as_ref())
-                .is_err());
-            assert!(raw_public_key
-                .verify(different_message, &invalid_signature)
-                .is_err());
+            assert!(
+                raw_public_key
+                    .verify(different_message, signature.as_ref())
+                    .is_err()
+            );
+            assert!(
+                raw_public_key
+                    .verify(different_message, &invalid_signature)
+                    .is_err()
+            );
 
             #[cfg(feature = "ring-sig-verify")]
             #[allow(deprecated)]
             {
                 use crate::signature::VerificationAlgorithm;
-                assert!(alg
-                    .0
-                    .verify(
-                        raw.into(),
-                        message.as_ref().into(),
-                        signature.as_slice().into()
-                    )
-                    .is_ok());
+                assert!(
+                    alg.0
+                        .verify(
+                            raw.into(),
+                            message.as_ref().into(),
+                            signature.as_slice().into()
+                        )
+                        .is_ok()
+                );
             }
         }
     }

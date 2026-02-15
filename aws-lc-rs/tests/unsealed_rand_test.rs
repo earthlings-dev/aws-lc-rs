@@ -18,7 +18,7 @@
 use aws_lc_rs::error::Unspecified;
 // When external_tests is enabled, the unsealed module is public, allowing
 // consumers to implement unsealed::SecureRandom for their own types.
-use aws_lc_rs::rand::{unsealed, SecureRandom};
+use aws_lc_rs::rand::{SecureRandom, unsealed};
 
 /// A deterministic implementation of `SecureRandom` for testing purposes.
 /// This fills the destination buffer with a repeating pattern based on

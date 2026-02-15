@@ -92,8 +92,8 @@
 //! [NIST SP 800-38B]: https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-38b.pdf
 
 use crate::aws_lc::{
-    CMAC_CTX_copy, CMAC_CTX_new, CMAC_Final, CMAC_Init, CMAC_Update, EVP_aes_128_cbc,
-    EVP_aes_192_cbc, EVP_aes_256_cbc, EVP_des_ede3_cbc, CMAC_CTX, EVP_CIPHER,
+    CMAC_CTX, CMAC_CTX_copy, CMAC_CTX_new, CMAC_Final, CMAC_Init, CMAC_Update, EVP_CIPHER,
+    EVP_aes_128_cbc, EVP_aes_192_cbc, EVP_aes_256_cbc, EVP_des_ede3_cbc,
 };
 use crate::error::Unspecified;
 use crate::fips::indicator_check;
@@ -508,7 +508,7 @@ pub fn verify(key: &Key, data: &[u8], tag: &[u8]) -> Result<(), Unspecified> {
 mod tests {
     use super::*;
 
-    #[cfg(feature = "fips")]
+    #[cfg(all(feature = "fips", not(feature = "non-fips")))]
     mod fips;
 
     #[test]

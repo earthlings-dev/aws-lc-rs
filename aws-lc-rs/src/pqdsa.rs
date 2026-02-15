@@ -95,14 +95,14 @@ pub(crate) fn parse_pqdsa_public_key(
 #[cfg(test)]
 mod tests {
     use crate::aws_lc::{
-        EVP_PKEY_cmp, EVP_PKEY, EVP_PKEY_PQDSA, NID_MLDSA44, NID_MLDSA65, NID_MLDSA87,
+        EVP_PKEY, EVP_PKEY_PQDSA, EVP_PKEY_cmp, NID_MLDSA44, NID_MLDSA65, NID_MLDSA87,
     };
 
     use crate::evp_pkey::*;
 
     use crate::pkcs8::Version;
-    use crate::pqdsa::key_pair::evp_key_pqdsa_generate;
     use crate::pqdsa::AlgorithmID;
+    use crate::pqdsa::key_pair::evp_key_pqdsa_generate;
     use crate::ptr::LcPtr;
 
     #[test]

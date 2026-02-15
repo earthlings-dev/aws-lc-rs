@@ -4,8 +4,8 @@ authors = ["AWS-LibCrypto"]
 version = "1.15.4"
 # this crate re-exports whatever sys crate that was selected
 links = "aws_lc_rs_1_15_4_sys"
-edition = "2021"
-rust-version = "1.71.0"
+edition.workspace = true
+rust-version.workspace = true
 keywords = ["crypto", "cryptography", "security"]
 license = "ISC AND (Apache-2.0 OR ISC)"
 description = "aws-lc-rs is a cryptographic library using AWS-LC for its cryptographic operations. This library strives to be API-compatible with the popular Rust library named ring."
@@ -44,18 +44,21 @@ dev-tests-only = []
 non-fips = ["aws-lc-sys"]
 
 # require FIPS
-fips = ["dep:aws-lc-fips-sys"]
+# NOTE: fips intentionally does NOT activate dep:aws-lc-fips-sys.
+# Code paths are gated with `all(feature = "fips", not(feature = "non-fips"))`,
+# so when both are active (e.g. --all-features) FIPS is dead and the dep is never built.
+fips = []
 
 [dependencies]
 untrusted = { workspace = true, optional = true }
-aws-lc-sys = { version = "0.37.0", path = "../aws-lc-sys", default-features = false, optional = true }
-aws-lc-fips-sys = { version = "0.13.1", path = "../aws-lc-fips-sys", optional = true }
+aws-lc-sys = { workspace = true, optional = true }
+aws-lc-fips-sys = { workspace = true, optional = true }
 zeroize.workspace = true
 
 [dev-dependencies]
 paste.workspace = true
 lazy_static.workspace = true
-clap = { workspace = true, features = ["derive"] }
+clap.workspace = true
 hex.workspace = true
 regex.workspace = true
 

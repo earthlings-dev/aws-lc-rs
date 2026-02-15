@@ -3,9 +3,9 @@
 
 #![allow(clippy::module_name_repetitions)]
 
-use crate::aws_lc::{SSKDF_digest, SSKDF_hmac, EVP_MD};
+use crate::aws_lc::{EVP_MD, SSKDF_digest, SSKDF_hmac};
 
-use crate::digest::{match_digest_type, AlgorithmID};
+use crate::digest::{AlgorithmID, match_digest_type};
 use crate::error::Unspecified;
 use crate::ptr::ConstPointer;
 

@@ -16,15 +16,19 @@ fn main() {
 
     select_dep!("aws-lc-rs");
     select_dep!("aws-lc-sys");
-    select_dep!("aws-lc-fips-sys");
+    // FIPS is gated out (exclude_fips); skip aws-lc-fips-sys selection.
 
-    assert_eq!(
-        deps.len(),
-        1,
-        "exactly one dependency is allowed at a time, got {deps:?}"
-    );
-
-    let dep = deps.pop().unwrap();
+    // When --all-features is active, multiple deps are selected.
+    // Prefer aws-lc-sys over aws-lc-rs when both are present.
+    let dep = if deps.contains(&"aws-lc-sys") {
+        "aws-lc-sys"
+    } else {
+        assert!(
+            !deps.is_empty(),
+            "at least one dependency feature must be enabled"
+        );
+        deps[0]
+    };
     let dep_links = get_package_links_property(&format!("../{dep}/Cargo.toml"));
     let dep_snake_case = dep.replace('-', "_");
     build_and_link(dep_links.as_ref(), &dep_snake_case);

@@ -201,7 +201,7 @@ mod unbound_key;
 
 pub use self::aes_gcm::{AES_128_GCM, AES_128_GCM_SIV, AES_192_GCM, AES_256_GCM, AES_256_GCM_SIV};
 pub use self::chacha::CHACHA20_POLY1305;
-pub use self::nonce::{Nonce, NONCE_LEN};
+pub use self::nonce::{NONCE_LEN, Nonce};
 pub use self::rand_nonce::RandomizedNonceKey;
 pub use self::tls::{TlsProtocolId, TlsRecordOpeningKey, TlsRecordSealingKey};
 pub use self::unbound_key::UnboundKey;
@@ -1017,7 +1017,7 @@ mod tests {
     use crate::iv::FixedLength;
     use crate::test::from_hex;
 
-    #[cfg(feature = "fips")]
+    #[cfg(all(feature = "fips", not(feature = "non-fips")))]
     mod fips;
 
     #[test]
@@ -1044,24 +1044,28 @@ mod tests {
 
         let mut in_out_clone = in_out.clone();
         let nonce: [u8; NONCE_LEN] = og_nonce.as_slice().try_into().unwrap();
-        assert!(less_safe_key
-            .open_in_place(
-                Nonce(FixedLength::from(nonce)),
-                Aad::from("test"),
-                &mut in_out_clone
-            )
-            .is_err());
+        assert!(
+            less_safe_key
+                .open_in_place(
+                    Nonce(FixedLength::from(nonce)),
+                    Aad::from("test"),
+                    &mut in_out_clone
+                )
+                .is_err()
+        );
 
         let mut in_out_clone = in_out.clone();
         let mut nonce: [u8; NONCE_LEN] = og_nonce.as_slice().try_into().unwrap();
         nonce[0] = 0;
-        assert!(less_safe_key
-            .open_in_place(
-                Nonce(FixedLength::from(nonce)),
-                Aad::empty(),
-                &mut in_out_clone
-            )
-            .is_err());
+        assert!(
+            less_safe_key
+                .open_in_place(
+                    Nonce(FixedLength::from(nonce)),
+                    Aad::empty(),
+                    &mut in_out_clone
+                )
+                .is_err()
+        );
 
         let nonce: [u8; NONCE_LEN] = og_nonce.as_slice().try_into().unwrap();
         less_safe_key

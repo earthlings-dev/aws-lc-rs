@@ -7,9 +7,10 @@ use aws_lc_rs::digest::{Digest, SHA1_FOR_LEGACY_USE_ONLY, SHA256, SHA384, SHA512
 use aws_lc_rs::encoding::{AsDer, Pkcs8V1Der, PublicKeyX509Der};
 use aws_lc_rs::rand::SystemRandom;
 use aws_lc_rs::rsa::{
-    EncryptionAlgorithmId, KeySize, OaepPrivateDecryptingKey, OaepPublicEncryptingKey,
-    Pkcs1PrivateDecryptingKey, Pkcs1PublicEncryptingKey, PrivateDecryptingKey, PublicEncryptingKey,
-    OAEP_SHA1_MGF1SHA1, OAEP_SHA256_MGF1SHA256, OAEP_SHA384_MGF1SHA384, OAEP_SHA512_MGF1SHA512,
+    EncryptionAlgorithmId, KeySize, OAEP_SHA1_MGF1SHA1, OAEP_SHA256_MGF1SHA256,
+    OAEP_SHA384_MGF1SHA384, OAEP_SHA512_MGF1SHA512, OaepPrivateDecryptingKey,
+    OaepPublicEncryptingKey, Pkcs1PrivateDecryptingKey, Pkcs1PublicEncryptingKey,
+    PrivateDecryptingKey, PublicEncryptingKey,
 };
 use aws_lc_rs::signature::{
     KeyPair, ParsedPublicKey, RsaKeyPair, RsaParameters, RsaPublicKeyComponents,
@@ -402,7 +403,7 @@ generate_encode_decode!(rsa8192_generate_encode_decode, KeySize::Rsa8192);
 
 macro_rules! generate_fips_encode_decode {
     ($name:ident, $size:expr) => {
-        #[cfg(feature = "fips")]
+        #[cfg(all(feature = "fips", not(feature = "non-fips")))]
         #[test]
         fn $name() {
             let private_key = RsaKeyPair::generate($size).expect("generation");
@@ -419,7 +420,7 @@ macro_rules! generate_fips_encode_decode {
         }
     };
     ($name:ident, $size:expr, false) => {
-        #[cfg(feature = "fips")]
+        #[cfg(all(feature = "fips", not(feature = "non-fips")))]
         #[test]
         fn $name() {
             let _ = RsaKeyPair::generate_fips($size).expect_err("should fail for key size");
@@ -473,7 +474,7 @@ encryption_generate_encode_decode!(rsa8192_encryption_generate_encode_decode, Ke
 
 macro_rules! encryption_generate_fips_encode_decode {
     ($name:ident, $size:expr) => {
-        #[cfg(feature = "fips")]
+        #[cfg(all(feature = "fips", not(feature = "non-fips")))]
         #[test]
         fn $name() {
             let private_key = PrivateDecryptingKey::generate($size).expect("generation");
@@ -495,7 +496,7 @@ macro_rules! encryption_generate_fips_encode_decode {
         }
     };
     ($name:ident, $size:expr, false) => {
-        #[cfg(feature = "fips")]
+        #[cfg(all(feature = "fips", not(feature = "non-fips")))]
         #[test]
         fn $name() {
             let _ =
@@ -533,7 +534,10 @@ fn public_key_components_clone_debug() {
         n: &[0x63, 0x61, 0x6d, 0x65, 0x6c, 0x6f, 0x74],
         e: &[0x61, 0x76, 0x61, 0x6c, 0x6f, 0x6e],
     };
-    assert_eq!("RsaPublicKeyComponents { n: [99, 97, 109, 101, 108, 111, 116], e: [97, 118, 97, 108, 111, 110] }", format!("{pkc:?}"));
+    assert_eq!(
+        "RsaPublicKeyComponents { n: [99, 97, 109, 101, 108, 111, 116], e: [97, 118, 97, 108, 111, 110] }",
+        format!("{pkc:?}")
+    );
 }
 
 #[test]
@@ -1170,9 +1174,11 @@ fn test_wrong_digest() {
     keypair
         .sign_digest(&signature::RSA_PSS_SHA256, &digest_sha256, &mut signature)
         .unwrap();
-    assert!(keypair
-        .sign_digest(&signature::RSA_PSS_SHA256, &digest_sha384, &mut signature)
-        .is_err());
+    assert!(
+        keypair
+            .sign_digest(&signature::RSA_PSS_SHA256, &digest_sha384, &mut signature)
+            .is_err()
+    );
 
     let public_key = keypair.public_key();
     let upk = UnparsedPublicKey::new(&signature::RSA_PSS_2048_8192_SHA256, &public_key);

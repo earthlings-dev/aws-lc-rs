@@ -2,10 +2,10 @@
 // SPDX-License-Identifier: Apache-2.0 OR ISC
 
 use crate::aws_lc::{
-    BN_free, CMAC_CTX_free, ECDSA_SIG_free, EC_GROUP_free, EC_KEY_free, EC_POINT_free,
-    EVP_AEAD_CTX_free, EVP_CIPHER_CTX_free, EVP_PKEY_CTX_free, EVP_PKEY_free, OPENSSL_free,
-    RSA_free, BIGNUM, CMAC_CTX, ECDSA_SIG, EC_GROUP, EC_KEY, EC_POINT, EVP_AEAD_CTX,
-    EVP_CIPHER_CTX, EVP_PKEY, EVP_PKEY_CTX, RSA,
+    BIGNUM, BN_free, CMAC_CTX, CMAC_CTX_free, EC_GROUP, EC_GROUP_free, EC_KEY, EC_KEY_free,
+    EC_POINT, EC_POINT_free, ECDSA_SIG, ECDSA_SIG_free, EVP_AEAD_CTX, EVP_AEAD_CTX_free,
+    EVP_CIPHER_CTX, EVP_CIPHER_CTX_free, EVP_PKEY, EVP_PKEY_CTX, EVP_PKEY_CTX_free, EVP_PKEY_free,
+    OPENSSL_free, RSA, RSA_free,
 };
 use std::marker::PhantomData;
 
@@ -28,7 +28,7 @@ impl<P: Pointer> ManagedPointer<P> {
     }
 
     pub unsafe fn as_slice(&self, len: usize) -> &[P::T] {
-        core::slice::from_raw_parts(self.pointer.as_const_ptr(), len)
+        unsafe { core::slice::from_raw_parts(self.pointer.as_const_ptr(), len) }
     }
 }
 
@@ -185,11 +185,7 @@ pub(crate) trait IntoPointer<P> {
 impl<T> IntoPointer<*mut T> for *mut T {
     #[inline]
     fn into_pointer(self) -> Option<*mut T> {
-        if self.is_null() {
-            None
-        } else {
-            Some(self)
-        }
+        if self.is_null() { None } else { Some(self) }
     }
 }
 

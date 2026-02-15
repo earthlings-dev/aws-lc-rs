@@ -283,7 +283,7 @@ mod tests {
     use crate::pbkdf2;
     use core::num::NonZeroU32;
 
-    #[cfg(feature = "fips")]
+    #[cfg(all(feature = "fips", not(feature = "non-fips")))]
     mod fips;
 
     #[test]

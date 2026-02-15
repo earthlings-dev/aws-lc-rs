@@ -6,9 +6,9 @@
 use std::error::Error;
 
 use aws_lc_rs::kdf::{
-    get_kbkdf_ctr_hmac_algorithm, get_sskdf_digest_algorithm, get_sskdf_hmac_algorithm,
-    kbkdf_ctr_hmac, sskdf_digest, sskdf_hmac, KbkdfCtrHmacAlgorithm, KbkdfCtrHmacAlgorithmId,
-    SskdfDigestAlgorithm, SskdfDigestAlgorithmId, SskdfHmacAlgorithm, SskdfHmacAlgorithmId,
+    KbkdfCtrHmacAlgorithm, KbkdfCtrHmacAlgorithmId, SskdfDigestAlgorithm, SskdfDigestAlgorithmId,
+    SskdfHmacAlgorithm, SskdfHmacAlgorithmId, get_kbkdf_ctr_hmac_algorithm,
+    get_sskdf_digest_algorithm, get_sskdf_hmac_algorithm, kbkdf_ctr_hmac, sskdf_digest, sskdf_hmac,
 };
 use aws_lc_rs::{test, test_file};
 

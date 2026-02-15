@@ -13,17 +13,17 @@ use crate::ptr::LcPtr;
 // SEC 1: Elliptic Curve Cryptography, Version 2.0
 pub(crate) mod sec1 {
     use crate::aws_lc::{
-        point_conversion_form_t, BN_bn2cbb_padded, EC_GROUP_get_curve_name, EC_KEY_get0_group,
+        BIGNUM, BN_bn2cbb_padded, EC_GROUP, EC_GROUP_get_curve_name, EC_KEY_get0_group,
         EC_KEY_get0_private_key, EC_KEY_get0_public_key, EC_KEY_new, EC_KEY_set_group,
-        EC_KEY_set_private_key, EC_KEY_set_public_key, EC_POINT_mul, EC_POINT_new,
-        EC_POINT_oct2point, EC_POINT_point2cbb, EVP_PKEY_assign_EC_KEY, EVP_PKEY_get0_EC_KEY,
-        EVP_PKEY_new, NID_X9_62_prime256v1, NID_secp256k1, NID_secp384r1, NID_secp521r1, BIGNUM,
-        EC_GROUP, EC_POINT, EVP_PKEY,
+        EC_KEY_set_private_key, EC_KEY_set_public_key, EC_POINT, EC_POINT_mul, EC_POINT_new,
+        EC_POINT_oct2point, EC_POINT_point2cbb, EVP_PKEY, EVP_PKEY_assign_EC_KEY,
+        EVP_PKEY_get0_EC_KEY, EVP_PKEY_new, NID_X9_62_prime256v1, NID_secp256k1, NID_secp384r1,
+        NID_secp521r1, point_conversion_form_t,
     };
     use crate::cbb::LcCBB;
     use crate::ec::{
-        compressed_public_key_size_bytes, ec_group_from_nid, uncompressed_public_key_size_bytes,
-        validate_ec_evp_key, KeyRejected,
+        KeyRejected, compressed_public_key_size_bytes, ec_group_from_nid,
+        uncompressed_public_key_size_bytes, validate_ec_evp_key,
     };
     use crate::error::Unspecified;
     use crate::ptr::{ConstPointer, DetachableLcPtr, LcPtr};
@@ -222,8 +222,8 @@ pub(crate) mod sec1 {
 
 pub(crate) mod rfc5915 {
     use crate::aws_lc::{
-        EC_KEY_get_enc_flags, EC_KEY_marshal_private_key, EC_KEY_parse_private_key,
-        EVP_PKEY_get0_EC_KEY, EVP_PKEY_new, EVP_PKEY_set1_EC_KEY, EVP_PKEY,
+        EC_KEY_get_enc_flags, EC_KEY_marshal_private_key, EC_KEY_parse_private_key, EVP_PKEY,
+        EVP_PKEY_get0_EC_KEY, EVP_PKEY_new, EVP_PKEY_set1_EC_KEY,
     };
     use crate::cbb::LcCBB;
     use crate::cbs::build_CBS;

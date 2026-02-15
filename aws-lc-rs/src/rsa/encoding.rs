@@ -6,8 +6,8 @@
 /// PKCS #1: RSA Cryptography Specifications Version 2.2
 pub(in crate::rsa) mod rfc8017 {
     use crate::aws_lc::{
-        EVP_PKEY_assign_RSA, EVP_PKEY_new, RSA_parse_private_key, RSA_public_key_from_bytes,
-        RSA_public_key_to_bytes, EVP_PKEY,
+        EVP_PKEY, EVP_PKEY_assign_RSA, EVP_PKEY_new, RSA_parse_private_key,
+        RSA_public_key_from_bytes, RSA_public_key_to_bytes,
     };
     use crate::cbs;
     use crate::error::{KeyRejected, Unspecified};

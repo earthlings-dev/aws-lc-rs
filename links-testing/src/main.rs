@@ -3,7 +3,7 @@
 
 use std::ffi::c_int;
 
-extern "C" {
+unsafe extern "C" {
     fn testing_evp_key_type(nid: c_int) -> c_int;
 }
 

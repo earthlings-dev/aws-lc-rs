@@ -511,7 +511,7 @@ mod tests {
     use crate::ed25519::Ed25519KeyPair;
     use crate::encoding::{AsBigEndian, AsDer, Pkcs8V1Der, Pkcs8V2Der, PublicKeyX509Der};
     use crate::rand::SystemRandom;
-    use crate::signature::{KeyPair, UnparsedPublicKey, ED25519};
+    use crate::signature::{ED25519, KeyPair, UnparsedPublicKey};
     use crate::{hex, test};
 
     #[test]
@@ -583,7 +583,7 @@ mod tests {
             TestCase {
                 key: "3072020101300506032b657004220420d4ee72dbf913584ad5b6d8f1f769f8ad3afe7c28cbf1d4fbe097a88f44755842a01f301d060a2a864886f70d01090914310f0c0d437572646c652043686169727381210019bf44096984cdfe8541bac167dc3b96c85086aa30b6b6cb0c5c38ad703166e1",
                 expected_public: "19bf44096984cdfe8541bac167dc3b96c85086aa30b6b6cb0c5c38ad703166e1",
-            }
+            },
         ] {
             let key_pair = Ed25519KeyPair::from_pkcs8(&test::from_dirty_hex(case.key)).unwrap();
             assert_eq!(
@@ -593,7 +593,9 @@ mod tests {
                 ),
                 format!("{key_pair:?}")
             );
-            let key_pair = Ed25519KeyPair::from_pkcs8_maybe_unchecked(&test::from_dirty_hex(case.key)).unwrap();
+            let key_pair =
+                Ed25519KeyPair::from_pkcs8_maybe_unchecked(&test::from_dirty_hex(case.key))
+                    .unwrap();
             assert_eq!(
                 format!(
                     r#"Ed25519KeyPair {{ public_key: PublicKey("{}") }}"#,

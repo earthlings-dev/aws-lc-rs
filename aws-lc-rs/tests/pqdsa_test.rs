@@ -5,8 +5,8 @@
 use aws_lc_rs::encoding::{AsDer, AsRawBytes};
 use aws_lc_rs::signature::{KeyPair, ParsedPublicKey, VerificationAlgorithm};
 use aws_lc_rs::unstable::signature::{
-    PqdsaKeyPair, ML_DSA_44, ML_DSA_44_SIGNING, ML_DSA_65, ML_DSA_65_SIGNING, ML_DSA_87,
-    ML_DSA_87_SIGNING,
+    ML_DSA_44, ML_DSA_44_SIGNING, ML_DSA_65, ML_DSA_65_SIGNING, ML_DSA_87, ML_DSA_87_SIGNING,
+    PqdsaKeyPair,
 };
 use aws_lc_rs::{test, test_file};
 

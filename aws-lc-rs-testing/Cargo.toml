@@ -2,8 +2,8 @@
 name = "aws-lc-rs-testing"
 authors = ["AWS-LibCrypto"]
 version = "0.1.0"
-edition = "2021"
-rust-version = "1.86.0"
+edition.workspace = true
+rust-version.workspace = true
 publish = false
 
 [features]
@@ -15,12 +15,12 @@ fips = ["aws-lc-rs/fips"]
 asan = ["aws-lc-rs/asan"]
 
 [dev-dependencies]
-aws-lc-rs = { version = "1.0", path = "../aws-lc-rs", features = ["ring-sig-verify", "unstable"] }
+aws-lc-rs = { workspace = true, features = ["ring-sig-verify", "unstable"] }
 untrusted.workspace = true
 paste.workspace = true
-criterion = { workspace = true, features = ["csv_output"] }
+criterion.workspace = true
 ring.workspace = true
-openssl = { workspace = true, features = ["vendored"] }
+openssl.workspace = true
 
 [[bench]]
 name = "aead_benchmark"

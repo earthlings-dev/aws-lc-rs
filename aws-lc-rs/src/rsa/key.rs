@@ -3,11 +3,11 @@
 // Modifications copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX-License-Identifier: Apache-2.0 OR ISC
 use super::signature::{RsaEncoding, RsaPadding};
-use super::{encoding, RsaParameters};
+use super::{RsaParameters, encoding};
 use crate::aws_lc::{
-    EVP_PKEY_CTX_set_rsa_keygen_bits, EVP_PKEY_CTX_set_signature_md, EVP_PKEY_assign_RSA,
-    EVP_PKEY_new, RSA_new, RSA_set0_key, RSA_size, EVP_PKEY, EVP_PKEY_CTX, EVP_PKEY_RSA,
-    EVP_PKEY_RSA_PSS,
+    EVP_PKEY, EVP_PKEY_CTX, EVP_PKEY_CTX_set_rsa_keygen_bits, EVP_PKEY_CTX_set_signature_md,
+    EVP_PKEY_RSA, EVP_PKEY_RSA_PSS, EVP_PKEY_assign_RSA, EVP_PKEY_new, RSA_new, RSA_set0_key,
+    RSA_size,
 };
 #[cfg(feature = "ring-io")]
 use crate::aws_lc::{RSA_get0_e, RSA_get0_n};
@@ -19,7 +19,7 @@ use crate::ptr::{DetachableLcPtr, LcPtr};
 use crate::rsa::PublicEncryptingKey;
 use crate::sealed::Sealed;
 use crate::{hex, rand};
-#[cfg(feature = "fips")]
+#[cfg(all(feature = "fips", not(feature = "non-fips")))]
 use aws_lc::RSA_check_fips;
 use core::fmt::{self, Debug, Formatter};
 use core::ptr::null_mut;
@@ -28,7 +28,7 @@ use core::ptr::null_mut;
 // use core::ffi::c_int;
 use std::os::raw::c_int;
 
-use crate::digest::{match_digest_type, Digest};
+use crate::digest::{Digest, match_digest_type};
 use crate::pkcs8::Version;
 use crate::rsa::encoding::{rfc5280, rfc8017};
 use crate::rsa::signature::configure_rsa_pkcs1_pss_padding;
@@ -129,7 +129,7 @@ impl KeyPair {
     ///
     /// # Errors
     /// * `Unspecified`: Any key generation failure.
-    #[cfg(feature = "fips")]
+    #[cfg(all(feature = "fips", not(feature = "non-fips")))]
     #[deprecated]
     pub fn generate_fips(size: KeySize) -> Result<Self, Unspecified> {
         Self::generate(size)
@@ -165,7 +165,7 @@ impl KeyPair {
     }
 
     /// Returns a boolean indicator if this RSA key is an approved FIPS 140-3 key.
-    #[cfg(feature = "fips")]
+    #[cfg(all(feature = "fips", not(feature = "non-fips")))]
     #[must_use]
     pub fn is_valid_fips_key(&self) -> bool {
         is_valid_fips_key(&self.evp_pkey)
@@ -551,7 +551,7 @@ pub(super) fn generate_rsa_key(size: c_int) -> Result<LcPtr<EVP_PKEY>, Unspecifi
     LcPtr::<EVP_PKEY>::generate(EVP_PKEY_RSA, Some(params_fn))
 }
 
-#[cfg(feature = "fips")]
+#[cfg(all(feature = "fips", not(feature = "non-fips")))]
 #[must_use]
 pub(super) fn is_valid_fips_key(key: &LcPtr<EVP_PKEY>) -> bool {
     // This should always be an RSA key and must-never panic.

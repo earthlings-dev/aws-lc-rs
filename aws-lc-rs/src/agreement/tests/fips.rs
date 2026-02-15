@@ -8,7 +8,6 @@ use crate::{
         agree_ephemeral, EphemeralPrivateKey, UnparsedPublicKey, ECDH_P256, ECDH_P384, ECDH_P521,
         X25519,
     },
-    error::Unspecified,
     fips::{assert_fips_status_indicator, FipsServiceStatus},
     rand::SystemRandom,
 };
@@ -32,16 +31,16 @@ macro_rules! agree_ephemeral_api {
             let bob_public = UnparsedPublicKey::new($alg, bob_public.as_ref());
 
             let alice_secret = assert_fips_status_indicator!(
-                agree_ephemeral(alice_private, &bob_public, Unspecified, |secret| {
-                    Ok(Vec::from(secret))
+                agree_ephemeral(alice_private, &bob_public, |secret| {
+                    Vec::from(secret)
                 }),
                 $expect
             )
             .unwrap();
 
             let bob_secret = assert_fips_status_indicator!(
-                agree_ephemeral(bob_private, &alice_public, Unspecified, |secret| {
-                    Ok(Vec::from(secret))
+                agree_ephemeral(bob_private, &alice_public, |secret| {
+                    Vec::from(secret)
                 }),
                 $expect
             )

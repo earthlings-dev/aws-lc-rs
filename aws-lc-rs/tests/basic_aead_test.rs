@@ -6,8 +6,8 @@ extern crate core;
 use aws_lc_rs::{aead, error, test};
 
 use aead::{
-    Aad, Algorithm, BoundKey, Nonce, NonceSequence, OpeningKey, SealingKey, UnboundKey,
-    AES_128_GCM, AES_128_GCM_SIV, AES_256_GCM, AES_256_GCM_SIV, CHACHA20_POLY1305,
+    AES_128_GCM, AES_128_GCM_SIV, AES_256_GCM, AES_256_GCM_SIV, Aad, Algorithm, BoundKey,
+    CHACHA20_POLY1305, Nonce, NonceSequence, OpeningKey, SealingKey, UnboundKey,
 };
 use aws_lc_rs::test::from_hex;
 use error::Unspecified;

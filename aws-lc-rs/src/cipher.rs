@@ -229,9 +229,9 @@ pub use padded::{PaddedBlockDecryptingKey, PaddedBlockEncryptingKey};
 pub use streaming::{BufferUpdate, StreamingDecryptingKey, StreamingEncryptingKey};
 
 use crate::aws_lc::{
-    EVP_aes_128_cbc, EVP_aes_128_cfb128, EVP_aes_128_ctr, EVP_aes_128_ecb, EVP_aes_192_cbc,
-    EVP_aes_192_cfb128, EVP_aes_192_ctr, EVP_aes_192_ecb, EVP_aes_256_cbc, EVP_aes_256_cfb128,
-    EVP_aes_256_ctr, EVP_aes_256_ecb, EVP_CIPHER,
+    EVP_CIPHER, EVP_aes_128_cbc, EVP_aes_128_cfb128, EVP_aes_128_ctr, EVP_aes_128_ecb,
+    EVP_aes_192_cbc, EVP_aes_192_cfb128, EVP_aes_192_ctr, EVP_aes_192_ecb, EVP_aes_256_cbc,
+    EVP_aes_256_cfb128, EVP_aes_256_ctr, EVP_aes_256_ecb,
 };
 use crate::buffer::Buffer;
 use crate::error::Unspecified;
@@ -784,7 +784,7 @@ fn encrypt(
 
     match mode {
         OperatingMode::CBC | OperatingMode::ECB => {
-            if in_out.len() % block_len != 0 {
+            if !in_out.len().is_multiple_of(block_len) {
                 return Err(Unspecified);
             }
         }
@@ -827,7 +827,7 @@ fn decrypt<'in_out>(
 
     match mode {
         OperatingMode::CBC | OperatingMode::ECB => {
-            if in_out.len() % block_len != 0 {
+            if !in_out.len().is_multiple_of(block_len) {
                 return Err(Unspecified);
             }
         }
@@ -864,7 +864,7 @@ mod tests {
     use super::*;
     use crate::test::from_hex;
 
-    #[cfg(feature = "fips")]
+    #[cfg(all(feature = "fips", not(feature = "non-fips")))]
     mod fips;
 
     #[test]
@@ -872,7 +872,10 @@ mod tests {
         {
             let aes_128_key_bytes = from_hex("000102030405060708090a0b0c0d0e0f").unwrap();
             let cipher_key = UnboundCipherKey::new(&AES_128, aes_128_key_bytes.as_slice()).unwrap();
-            assert_eq!("UnboundCipherKey { algorithm: Algorithm { id: Aes128, key_len: 16, block_len: 16 } }", format!("{cipher_key:?}"));
+            assert_eq!(
+                "UnboundCipherKey { algorithm: Algorithm { id: Aes128, key_len: 16, block_len: 16 } }",
+                format!("{cipher_key:?}")
+            );
         }
 
         {
@@ -880,7 +883,10 @@ mod tests {
                 from_hex("000102030405060708090a0b0c0d0e0f000102030405060708090a0b0c0d0e0f")
                     .unwrap();
             let cipher_key = UnboundCipherKey::new(&AES_256, aes_256_key_bytes.as_slice()).unwrap();
-            assert_eq!("UnboundCipherKey { algorithm: Algorithm { id: Aes256, key_len: 32, block_len: 16 } }", format!("{cipher_key:?}"));
+            assert_eq!(
+                "UnboundCipherKey { algorithm: Algorithm { id: Aes256, key_len: 32, block_len: 16 } }",
+                format!("{cipher_key:?}")
+            );
         }
 
         {
@@ -889,7 +895,10 @@ mod tests {
                 UnboundCipherKey::new(&AES_128, key_bytes).unwrap(),
             )
             .unwrap();
-            assert_eq!("PaddedBlockEncryptingKey { algorithm: Algorithm { id: Aes128, key_len: 16, block_len: 16 }, mode: CBC, padding: PKCS7, .. }", format!("{key:?}"));
+            assert_eq!(
+                "PaddedBlockEncryptingKey { algorithm: Algorithm { id: Aes128, key_len: 16, block_len: 16 }, mode: CBC, padding: PKCS7, .. }",
+                format!("{key:?}")
+            );
             let mut data = vec![0u8; 16];
             let context = key.encrypt(&mut data).unwrap();
             assert_eq!("Iv128", format!("{context:?}"));
@@ -897,20 +906,29 @@ mod tests {
                 UnboundCipherKey::new(&AES_128, key_bytes).unwrap(),
             )
             .unwrap();
-            assert_eq!("PaddedBlockDecryptingKey { algorithm: Algorithm { id: Aes128, key_len: 16, block_len: 16 }, mode: CBC, padding: PKCS7, .. }", format!("{key:?}"));
+            assert_eq!(
+                "PaddedBlockDecryptingKey { algorithm: Algorithm { id: Aes128, key_len: 16, block_len: 16 }, mode: CBC, padding: PKCS7, .. }",
+                format!("{key:?}")
+            );
         }
 
         {
             let key_bytes = &[0u8; 16];
             let key =
                 EncryptingKey::ctr(UnboundCipherKey::new(&AES_128, key_bytes).unwrap()).unwrap();
-            assert_eq!("EncryptingKey { algorithm: Algorithm { id: Aes128, key_len: 16, block_len: 16 }, mode: CTR, .. }", format!("{key:?}"));
+            assert_eq!(
+                "EncryptingKey { algorithm: Algorithm { id: Aes128, key_len: 16, block_len: 16 }, mode: CTR, .. }",
+                format!("{key:?}")
+            );
             let mut data = vec![0u8; 16];
             let context = key.encrypt(&mut data).unwrap();
             assert_eq!("Iv128", format!("{context:?}"));
             let key =
                 DecryptingKey::ctr(UnboundCipherKey::new(&AES_128, key_bytes).unwrap()).unwrap();
-            assert_eq!("DecryptingKey { algorithm: Algorithm { id: Aes128, key_len: 16, block_len: 16 }, mode: CTR, .. }", format!("{key:?}"));
+            assert_eq!(
+                "DecryptingKey { algorithm: Algorithm { id: Aes128, key_len: 16, block_len: 16 }, mode: CTR, .. }",
+                format!("{key:?}")
+            );
         }
     }
 

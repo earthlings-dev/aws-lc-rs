@@ -74,8 +74,8 @@ mod digest_shavs {
             #[allow(non_snake_case)]
             mod $algorithm_name {
                 use super::{
-                    run_known_answer_test, run_monte_carlo_fips_180_4_test,
-                    run_monte_carlo_fips_202_test, TestType,
+                    TestType, run_known_answer_test, run_monte_carlo_fips_180_4_test,
+                    run_monte_carlo_fips_202_test,
                 };
                 use aws_lc_rs::{digest, test_file};
 

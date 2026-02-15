@@ -3,8 +3,8 @@
 use crate::cipher;
 use crate::cipher::key::SymmetricCipherKey;
 use crate::cipher::{
-    Algorithm, DecryptionContext, EncryptionContext, OperatingMode, UnboundCipherKey,
-    MAX_CIPHER_BLOCK_LEN,
+    Algorithm, DecryptionContext, EncryptionContext, MAX_CIPHER_BLOCK_LEN, OperatingMode,
+    UnboundCipherKey,
 };
 use crate::error::Unspecified;
 use core::fmt::Debug;
@@ -322,8 +322,8 @@ impl Debug for PaddedBlockDecryptingKey {
 mod tests {
     use crate::cipher::padded::PaddingStrategy;
     use crate::cipher::{
-        Algorithm, EncryptionContext, OperatingMode, PaddedBlockDecryptingKey,
-        PaddedBlockEncryptingKey, UnboundCipherKey, AES_128, AES_256,
+        AES_128, AES_256, Algorithm, EncryptionContext, OperatingMode, PaddedBlockDecryptingKey,
+        PaddedBlockEncryptingKey, UnboundCipherKey,
     };
     use crate::iv::FixedLength;
     use crate::test::from_hex;

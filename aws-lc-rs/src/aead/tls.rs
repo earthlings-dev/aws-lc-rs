@@ -296,7 +296,7 @@ impl Debug for TlsRecordOpeningKey {
 #[cfg(test)]
 mod tests {
     use super::{TlsProtocolId, TlsRecordOpeningKey, TlsRecordSealingKey};
-    use crate::aead::{Aad, Nonce, AES_128_GCM, AES_256_GCM, CHACHA20_POLY1305};
+    use crate::aead::{AES_128_GCM, AES_256_GCM, Aad, CHACHA20_POLY1305, Nonce};
     use crate::test::from_hex;
     use paste::paste;
 

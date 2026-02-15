@@ -19,10 +19,10 @@ mod win_x86_64;
 
 use crate::nasm_builder::NasmBuilder;
 use crate::{
-    cargo_env, disable_jitter_entropy, emit_warning, env_var_to_bool, execute_command,
-    get_crate_cc, get_crate_cflags, get_crate_cxx, is_no_asm, out_dir, requested_c_std,
-    set_env_for_target, target, target_arch, target_env, target_os, target_vendor,
-    test_clang_cl_command, CStdRequested, OutputLibType,
+    CStdRequested, OutputLibType, cargo_env, disable_jitter_entropy, emit_warning, env_var_to_bool,
+    execute_command, get_crate_cc, get_crate_cflags, get_crate_cxx, is_no_asm, out_dir,
+    requested_c_std, set_env_for_target, target, target_arch, target_env, target_os, target_vendor,
+    test_clang_cl_command,
 };
 use std::cell::Cell;
 use std::collections::HashMap;
@@ -218,10 +218,11 @@ impl CcBuilder {
             set_env_for_target("CXX", &cxx);
         }
 
-        if target_arch() == "x86" && !compiler_is_msvc {
-            if let Some(option) = BuildOption::flag_if_supported(cc_build, "-msse2") {
-                build_options.push(option);
-            }
+        if target_arch() == "x86"
+            && !compiler_is_msvc
+            && let Some(option) = BuildOption::flag_if_supported(cc_build, "-msse2")
+        {
+            build_options.push(option);
         }
 
         if target_os() == "macos" || target_os() == "darwin" {
@@ -254,7 +255,9 @@ impl CcBuilder {
                         emit_warning(format!("Using flag: {}", &flag));
                         build_options.push(BuildOption::flag(&flag));
                     } else {
-                        emit_warning("NOTICE: Build environment source paths might be visible in release binary.");
+                        emit_warning(
+                            "NOTICE: Build environment source paths might be visible in release binary.",
+                        );
                         let flag = format!("-fdebug-prefix-map={path_str}=");
                         if let Ok(true) = cc_build.is_flag_supported(&flag) {
                             emit_warning(format!("Using flag: {}", &flag));

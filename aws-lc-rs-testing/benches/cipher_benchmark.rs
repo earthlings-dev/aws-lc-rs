@@ -2,11 +2,11 @@
 // SPDX-License-Identifier: Apache-2.0 OR ISC
 
 use aws_lc_rs::cipher::{
-    DecryptingKey, EncryptingKey, EncryptionContext, OperatingMode, PaddedBlockDecryptingKey,
-    PaddedBlockEncryptingKey, UnboundCipherKey, AES_128, AES_256,
+    AES_128, AES_256, DecryptingKey, EncryptingKey, EncryptionContext, OperatingMode,
+    PaddedBlockDecryptingKey, PaddedBlockEncryptingKey, UnboundCipherKey,
 };
 use aws_lc_rs::{test, test_file};
-use criterion::{criterion_group, criterion_main, Criterion};
+use criterion::{Criterion, criterion_group, criterion_main};
 
 macro_rules! openssl_bench {
     ($group:ident, $openssl: expr, $key:ident, $iv:ident, $data:ident) => {{

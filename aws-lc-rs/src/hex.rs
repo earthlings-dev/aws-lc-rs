@@ -37,7 +37,7 @@ pub fn decode(hex_str: &str) -> Result<Vec<u8>, String> {
         // DON'T PANIC: it should not be possible to panic because we verify above that the character is a
         // hex digit.
         let value = ch.to_digit(16).unwrap() as u8;
-        if index % 2 == 0 {
+        if index.is_multiple_of(2) {
             current_byte = value << 4;
         } else {
             current_byte |= value;

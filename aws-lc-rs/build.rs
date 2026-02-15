@@ -4,12 +4,6 @@
 use std::env;
 
 fn main() {
-    let has_mutually_exclusive_features = cfg!(feature = "non-fips") && cfg!(feature = "fips");
-    assert!(
-        !has_mutually_exclusive_features,
-        "`fips` and `non-fips` are mutually exclusive crate features."
-    );
-
     println!("cargo:rustc-check-cfg=cfg(aws_lc_rs_docsrs)");
     println!("cargo:rustc-check-cfg=cfg(disable_slow_tests)");
     println!("cargo:rustc-check-cfg=cfg(dev_tests_only)");
@@ -44,14 +38,18 @@ fn main() {
             println!("cargo:warning=### Enabling public testing functions! ###");
             println!("cargo:rustc-cfg=dev_tests_only");
         } else {
-            println!("cargo:warning=### AWS_LC_RS_DEV_TESTS_ONLY: Public testing functions not enabled! ###");
+            println!(
+                "cargo:warning=### AWS_LC_RS_DEV_TESTS_ONLY: Public testing functions not enabled! ###"
+            );
         }
     }
 
     // This appears asymmetric, but it reflects the `cfg` statements in lib.rs that
-    // require `aws-lc-sys` to be present when "fips" is not enabled.
-    // if `fips` is enabled, then use that
-    let sys_crate = if cfg!(feature = "fips") {
+    // require `aws-lc-sys` to be present when "fips" is not the sole provider.
+    // When both `fips` and `non-fips` are active (e.g. --all-features), `non-fips`
+    // wins and aws-lc-sys is selected — matching the cfg gate pattern
+    // `all(feature = "fips", not(feature = "non-fips"))`.
+    let sys_crate = if cfg!(feature = "fips") && !cfg!(feature = "non-fips") {
         "aws-lc-fips-sys"
     } else if cfg!(feature = "aws-lc-sys") {
         "aws-lc-sys"

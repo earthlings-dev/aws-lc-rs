@@ -4,10 +4,10 @@ description = "AWS-LC is a general-purpose cryptographic library maintained by t
 version = "0.13.11"
 links = "aws_lc_fips_0_13_11"
 authors = ["AWS-LC"]
-edition = "2021"
+edition.workspace = true
 repository = "https://github.com/aws/aws-lc-rs"
 license = "ISC AND (Apache-2.0 OR ISC) AND OpenSSL"
-rust-version = "1.71.0"
+rust-version.workspace = true
 include = [
     "LICENSE",
     "/aws-lc/**/*.c",
@@ -60,6 +60,7 @@ build = "builder/main.rs"
 [features]
 asan = []
 ssl = []
+no-build = [] # Skip the FIPS C library build (activated by --all-features)
 bindgen = [
     "dep:bindgen",
 ] # Generate the bindings on the targeted platform as a fallback mechanism.

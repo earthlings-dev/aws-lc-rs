@@ -46,8 +46,8 @@
 //! # Ok::<(), aws_lc_rs::error::Unspecified>(())
 //! ```
 use crate::aws_lc::{
-    EVP_PKEY_CTX_kem_set_params, EVP_PKEY_decapsulate, EVP_PKEY_encapsulate,
-    EVP_PKEY_kem_new_raw_public_key, EVP_PKEY_kem_new_raw_secret_key, EVP_PKEY, EVP_PKEY_KEM,
+    EVP_PKEY, EVP_PKEY_CTX_kem_set_params, EVP_PKEY_KEM, EVP_PKEY_decapsulate,
+    EVP_PKEY_encapsulate, EVP_PKEY_kem_new_raw_public_key, EVP_PKEY_kem_new_raw_secret_key,
 };
 use crate::buffer::Buffer;
 use crate::encoding::generated_encodings;
@@ -99,7 +99,7 @@ pub const ML_KEM_1024: Algorithm<AlgorithmId> = Algorithm {
     shared_secret_size: ML_KEM_1024_SHARED_SECRET_LENGTH,
 };
 
-use crate::aws_lc::{NID_MLKEM1024, NID_MLKEM512, NID_MLKEM768};
+use crate::aws_lc::{NID_MLKEM512, NID_MLKEM768, NID_MLKEM1024};
 
 /// An identifier for a KEM algorithm.
 pub trait AlgorithmIdentifier:
@@ -566,7 +566,7 @@ mod tests {
     use super::{Ciphertext, DecapsulationKey, EncapsulationKey, SharedSecret};
     use crate::error::KeyRejected;
 
-    use crate::kem::{ML_KEM_1024, ML_KEM_512, ML_KEM_768};
+    use crate::kem::{ML_KEM_512, ML_KEM_768, ML_KEM_1024};
 
     #[test]
     fn ciphertext() {

@@ -15,27 +15,40 @@ exclude = [
 ]
 resolver = "2"
 
+[workspace.package]
+edition = "2024"
+rust-version = "1.93"
+
 [workspace.dependencies]
-bindgen = "0.72.0"
-cc = "1.2.26"
-cmake = "0.1.54"
+# Internal crates
+aws-lc-rs = { version = "1.15.4", path = "aws-lc-rs", default-features = false, features = ["ring-sig-verify", "unstable"] }
+aws-lc-sys = { version = "0.37.1", path = "aws-lc-sys", default-features = false }
+aws-lc-fips-sys = { version = "0.13.11", path = "aws-lc-fips-sys" }
+
+# External dependencies
+bindgen = "0.72.1"
+cc = { version = "1.2.56", features = ["parallel"] }
+cmake = "0.1.57"
 dunce = "1.0.5"
 fs_extra = "1.3.0"
-regex = "1.11.1"
-untrusted = "0.7.1"
-zeroize = "1.8.1"
+regex = "1.12.3"
+untrusted = "0.9.0"
+zeroize = "1.8.2"
 
-# The dependencies below do not affect our MSRV. They are only used as
-# a dev-dependency or only used outside of our public crates.
-# These can be updated to the latest versions.
-clap = "4.4"
-criterion = "0.8.2"
+# Dev/non-MSRV dependencies
+clap = { version = "4.5", features = ["derive"] }
+criterion = { version = "0.8.2", features = ["csv_output"] }
 hex = "0.4.3"
 lazy_static = "1.5.0"
-openssl = "0.10.73"
+openssl = { version = "0.10.75", features = ["vendored"] }
 paste = "1.0.15"
 ring = "0.17.14"
-toml_edit = "0.25.0"
+toml_edit = "0.25.2"
+
+[patch.crates-io]
+clap = { git = "https://github.com/earthlings-dev/clap.git" }
+ring = { git = "https://github.com/earthlings-dev/ring-rs.git" }
+toml_edit = { git = "https://github.com/earthlings-dev/toml.git" }
 
 [profile.bench]
 lto = true

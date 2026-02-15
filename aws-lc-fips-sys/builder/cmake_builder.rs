@@ -3,9 +3,9 @@
 
 use crate::OutputLib::{Crypto, RustWrapper, Ssl};
 use crate::{
-    cargo_env, effective_target, emit_rustc_cfg, emit_warning, execute_command,
-    is_cpu_jitter_entropy, is_crt_static, is_no_asm, option_env, target_arch, target_env,
-    target_family, target_os, target_underscored, target_vendor, OutputLibType, TestCommandResult,
+    OutputLibType, TestCommandResult, cargo_env, effective_target, emit_rustc_cfg, emit_warning,
+    execute_command, is_cpu_jitter_entropy, is_crt_static, is_no_asm, option_env, target_arch,
+    target_env, target_family, target_os, target_underscored, target_vendor,
 };
 use std::collections::HashMap;
 use std::env;
@@ -93,10 +93,13 @@ impl CmakeBuilder {
     const GOCACHE_DIR_NAME: &'static str = "go-cache";
     #[allow(clippy::too_many_lines)]
     fn prepare_cmake_build(&self) -> cmake::Config {
-        env::set_var(
-            "GOCACHE",
-            self.out_dir.join(Self::GOCACHE_DIR_NAME).as_os_str(),
-        );
+        // SAFETY: Build scripts are single-threaded; no concurrent env readers.
+        unsafe {
+            env::set_var(
+                "GOCACHE",
+                self.out_dir.join(Self::GOCACHE_DIR_NAME).as_os_str(),
+            );
+        }
 
         let mut cmake_cfg = self.get_cmake_config();
 
@@ -111,12 +114,13 @@ impl CmakeBuilder {
             emit_rustc_cfg("cpu_jitter_entropy");
         }
 
+        // SAFETY: Build scripts are single-threaded; no concurrent env readers.
         if let Some(cc) = option_env!("AWS_LC_FIPS_SYS_CC") {
-            env::set_var("CC", cc);
+            unsafe { env::set_var("CC", cc) };
             emit_warning(&format!("Setting CC: {cc}"));
         }
         if let Some(cxx) = option_env!("AWS_LC_FIPS_SYS_CXX") {
-            env::set_var("CXX", cxx);
+            unsafe { env::set_var("CXX", cxx) };
             emit_warning(&format!("Setting CXX: {cxx}"));
         }
 
@@ -137,20 +141,20 @@ impl CmakeBuilder {
                 emit_warning(
                     "NOTICE: Build environment source paths might be visible in release binary.",
                 );
-                if let Some(parent_dir) = self.manifest_dir.parent() {
-                    if target_family() == "unix" || target_env() == "gnu" {
-                        let flag = format!("\"-ffile-prefix-map={}=\"", parent_dir.display());
+                if let Some(parent_dir) = self.manifest_dir.parent()
+                    && (target_family() == "unix" || target_env() == "gnu")
+                {
+                    let flag = format!("\"-ffile-prefix-map={}=\"", parent_dir.display());
+                    if let Ok(true) = cc_build.is_flag_supported(&flag) {
+                        emit_warning(&format!("Using flag: {}", &flag));
+                        cmake_cfg.asmflag(&flag);
+                        cmake_cfg.cflag(&flag);
+                    } else {
+                        let flag = format!("\"-fdebug-prefix-map={}=\"", parent_dir.display());
                         if let Ok(true) = cc_build.is_flag_supported(&flag) {
                             emit_warning(&format!("Using flag: {}", &flag));
                             cmake_cfg.asmflag(&flag);
                             cmake_cfg.cflag(&flag);
-                        } else {
-                            let flag = format!("\"-fdebug-prefix-map={}=\"", parent_dir.display());
-                            if let Ok(true) = cc_build.is_flag_supported(&flag) {
-                                emit_warning(&format!("Using flag: {}", &flag));
-                                cmake_cfg.asmflag(&flag);
-                                cmake_cfg.cflag(&flag);
-                            }
                         }
                     }
                 }
@@ -207,11 +211,17 @@ impl CmakeBuilder {
         }
 
         if cfg!(feature = "asan") {
-            env::set_var("CC", "clang");
-            env::set_var("CXX", "clang++");
-            env::set_var("ASM", "clang");
-
-            cmake_cfg.define("ASAN", "1");
+            if execute_command("clang".as_ref(), &["--version".as_ref()]).status {
+                // SAFETY: Build scripts are single-threaded; no concurrent env readers.
+                unsafe {
+                    env::set_var("CC", "clang");
+                    env::set_var("CXX", "clang++");
+                    env::set_var("ASM", "clang");
+                }
+                cmake_cfg.define("ASAN", "1");
+            } else {
+                emit_warning("WARNING: ASAN feature enabled but clang not found. Skipping ASAN.");
+            }
         }
 
         // cmake-rs has logic that strips Optimization/Debug options that are passed via CFLAGS:
@@ -310,42 +320,41 @@ impl CmakeBuilder {
                 executed: true,
                 status: true,
             } = execute_command(compiler_path.as_os_str(), &["--version".as_ref()])
+                && let Some(first_line) = stdout.lines().nth(0)
+                && let Some((major, minor, patch)) = parse_version(first_line)
             {
-                if let Some(first_line) = stdout.lines().nth(0) {
-                    if let Some((major, minor, patch)) = parse_version(first_line) {
-                        // We don't force a build failure, but we generate a clear message.
-                        if compiler.is_like_gnu() {
-                            emit_warning(&format!("GCC v{major}.{minor}.{patch} detected."));
-                            if major > 13 {
-                                // TODO: Update when FIPS GCC 14 build is fixed
-                                emit_warning("WARNING: FIPS build is known to fail on GCC >= 14. See: https://github.com/aws/aws-lc-rs/issues/569");
-                                emit_warning("Consider specifying a different compiler in your environment by setting `CC` or: `export AWS_LC_FIPS_SYS_CC=clang`");
-                                return Some(false);
-                            }
-                        }
-                        if compiler.is_like_clang() {
-                            // AWS-LC-FIPS 2.0 was unable to compile with Clang 19
-                            emit_warning(&format!("Clang v{major}.{minor}.{patch} detected."));
-                        }
-                        return Some(true);
+                // We don't force a build failure, but we generate a clear message.
+                if compiler.is_like_gnu() {
+                    emit_warning(&format!("GCC v{major}.{minor}.{patch} detected."));
+                    if major > 13 {
+                        // TODO: Update when FIPS GCC 14 build is fixed
+                        emit_warning(
+                            "WARNING: FIPS build is known to fail on GCC >= 14. See: https://github.com/aws/aws-lc-rs/issues/569",
+                        );
+                        emit_warning(
+                            "Consider specifying a different compiler in your environment by setting `CC` or: `export AWS_LC_FIPS_SYS_CC=clang`",
+                        );
+                        return Some(false);
                     }
                 }
+                if compiler.is_like_clang() {
+                    // AWS-LC-FIPS 2.0 was unable to compile with Clang 19
+                    emit_warning(&format!("Clang v{major}.{minor}.{patch} detected."));
+                }
+                return Some(true);
             }
-        } else if compiler.is_like_msvc() {
-            if let TestCommandResult {
+        } else if compiler.is_like_msvc()
+            && let TestCommandResult {
                 stderr,
                 stdout: _,
                 executed: true,
                 status: true,
             } = execute_command(compiler_path.as_os_str(), &["/help".as_ref()])
-            {
-                if let Some(first_line) = stderr.lines().nth(0) {
-                    if let Some((major, minor, patch)) = parse_version(first_line) {
-                        emit_warning(&format!("MSVC v{major}.{minor}.{patch} detected."));
-                        return Some(true);
-                    }
-                }
-            }
+            && let Some(first_line) = stderr.lines().nth(0)
+            && let Some((major, minor, patch)) = parse_version(first_line)
+        {
+            emit_warning(&format!("MSVC v{major}.{minor}.{patch} detected."));
+            return Some(true);
         }
         None
     }
@@ -444,7 +453,8 @@ impl crate::Builder for CmakeBuilder {
             missing_dependency = true;
         }
         if let Some(cmake_cmd) = find_cmake_command() {
-            env::set_var("CMAKE", cmake_cmd);
+            // SAFETY: Build scripts are single-threaded; no concurrent env readers.
+            unsafe { env::set_var("CMAKE", cmake_cmd) };
         } else {
             eprintln!("Missing dependency: cmake");
             missing_dependency = true;

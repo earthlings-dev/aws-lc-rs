@@ -2,9 +2,9 @@
 // SPDX-License-Identifier: Apache-2.0 OR ISC
 
 use crate::aws_lc::{
-    EVP_CIPHER_CTX_new, EVP_CIPHER_iv_length, EVP_CIPHER_key_length, EVP_DecryptFinal_ex,
-    EVP_DecryptInit_ex, EVP_DecryptUpdate, EVP_EncryptFinal_ex, EVP_EncryptInit_ex,
-    EVP_EncryptUpdate, EVP_CIPHER, EVP_CIPHER_CTX,
+    EVP_CIPHER, EVP_CIPHER_CTX, EVP_CIPHER_CTX_new, EVP_CIPHER_iv_length, EVP_CIPHER_key_length,
+    EVP_DecryptFinal_ex, EVP_DecryptInit_ex, EVP_DecryptUpdate, EVP_EncryptFinal_ex,
+    EVP_EncryptInit_ex, EVP_EncryptUpdate,
 };
 use crate::cipher::{
     Algorithm, DecryptionContext, EncryptionContext, OperatingMode, UnboundCipherKey,
@@ -626,8 +626,8 @@ impl StreamingDecryptingKey {
 #[cfg(test)]
 mod tests {
     use crate::cipher::{
-        DecryptionContext, EncryptionContext, OperatingMode, StreamingDecryptingKey,
-        StreamingEncryptingKey, UnboundCipherKey, AES_128, AES_256, AES_256_KEY_LEN,
+        AES_128, AES_256, AES_256_KEY_LEN, DecryptionContext, EncryptionContext, OperatingMode,
+        StreamingDecryptingKey, StreamingEncryptingKey, UnboundCipherKey,
     };
     use crate::iv::{FixedLength, IV_LEN_128_BIT};
     use crate::rand::{SecureRandom, SystemRandom};

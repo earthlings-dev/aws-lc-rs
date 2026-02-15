@@ -5,10 +5,10 @@
 
 use super::{EncryptionAlgorithmId, PrivateDecryptingKey, PublicEncryptingKey};
 use crate::aws_lc::{
-    EVP_PKEY_CTX_set0_rsa_oaep_label, EVP_PKEY_CTX_set_rsa_mgf1_md, EVP_PKEY_CTX_set_rsa_oaep_md,
-    EVP_PKEY_CTX_set_rsa_padding, EVP_PKEY_decrypt, EVP_PKEY_decrypt_init, EVP_PKEY_encrypt,
-    EVP_PKEY_encrypt_init, EVP_sha1, EVP_sha256, EVP_sha384, EVP_sha512, OPENSSL_malloc, EVP_MD,
-    EVP_PKEY_CTX, RSA_PKCS1_OAEP_PADDING,
+    EVP_MD, EVP_PKEY_CTX, EVP_PKEY_CTX_set_rsa_mgf1_md, EVP_PKEY_CTX_set_rsa_oaep_md,
+    EVP_PKEY_CTX_set_rsa_padding, EVP_PKEY_CTX_set0_rsa_oaep_label, EVP_PKEY_decrypt,
+    EVP_PKEY_decrypt_init, EVP_PKEY_encrypt, EVP_PKEY_encrypt_init, EVP_sha1, EVP_sha256,
+    EVP_sha384, EVP_sha512, OPENSSL_malloc, RSA_PKCS1_OAEP_PADDING,
 };
 use crate::error::Unspecified;
 use crate::fips::indicator_check;

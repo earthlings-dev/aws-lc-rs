@@ -96,8 +96,8 @@
 //! [RFC 2104]: https://tools.ietf.org/html/rfc2104
 
 use crate::aws_lc::{
-    HMAC_CTX_cleanup, HMAC_CTX_copy_ex, HMAC_CTX_init, HMAC_Final, HMAC_Init_ex, HMAC_Update,
-    HMAC_CTX,
+    HMAC_CTX, HMAC_CTX_cleanup, HMAC_CTX_copy_ex, HMAC_CTX_init, HMAC_Final, HMAC_Init_ex,
+    HMAC_Update,
 };
 use crate::error::Unspecified;
 use crate::fips::indicator_check;
@@ -486,7 +486,7 @@ pub fn verify(key: &Key, data: &[u8], tag: &[u8]) -> Result<(), Unspecified> {
 mod tests {
     use crate::{hmac, rand};
 
-    #[cfg(feature = "fips")]
+    #[cfg(all(feature = "fips", not(feature = "non-fips")))]
     mod fips;
 
     // Make sure that `Key::generate` and `verify_with_own_key` aren't

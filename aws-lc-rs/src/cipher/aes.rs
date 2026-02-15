@@ -4,8 +4,8 @@
 // SPDX-License-Identifier: Apache-2.0 OR ISC
 
 use crate::aws_lc::{
-    AES_cbc_encrypt, AES_cfb128_encrypt, AES_ctr128_encrypt, AES_ecb_encrypt, AES_DECRYPT,
-    AES_ENCRYPT, AES_KEY,
+    AES_DECRYPT, AES_ENCRYPT, AES_KEY, AES_cbc_encrypt, AES_cfb128_encrypt, AES_ctr128_encrypt,
+    AES_ecb_encrypt,
 };
 use crate::cipher::block::Block;
 use crate::error::Unspecified;

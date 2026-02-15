@@ -156,9 +156,9 @@
 #![cfg_attr(aws_lc_rs_docsrs, feature(doc_cfg))]
 
 extern crate alloc;
-#[cfg(feature = "fips")]
+#[cfg(all(feature = "fips", not(feature = "non-fips")))]
 extern crate aws_lc_fips_sys as aws_lc;
-#[cfg(not(feature = "fips"))]
+#[cfg(any(not(feature = "fips"), feature = "non-fips"))]
 extern crate aws_lc_sys as aws_lc;
 
 pub mod aead;
@@ -195,7 +195,7 @@ pub mod iv;
 pub mod kdf;
 #[allow(clippy::module_name_repetitions)]
 pub mod kem;
-#[cfg(all(feature = "unstable", not(feature = "fips")))]
+#[cfg(all(feature = "unstable", any(not(feature = "fips"), feature = "non-fips")))]
 mod pqdsa;
 mod ptr;
 pub mod rsa;
@@ -208,8 +208,8 @@ pub(crate) use debug::derive_debug_via_id;
 use std::ffi::CStr;
 
 use crate::aws_lc::{
-    CRYPTO_library_init, ERR_error_string, ERR_get_error, FIPS_mode, ERR_GET_FUNC, ERR_GET_LIB,
-    ERR_GET_REASON,
+    CRYPTO_library_init, ERR_GET_FUNC, ERR_GET_LIB, ERR_GET_REASON, ERR_error_string,
+    ERR_get_error, FIPS_mode,
 };
 use std::sync::Once;
 
@@ -223,7 +223,7 @@ pub fn init() {
     });
 }
 
-#[cfg(feature = "fips")]
+#[cfg(all(feature = "fips", not(feature = "non-fips")))]
 /// Panics if the underlying implementation is not FIPS, otherwise it returns.
 ///
 /// # Panics
@@ -244,7 +244,7 @@ pub fn try_fips_mode() -> Result<(), &'static str> {
     }
 }
 
-#[cfg(feature = "fips")]
+#[cfg(all(feature = "fips", not(feature = "non-fips")))]
 /// Panics if the underlying implementation is not using CPU jitter entropy, otherwise it returns.
 ///
 /// # Panics
@@ -261,13 +261,13 @@ pub fn try_fips_cpu_jitter_entropy() -> Result<(), &'static str> {
     init();
     // TODO: Delete once FIPS_is_entropy_cpu_jitter() available on FIPS branch
     // https://github.com/aws/aws-lc/pull/2088
-    #[cfg(feature = "fips")]
+    #[cfg(all(feature = "fips", not(feature = "non-fips")))]
     if aws_lc::CFG_CPU_JITTER_ENTROPY() {
         Ok(())
     } else {
         Err("FIPS CPU Jitter Entropy not enabled!")
     }
-    #[cfg(not(feature = "fips"))]
+    #[cfg(any(not(feature = "fips"), feature = "non-fips"))]
     match unsafe { aws_lc::FIPS_is_entropy_cpu_jitter() } {
         1 => Ok(()),
         _ => Err("FIPS CPU Jitter Entropy not enabled!"),
@@ -276,14 +276,18 @@ pub fn try_fips_cpu_jitter_entropy() -> Result<(), &'static str> {
 
 #[allow(dead_code)]
 unsafe fn dump_error() {
-    let err = ERR_get_error();
-    let lib = ERR_GET_LIB(err);
-    let reason = ERR_GET_REASON(err);
-    let func = ERR_GET_FUNC(err);
-    let mut buffer = [0u8; 256];
-    ERR_error_string(err, buffer.as_mut_ptr().cast());
-    let error_msg = CStr::from_bytes_with_nul_unchecked(&buffer);
-    eprintln!("Raw Error -- {error_msg:?}\nErr: {err}, Lib: {lib}, Reason: {reason}, Func: {func}");
+    unsafe {
+        let err = ERR_get_error();
+        let lib = ERR_GET_LIB(err);
+        let reason = ERR_GET_REASON(err);
+        let func = ERR_GET_FUNC(err);
+        let mut buffer = [0u8; 256];
+        ERR_error_string(err, buffer.as_mut_ptr().cast());
+        let error_msg = CStr::from_bytes_with_nul_unchecked(&buffer);
+        eprintln!(
+            "Raw Error -- {error_msg:?}\nErr: {err}, Lib: {lib}, Reason: {reason}, Func: {func}"
+        );
+    }
 }
 
 mod sealed {
@@ -318,7 +322,7 @@ mod tests {
         }
     }
 
-    #[cfg(not(feature = "fips"))]
+    #[cfg(any(not(feature = "fips"), feature = "non-fips"))]
     #[test]
     fn test_fips() {
         assert!({ crate::try_fips_mode().is_err() });
@@ -328,7 +332,7 @@ mod tests {
 
     #[test]
     // FIPS mode is disabled for an ASAN build
-    #[cfg(feature = "fips")]
+    #[cfg(all(feature = "fips", not(feature = "non-fips")))]
     fn test_fips() {
         #[cfg(not(feature = "asan"))]
         crate::fips_mode();

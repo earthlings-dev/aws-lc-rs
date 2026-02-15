@@ -4,7 +4,7 @@
 // SPDX-License-Identifier: Apache-2.0 OR ISC
 
 use aws_lc_rs::digest::{
-    Digest, SHA1_FOR_LEGACY_USE_ONLY, SHA224, SHA256, SHA384, SHA3_256, SHA3_384, SHA3_512, SHA512,
+    Digest, SHA1_FOR_LEGACY_USE_ONLY, SHA3_256, SHA3_384, SHA3_512, SHA224, SHA256, SHA384, SHA512,
 };
 use aws_lc_rs::encoding::{AsBigEndian, AsDer, EcPrivateKeyRfc5915Der};
 use aws_lc_rs::rand::SystemRandom;
@@ -393,7 +393,7 @@ fn test_signature_ecdsa_sign_fixed_sign_and_verify(data_file: test::File) {
             };
 
         let private_key =
-            EcdsaKeyPair::from_private_key_and_public_key(signing_alg, &d, &q).unwrap();
+            EcdsaKeyPair::from_private_key_and_public_key(signing_alg, &d, &q, &rng).unwrap();
 
         let signature = private_key.sign(&rng, &msg).unwrap();
 
@@ -501,7 +501,7 @@ fn test_signature_ecdsa_sign_asn1(data_file: test::File) {
             };
 
         let private_key =
-            EcdsaKeyPair::from_private_key_and_public_key(signing_alg, &d, &q).unwrap();
+            EcdsaKeyPair::from_private_key_and_public_key(signing_alg, &d, &q, &rng).unwrap();
 
         let signature = private_key.sign(&rng, &msg).unwrap();
 
@@ -568,6 +568,7 @@ fn test_private_key() {
                 signing_alg,
                 private_key.as_ref(),
                 public_key.as_ref(),
+                &rnd,
             )
             .unwrap();
             let key_pair_copy_doc = key_pair_copy.to_pkcs8v1().unwrap();
@@ -602,7 +603,8 @@ fn test_wrong_digest() {
     upk.verify(msg.as_bytes(), signature_sha256.as_ref())
         .unwrap();
 
-    assert!(upk
-        .verify_digest(&digest_sha384, signature_sha256.as_ref())
-        .is_err());
+    assert!(
+        upk.verify_digest(&digest_sha384, signature_sha256.as_ref())
+            .is_err()
+    );
 }

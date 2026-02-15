@@ -1,7 +1,7 @@
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX-License-Identifier: Apache-2.0 OR ISC
 
-use crate::aws_lc::{CBB_cleanup, CBB_finish, CBB_init, CBB_init_fixed, CBB};
+use crate::aws_lc::{CBB, CBB_cleanup, CBB_finish, CBB_init, CBB_init_fixed};
 use crate::error::Unspecified;
 use crate::ptr::LcPtr;
 use core::marker::PhantomData;

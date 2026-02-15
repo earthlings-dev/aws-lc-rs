@@ -38,12 +38,10 @@
 //! agreement::agree_ephemeral(
 //!     my_private_key,
 //!     &peer_public_key,
-//!     aws_lc_rs::error::Unspecified,
 //!     |_key_material| {
 //!         // In a real application, we'd apply a KDF to the key material and the
 //!         // public keys (as recommended in RFC 7748) and then derive session
 //!         // keys from the result. We omit all that here.
-//!         Ok(())
 //!     },
 //! )?;
 //!
@@ -55,16 +53,16 @@ use crate::ec::encoding::sec1::{
     marshal_sec1_private_key, marshal_sec1_public_point, marshal_sec1_public_point_into_buffer,
     parse_sec1_private_bn, parse_sec1_public_point,
 };
-#[cfg(not(feature = "fips"))]
+#[cfg(any(not(feature = "fips"), feature = "non-fips"))]
 use crate::ec::verify_evp_key_nid;
 use crate::ec::{evp_key_generate, validate_ec_evp_key};
 use crate::error::{KeyRejected, Unspecified};
 use crate::hex;
-pub use ephemeral::{agree_ephemeral, EphemeralPrivateKey};
+pub use ephemeral::{EphemeralPrivateKey, agree_ephemeral};
 
 use crate::aws_lc::{
-    i2d_ECPrivateKey, EVP_PKEY_get0_EC_KEY, NID_X9_62_prime256v1, NID_secp384r1, NID_secp521r1,
-    EVP_PKEY, EVP_PKEY_EC, EVP_PKEY_X25519, NID_X25519,
+    EVP_PKEY, EVP_PKEY_EC, EVP_PKEY_X25519, EVP_PKEY_get0_EC_KEY, NID_X9_62_prime256v1, NID_X25519,
+    NID_secp384r1, NID_secp521r1, i2d_ECPrivateKey,
 };
 
 use crate::buffer::Buffer;
@@ -296,9 +294,9 @@ impl PrivateKey {
         }
         let evp_pkey = LcPtr::<EVP_PKEY>::parse_rfc5208_private_key(key_bytes, EVP_PKEY_EC)
             .or(parse_rfc5915_private_key(key_bytes, alg.id.nid()))?;
-        #[cfg(not(feature = "fips"))]
+        #[cfg(any(not(feature = "fips"), feature = "non-fips"))]
         verify_evp_key_nid(&evp_pkey.as_const(), alg.id.nid())?;
-        #[cfg(feature = "fips")]
+        #[cfg(all(feature = "fips", not(feature = "non-fips")))]
         validate_ec_evp_key(&evp_pkey.as_const(), alg.id.nid())?;
 
         Ok(Self::new(alg, evp_pkey))

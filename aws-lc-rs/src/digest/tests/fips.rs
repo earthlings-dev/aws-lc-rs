@@ -4,10 +4,10 @@
 #![cfg(debug_assertions)]
 
 use crate::digest::{
-    Context, SHA1_FOR_LEGACY_USE_ONLY, SHA224, SHA256, SHA384, SHA3_256, SHA3_384, SHA3_512,
+    Context, SHA1_FOR_LEGACY_USE_ONLY, SHA3_256, SHA3_384, SHA3_512, SHA224, SHA256, SHA384,
     SHA512, SHA512_256,
 };
-use crate::fips::{assert_fips_status_indicator, FipsServiceStatus};
+use crate::fips::{FipsServiceStatus, assert_fips_status_indicator};
 
 const TEST_MESSAGE: &str = "test message";
 

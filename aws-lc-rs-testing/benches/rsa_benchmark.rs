@@ -4,7 +4,7 @@
 #![allow(deprecated, dead_code)]
 
 use aws_lc_rs::{test, test_file};
-use criterion::{criterion_group, criterion_main, Criterion};
+use criterion::{Criterion, criterion_group, criterion_main};
 
 #[allow(dead_code)]
 pub struct RsaConfig {

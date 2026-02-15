@@ -187,7 +187,7 @@ mod tests {
     use crate::rand;
     use core::array::IntoIter;
 
-    use crate::rand::{generate, SecureRandom, SystemRandom};
+    use crate::rand::{SecureRandom, SystemRandom, generate};
 
     #[test]
     fn test_secure_random_fill() {

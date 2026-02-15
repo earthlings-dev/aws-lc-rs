@@ -34,8 +34,8 @@ use crate::{debug, derive_debug_via_id};
 pub(crate) mod digest_ctx;
 mod sha;
 use crate::aws_lc::{
-    EVP_DigestFinal, EVP_DigestUpdate, EVP_sha1, EVP_sha224, EVP_sha256, EVP_sha384, EVP_sha3_256,
-    EVP_sha3_384, EVP_sha3_512, EVP_sha512, EVP_sha512_256, EVP_MD,
+    EVP_DigestFinal, EVP_DigestUpdate, EVP_MD, EVP_sha1, EVP_sha3_256, EVP_sha3_384, EVP_sha3_512,
+    EVP_sha224, EVP_sha256, EVP_sha384, EVP_sha512, EVP_sha512_256,
 };
 use crate::error::Unspecified;
 use crate::ptr::ConstPointer;
@@ -43,8 +43,8 @@ use core::ffi::c_uint;
 use core::mem::MaybeUninit;
 use digest_ctx::DigestContext;
 pub use sha::{
-    SHA1_FOR_LEGACY_USE_ONLY, SHA1_OUTPUT_LEN, SHA224, SHA224_OUTPUT_LEN, SHA256,
-    SHA256_OUTPUT_LEN, SHA384, SHA384_OUTPUT_LEN, SHA3_256, SHA3_384, SHA3_512, SHA512, SHA512_256,
+    SHA1_FOR_LEGACY_USE_ONLY, SHA1_OUTPUT_LEN, SHA3_256, SHA3_384, SHA3_512, SHA224,
+    SHA224_OUTPUT_LEN, SHA256, SHA256_OUTPUT_LEN, SHA384, SHA384_OUTPUT_LEN, SHA512, SHA512_256,
     SHA512_256_OUTPUT_LEN, SHA512_OUTPUT_LEN,
 };
 
@@ -382,15 +382,15 @@ pub(crate) fn match_digest_type(algorithm_id: &AlgorithmID) -> ConstPointer<'_, 
 #[cfg(test)]
 mod tests {
     use crate::digest;
-    #[cfg(feature = "fips")]
+    #[cfg(all(feature = "fips", not(feature = "non-fips")))]
     mod fips;
 
     mod max_input {
         extern crate alloc;
 
         use super::super::super::digest;
-        use crate::digest::digest_ctx::DigestContext;
         use crate::digest::Digest;
+        use crate::digest::digest_ctx::DigestContext;
         use alloc::vec;
 
         macro_rules! max_input_tests {

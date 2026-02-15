@@ -194,12 +194,11 @@ fn hkdf_thread_safeness() {
     let mut join_handles = Vec::new();
     for _ in 1..100 {
         let join_handle = thread::spawn(|| {
-            let okm = SECRET_KEY
+            SECRET_KEY
                 .extract(b"secret")
                 .expand(&[b"info"], My(digest::MAX_OUTPUT_LEN))
                 .unwrap()
-                .into();
-            okm
+                .into()
         });
         join_handles.push(join_handle);
     }

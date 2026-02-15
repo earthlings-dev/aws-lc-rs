@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0 OR ISC
 
 use crate::aead::chacha20_poly1305_openssh::{OpeningKey, SealingKey};
-use crate::fips::{assert_fips_status_indicator, FipsServiceStatus};
+use crate::fips::{FipsServiceStatus, assert_fips_status_indicator};
 
 use super::TEST_MESSAGE;
 

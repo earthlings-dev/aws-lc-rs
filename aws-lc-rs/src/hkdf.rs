@@ -37,7 +37,7 @@
 //! let aead_unbound_key = aead::UnboundKey::from(aes_keying_material);
 //! ```
 
-use crate::aws_lc::{HKDF_expand, HKDF};
+use crate::aws_lc::{HKDF, HKDF_expand};
 use crate::error::Unspecified;
 use crate::fips::indicator_check;
 use crate::{digest, hmac};
@@ -450,9 +450,9 @@ impl<L: KeyType> Okm<'_, L> {
 
 #[cfg(test)]
 mod tests {
-    use crate::hkdf::{Salt, HKDF_SHA256, HKDF_SHA384};
+    use crate::hkdf::{HKDF_SHA256, HKDF_SHA384, Salt};
 
-    #[cfg(feature = "fips")]
+    #[cfg(all(feature = "fips", not(feature = "non-fips")))]
     mod fips;
 
     #[test]

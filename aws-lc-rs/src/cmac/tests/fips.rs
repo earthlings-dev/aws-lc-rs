@@ -3,8 +3,8 @@
 
 #![cfg(debug_assertions)]
 
-use crate::cmac::{sign, verify, Key, AES_128, AES_192, AES_256, TDES_FOR_LEGACY_USE_ONLY};
-use crate::fips::{assert_fips_status_indicator, FipsServiceStatus};
+use crate::cmac::{AES_128, AES_192, AES_256, Key, TDES_FOR_LEGACY_USE_ONLY, sign, verify};
+use crate::fips::{FipsServiceStatus, assert_fips_status_indicator};
 use crate::rand::{self, SystemRandom};
 
 const TEST_MESSAGE: &str = "test message";

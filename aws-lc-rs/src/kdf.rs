@@ -215,78 +215,93 @@ mod kbkdf;
 mod sskdf;
 
 pub use kbkdf::{
-    get_kbkdf_ctr_hmac_algorithm, kbkdf_ctr_hmac, KbkdfCtrHmacAlgorithm, KbkdfCtrHmacAlgorithmId,
+    KbkdfCtrHmacAlgorithm, KbkdfCtrHmacAlgorithmId, get_kbkdf_ctr_hmac_algorithm, kbkdf_ctr_hmac,
 };
 
 pub use sskdf::{
-    get_sskdf_digest_algorithm, get_sskdf_hmac_algorithm, sskdf_digest, sskdf_hmac,
     SskdfDigestAlgorithm, SskdfDigestAlgorithmId, SskdfHmacAlgorithm, SskdfHmacAlgorithmId,
+    get_sskdf_digest_algorithm, get_sskdf_hmac_algorithm, sskdf_digest, sskdf_hmac,
 };
 
 #[cfg(test)]
 mod tests {
     use crate::kdf::sskdf::SskdfHmacAlgorithmId;
     use crate::kdf::{
-        get_kbkdf_ctr_hmac_algorithm, get_sskdf_digest_algorithm, get_sskdf_hmac_algorithm,
-        kbkdf_ctr_hmac, sskdf_digest, sskdf_hmac, KbkdfCtrHmacAlgorithmId, SskdfDigestAlgorithmId,
+        KbkdfCtrHmacAlgorithmId, SskdfDigestAlgorithmId, get_kbkdf_ctr_hmac_algorithm,
+        get_sskdf_digest_algorithm, get_sskdf_hmac_algorithm, kbkdf_ctr_hmac, sskdf_digest,
+        sskdf_hmac,
     };
 
     #[test]
     fn zero_length_output() {
         let mut output = vec![0u8; 0];
-        assert!(sskdf_hmac(
-            get_sskdf_hmac_algorithm(SskdfHmacAlgorithmId::Sha256).expect("algorithm supported"),
-            &[0u8; 16],
-            &[],
-            &[],
-            &mut output
-        )
-        .is_err());
-        assert!(sskdf_digest(
-            get_sskdf_digest_algorithm(SskdfDigestAlgorithmId::Sha256)
-                .expect("algorithm supported"),
-            &[0u8; 16],
-            &[],
-            &mut output
-        )
-        .is_err());
-        assert!(kbkdf_ctr_hmac(
-            get_kbkdf_ctr_hmac_algorithm(KbkdfCtrHmacAlgorithmId::Sha256)
-                .expect("algorithm supported"),
-            &[0u8; 16],
-            &[],
-            &mut output
-        )
-        .is_err());
+        assert!(
+            sskdf_hmac(
+                get_sskdf_hmac_algorithm(SskdfHmacAlgorithmId::Sha256)
+                    .expect("algorithm supported"),
+                &[0u8; 16],
+                &[],
+                &[],
+                &mut output
+            )
+            .is_err()
+        );
+        assert!(
+            sskdf_digest(
+                get_sskdf_digest_algorithm(SskdfDigestAlgorithmId::Sha256)
+                    .expect("algorithm supported"),
+                &[0u8; 16],
+                &[],
+                &mut output
+            )
+            .is_err()
+        );
+        assert!(
+            kbkdf_ctr_hmac(
+                get_kbkdf_ctr_hmac_algorithm(KbkdfCtrHmacAlgorithmId::Sha256)
+                    .expect("algorithm supported"),
+                &[0u8; 16],
+                &[],
+                &mut output
+            )
+            .is_err()
+        );
     }
 
     #[test]
     fn zero_length_secret() {
         let mut output = vec![0u8; 16];
-        assert!(sskdf_hmac(
-            get_sskdf_hmac_algorithm(SskdfHmacAlgorithmId::Sha256).expect("algorithm supported"),
-            &[],
-            &[],
-            &[],
-            &mut output
-        )
-        .is_err());
-        assert!(sskdf_digest(
-            get_sskdf_digest_algorithm(SskdfDigestAlgorithmId::Sha256)
-                .expect("algorithm supported"),
-            &[],
-            &[],
-            &mut output
-        )
-        .is_err());
-        assert!(kbkdf_ctr_hmac(
-            get_kbkdf_ctr_hmac_algorithm(KbkdfCtrHmacAlgorithmId::Sha256)
-                .expect("algorithm supported"),
-            &[],
-            &[],
-            &mut output
-        )
-        .is_err());
+        assert!(
+            sskdf_hmac(
+                get_sskdf_hmac_algorithm(SskdfHmacAlgorithmId::Sha256)
+                    .expect("algorithm supported"),
+                &[],
+                &[],
+                &[],
+                &mut output
+            )
+            .is_err()
+        );
+        assert!(
+            sskdf_digest(
+                get_sskdf_digest_algorithm(SskdfDigestAlgorithmId::Sha256)
+                    .expect("algorithm supported"),
+                &[],
+                &[],
+                &mut output
+            )
+            .is_err()
+        );
+        assert!(
+            kbkdf_ctr_hmac(
+                get_kbkdf_ctr_hmac_algorithm(KbkdfCtrHmacAlgorithmId::Sha256)
+                    .expect("algorithm supported"),
+                &[],
+                &[],
+                &mut output
+            )
+            .is_err()
+        );
     }
 
     #[test]
@@ -365,8 +380,8 @@ mod tests {
 #[cfg(test)]
 mod more_tests {
     use crate::kdf::{
-        get_kbkdf_ctr_hmac_algorithm, get_sskdf_digest_algorithm, get_sskdf_hmac_algorithm,
         KbkdfCtrHmacAlgorithmId, SskdfDigestAlgorithmId, SskdfHmacAlgorithmId,
+        get_kbkdf_ctr_hmac_algorithm, get_sskdf_digest_algorithm, get_sskdf_hmac_algorithm,
     };
 
     macro_rules! assert_get_algorithm {

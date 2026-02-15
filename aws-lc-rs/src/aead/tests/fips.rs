@@ -8,11 +8,11 @@ mod quic;
 
 use crate::aead::nonce_sequence::Counter64Builder;
 use crate::aead::{
-    Aad, BoundKey, Nonce, OpeningKey, RandomizedNonceKey, SealingKey, TlsProtocolId,
-    TlsRecordOpeningKey, TlsRecordSealingKey, UnboundKey, AES_128_GCM, AES_256_GCM,
-    CHACHA20_POLY1305,
+    AES_128_GCM, AES_256_GCM, Aad, BoundKey, CHACHA20_POLY1305, Nonce, OpeningKey,
+    RandomizedNonceKey, SealingKey, TlsProtocolId, TlsRecordOpeningKey, TlsRecordSealingKey,
+    UnboundKey,
 };
-use crate::fips::{assert_fips_status_indicator, FipsServiceStatus};
+use crate::fips::{FipsServiceStatus, assert_fips_status_indicator};
 
 const TEST_KEY_128_BIT: [u8; 16] = [
     0x9f, 0xd9, 0x41, 0xc3, 0xa6, 0xfe, 0xb9, 0x26, 0x2a, 0x35, 0xa7, 0x44, 0xbb, 0xc0, 0x3a, 0x6a,

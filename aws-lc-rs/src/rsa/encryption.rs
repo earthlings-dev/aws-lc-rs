@@ -5,7 +5,7 @@ pub(super) mod oaep;
 pub(super) mod pkcs1;
 
 use super::key::{generate_rsa_key, is_rsa_key};
-use super::{encoding, KeySize};
+use super::{KeySize, encoding};
 use crate::aws_lc::{EVP_PKEY, EVP_PKEY_RSA};
 use crate::encoding::{AsDer, Pkcs8V1Der, PublicKeyX509Der};
 use crate::error::{KeyRejected, Unspecified};
@@ -78,7 +78,7 @@ impl PrivateDecryptingKey {
     ///
     /// # Errors
     /// * `Unspecified` for any error that occurs during the generation of the RSA keypair.
-    #[cfg(feature = "fips")]
+    #[cfg(all(feature = "fips", not(feature = "non-fips")))]
     #[deprecated]
     pub fn generate_fips(size: KeySize) -> Result<Self, Unspecified> {
         Self::generate(size)
@@ -96,7 +96,7 @@ impl PrivateDecryptingKey {
     }
 
     /// Returns a boolean indicator if this RSA key is an approved FIPS 140-3 key.
-    #[cfg(feature = "fips")]
+    #[cfg(all(feature = "fips", not(feature = "non-fips")))]
     #[must_use]
     pub fn is_valid_fips_key(&self) -> bool {
         super::key::is_valid_fips_key(&self.0)

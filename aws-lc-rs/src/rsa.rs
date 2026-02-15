@@ -71,8 +71,8 @@ pub(crate) mod key;
 pub(crate) mod signature;
 
 pub use self::encryption::oaep::{
-    OaepAlgorithm, OaepPrivateDecryptingKey, OaepPublicEncryptingKey, OAEP_SHA1_MGF1SHA1,
-    OAEP_SHA256_MGF1SHA256, OAEP_SHA384_MGF1SHA384, OAEP_SHA512_MGF1SHA512,
+    OAEP_SHA1_MGF1SHA1, OAEP_SHA256_MGF1SHA256, OAEP_SHA384_MGF1SHA384, OAEP_SHA512_MGF1SHA512,
+    OaepAlgorithm, OaepPrivateDecryptingKey, OaepPublicEncryptingKey,
 };
 pub use self::encryption::pkcs1::{Pkcs1PrivateDecryptingKey, Pkcs1PublicEncryptingKey};
 pub use self::encryption::{EncryptionAlgorithmId, PrivateDecryptingKey, PublicEncryptingKey};
@@ -84,7 +84,7 @@ pub(crate) use self::signature::RsaVerificationAlgorithmId;
 
 #[cfg(test)]
 mod tests {
-    #[cfg(feature = "fips")]
+    #[cfg(all(feature = "fips", not(feature = "non-fips")))]
     mod fips;
 
     #[cfg(feature = "ring-io")]

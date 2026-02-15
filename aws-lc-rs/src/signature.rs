@@ -244,8 +244,8 @@ use std::any::{Any, TypeId};
 #[cfg(feature = "ring-sig-verify")]
 use untrusted::Input;
 
-use crate::rsa::signature::RsaSigningAlgorithmId;
 use crate::rsa::RsaVerificationAlgorithmId;
+use crate::rsa::signature::RsaSigningAlgorithmId;
 
 pub use crate::ec::key_pair::{EcdsaKeyPair, PrivateKey as EcdsaPrivateKey};
 use crate::ec::signature::EcdsaSignatureFormat;
@@ -253,8 +253,8 @@ pub use crate::ec::signature::{
     EcdsaSigningAlgorithm, EcdsaVerificationAlgorithm, PublicKey as EcdsaPublicKey,
 };
 pub use crate::ed25519::{
-    Ed25519KeyPair, EdDSAParameters, PublicKey as Ed25519PublicKey, Seed as Ed25519Seed,
-    ED25519_PUBLIC_KEY_LEN,
+    ED25519_PUBLIC_KEY_LEN, Ed25519KeyPair, EdDSAParameters, PublicKey as Ed25519PublicKey,
+    Seed as Ed25519Seed,
 };
 
 use crate::digest::Digest;
@@ -262,7 +262,7 @@ use crate::ec::encoding::parse_ec_public_key;
 use crate::ed25519::parse_ed25519_public_key;
 use crate::encoding::{AsDer, PublicKeyX509Der};
 use crate::error::{KeyRejected, Unspecified};
-#[cfg(all(feature = "unstable", not(feature = "fips")))]
+#[cfg(all(feature = "unstable", any(not(feature = "fips"), feature = "non-fips")))]
 use crate::pqdsa::{parse_pqdsa_public_key, signature::PqdsaVerificationAlgorithm};
 use crate::ptr::LcPtr;
 use crate::rsa::key::parse_rsa_public_key;
@@ -646,7 +646,7 @@ pub(crate) fn parse_public_key(
         parsed_algorithm = rsa_alg;
         parse_rsa_public_key(bytes)?
     } else {
-        #[cfg(all(feature = "unstable", not(feature = "fips")))]
+        #[cfg(all(feature = "unstable", any(not(feature = "fips"), feature = "non-fips")))]
         if algorithm.type_id() == TypeId::of::<PqdsaVerificationAlgorithm>() {
             #[allow(clippy::cast_ptr_alignment)]
             let pqdsa_alg = unsafe {
@@ -658,7 +658,10 @@ pub(crate) fn parse_public_key(
         } else {
             unreachable!()
         }
-        #[cfg(any(not(feature = "unstable"), feature = "fips"))]
+        #[cfg(any(
+            not(feature = "unstable"),
+            all(feature = "fips", not(feature = "non-fips"))
+        ))]
         unreachable!()
     };
 
@@ -1086,12 +1089,12 @@ pub const ED25519: EdDSAParameters = EdDSAParameters {};
 
 #[cfg(test)]
 mod tests {
-    use crate::rand::{generate, SystemRandom};
-    use crate::signature::{ParsedPublicKey, UnparsedPublicKey, ED25519};
+    use crate::rand::{SystemRandom, generate};
+    use crate::signature::{ED25519, ParsedPublicKey, UnparsedPublicKey};
     use crate::test;
     use regex::Regex;
 
-    #[cfg(feature = "fips")]
+    #[cfg(all(feature = "fips", not(feature = "non-fips")))]
     mod fips;
 
     #[test]

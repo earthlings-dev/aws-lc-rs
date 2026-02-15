@@ -23,39 +23,19 @@ fn agree_ephemeral_e2e() {
         let bob_private_key = agreement::EphemeralPrivateKey::generate(algorithm, &rng).unwrap();
         let bob_public_key = bob_private_key.compute_public_key().unwrap();
 
-        let alice_shared_secret = {
-            let mut secret: Vec<u8> = vec![];
+        let alice_shared_secret = agreement::agree_ephemeral(
+            alice_private_key,
+            agreement::UnparsedPublicKey::new(algorithm, bob_public_key),
+            |value| Vec::from(value),
+        )
+        .unwrap();
 
-            agreement::agree_ephemeral(
-                alice_private_key,
-                agreement::UnparsedPublicKey::new(algorithm, bob_public_key),
-                ring::error::Unspecified,
-                |value| {
-                    secret.extend_from_slice(value);
-                    Ok(())
-                },
-            )
-            .unwrap();
-
-            secret
-        };
-
-        let bob_shared_secret = {
-            let mut secret: Vec<u8> = vec![];
-
-            agreement::agree_ephemeral(
-                bob_private_key,
-                agreement::UnparsedPublicKey::new(algorithm, alice_public_key),
-                ring::error::Unspecified,
-                |value| {
-                    secret.extend_from_slice(value);
-                    Ok(())
-                },
-            )
-            .unwrap();
-
-            secret
-        };
+        let bob_shared_secret = agreement::agree_ephemeral(
+            bob_private_key,
+            agreement::UnparsedPublicKey::new(algorithm, alice_public_key),
+            |value| Vec::from(value),
+        )
+        .unwrap();
 
         assert_eq!(alice_shared_secret.as_slice(), bob_shared_secret.as_slice());
     }

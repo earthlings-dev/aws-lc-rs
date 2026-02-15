@@ -1,8 +1,8 @@
 [package]
 name = "links-testing"
 version = "0.1.0"
-edition = "2021"
-rust-version = "1.70.0"
+edition.workspace = true
+rust-version.workspace = true
 publish = false
 
 [features]
@@ -13,9 +13,9 @@ aws-lc-sys = ["dep:aws-lc-sys"]
 aws-lc-fips-sys = ["dep:aws-lc-fips-sys"]
 
 [dependencies]
-aws-lc-rs = { path = "../aws-lc-rs", optional = true }
-aws-lc-sys = { path = "../aws-lc-sys", optional = true }
-aws-lc-fips-sys = { path = "../aws-lc-fips-sys", optional = true }
+aws-lc-rs = { workspace = true, optional = true }
+aws-lc-sys = { workspace = true, optional = true, default-features = true }
+aws-lc-fips-sys = { workspace = true, optional = true }
 
 [build-dependencies]
 cc.workspace = true

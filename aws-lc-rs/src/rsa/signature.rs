@@ -5,11 +5,11 @@ use std::fmt::{self, Debug, Formatter};
 use std::ops::RangeInclusive;
 
 use crate::aws_lc::{
-    EVP_PKEY_CTX_set_rsa_padding, EVP_PKEY_CTX_set_rsa_pss_saltlen, EVP_PKEY_CTX_set_signature_md,
-    RSA_bits, EVP_PKEY, EVP_PKEY_CTX, RSA_PKCS1_PSS_PADDING, RSA_PSS_SALTLEN_DIGEST,
+    EVP_PKEY, EVP_PKEY_CTX, EVP_PKEY_CTX_set_rsa_padding, EVP_PKEY_CTX_set_rsa_pss_saltlen,
+    EVP_PKEY_CTX_set_signature_md, RSA_PKCS1_PSS_PADDING, RSA_PSS_SALTLEN_DIGEST, RSA_bits,
 };
 
-use crate::digest::{self, match_digest_type, Digest};
+use crate::digest::{self, Digest, match_digest_type};
 use crate::error::Unspecified;
 use crate::ptr::LcPtr;
 use crate::rsa::key::parse_rsa_public_key;

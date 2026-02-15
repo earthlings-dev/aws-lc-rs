@@ -4,10 +4,10 @@ description = "AWS-LC is a general-purpose cryptographic library maintained by t
 version = "0.37.1"
 links = "aws_lc_0_37_1"
 authors = ["AWS-LC"]
-edition = "2021"
+edition.workspace = true
 repository = "https://github.com/aws/aws-lc-rs"
 license = "ISC AND (Apache-2.0 OR ISC) AND OpenSSL"
-rust-version = "1.71.0"
+rust-version.workspace = true
 include = [
     "LICENSE",
     "/aws-lc/**/*.c",
@@ -70,7 +70,7 @@ default = ['all-bindings']
 cmake.workspace = true
 dunce.workspace = true
 fs_extra.workspace = true
-cc = { workspace = true, features = ["parallel"] }
+cc.workspace = true
 bindgen = { workspace = true, optional = true }
 
 [package.metadata.aws-lc-sys]

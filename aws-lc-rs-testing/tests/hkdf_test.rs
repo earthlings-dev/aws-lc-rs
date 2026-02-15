@@ -1,7 +1,7 @@
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX-License-Identifier: Apache-2.0 OR ISC
 
-use aws_lc_rs::hkdf::{Prk, Salt, HKDF_SHA256};
+use aws_lc_rs::hkdf::{HKDF_SHA256, Prk, Salt};
 
 #[test]
 fn rustls_test() {

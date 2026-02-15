@@ -3,9 +3,9 @@
 
 #![cfg(debug_assertions)]
 
-use crate::fips::{assert_fips_status_indicator, FipsServiceStatus};
+use crate::fips::{FipsServiceStatus, assert_fips_status_indicator};
 use crate::hkdf::{
-    KeyType, Prk, Salt, HKDF_SHA1_FOR_LEGACY_USE_ONLY, HKDF_SHA256, HKDF_SHA384, HKDF_SHA512,
+    HKDF_SHA1_FOR_LEGACY_USE_ONLY, HKDF_SHA256, HKDF_SHA384, HKDF_SHA512, KeyType, Prk, Salt,
 };
 
 const TEST_KEY_128_BIT: [u8; 16] = [

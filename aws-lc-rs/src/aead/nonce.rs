@@ -98,8 +98,8 @@ mod tests {
 
     #[test]
     fn test_nonce_from_byte_array() {
-        use crate::aead::nonce::IV_LEN;
         use crate::aead::Nonce;
+        use crate::aead::nonce::IV_LEN;
         let iv: [u8; IV_LEN] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
         let nonce = Nonce::from(&iv);
 

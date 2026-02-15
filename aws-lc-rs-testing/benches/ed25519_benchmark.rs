@@ -6,7 +6,7 @@
 #[cfg(feature = "ring-sig-verify")]
 use aws_lc_rs::{test, test_file};
 #[cfg(feature = "ring-sig-verify")]
-use criterion::{criterion_group, criterion_main, Criterion};
+use criterion::{Criterion, criterion_group, criterion_main};
 
 #[derive(Debug)]
 pub struct Ed25519Config {

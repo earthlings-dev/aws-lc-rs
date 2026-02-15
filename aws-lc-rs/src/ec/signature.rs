@@ -2,8 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0 OR ISC
 
 use crate::aws_lc::{
-    ECDSA_SIG_new, ECDSA_SIG_set0, ECDSA_SIG_to_bytes, NID_X9_62_prime256v1, NID_secp256k1,
-    NID_secp384r1, NID_secp521r1, BIGNUM, ECDSA_SIG, EVP_PKEY,
+    BIGNUM, ECDSA_SIG, ECDSA_SIG_new, ECDSA_SIG_set0, ECDSA_SIG_to_bytes, EVP_PKEY,
+    NID_X9_62_prime256v1, NID_secp256k1, NID_secp384r1, NID_secp521r1,
 };
 
 use crate::digest::Digest;
@@ -316,20 +316,22 @@ unsafe fn ecdsa_sig_from_fixed(
     alg_id: &'static AlgorithmID,
     signature: &[u8],
 ) -> Result<LcPtr<ECDSA_SIG>, ()> {
-    let num_size_bytes = alg_id.private_key_size();
-    if signature.len() != 2 * num_size_bytes {
-        return Err(());
+    unsafe {
+        let num_size_bytes = alg_id.private_key_size();
+        if signature.len() != 2 * num_size_bytes {
+            return Err(());
+        }
+        let mut r_bn = DetachableLcPtr::<BIGNUM>::try_from(&signature[..num_size_bytes])?;
+        let mut s_bn = DetachableLcPtr::<BIGNUM>::try_from(&signature[num_size_bytes..])?;
+
+        let mut ecdsa_sig = LcPtr::new(ECDSA_SIG_new())?;
+
+        if 1 != ECDSA_SIG_set0(ecdsa_sig.as_mut_ptr(), r_bn.as_mut_ptr(), s_bn.as_mut_ptr()) {
+            return Err(());
+        }
+        r_bn.detach();
+        s_bn.detach();
+
+        Ok(ecdsa_sig)
     }
-    let mut r_bn = DetachableLcPtr::<BIGNUM>::try_from(&signature[..num_size_bytes])?;
-    let mut s_bn = DetachableLcPtr::<BIGNUM>::try_from(&signature[num_size_bytes..])?;
-
-    let mut ecdsa_sig = LcPtr::new(ECDSA_SIG_new())?;
-
-    if 1 != ECDSA_SIG_set0(ecdsa_sig.as_mut_ptr(), r_bn.as_mut_ptr(), s_bn.as_mut_ptr()) {
-        return Err(());
-    }
-    r_bn.detach();
-    s_bn.detach();
-
-    Ok(ecdsa_sig)
 }

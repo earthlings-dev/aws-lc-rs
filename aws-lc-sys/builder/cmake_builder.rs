@@ -1,14 +1,14 @@
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX-License-Identifier: Apache-2.0 OR ISC
 
-use crate::cc_builder::CcBuilder;
 use crate::OutputLib::{Crypto, Ssl};
+use crate::cc_builder::CcBuilder;
 use crate::{
-    allow_prebuilt_nasm, cargo_env, disable_jitter_entropy, effective_target, emit_warning,
-    execute_command, get_crate_cflags, is_crt_static, is_no_asm, is_no_pregenerated_src,
-    optional_env, optional_env_optional_crate_target, set_env, set_env_for_target, target_arch,
-    target_env, target_os, test_clang_cl_command, test_nasm_command, use_prebuilt_nasm,
-    OutputLibType,
+    OutputLibType, allow_prebuilt_nasm, cargo_env, disable_jitter_entropy, effective_target,
+    emit_warning, execute_command, get_crate_cflags, is_crt_static, is_no_asm,
+    is_no_pregenerated_src, optional_env, optional_env_optional_crate_target, set_env,
+    set_env_for_target, target_arch, target_env, target_os, test_clang_cl_command,
+    test_nasm_command, use_prebuilt_nasm,
 };
 use std::env;
 use std::ffi::OsString;
@@ -141,10 +141,13 @@ impl CmakeBuilder {
         }
 
         if cfg!(feature = "asan") {
-            set_env_for_target("CC", "clang");
-            set_env_for_target("CXX", "clang++");
-
-            cmake_cfg.define("ASAN", "1");
+            if execute_command("clang".as_ref(), &["--version".as_ref()]).status {
+                set_env_for_target("CC", "clang");
+                set_env_for_target("CXX", "clang++");
+                cmake_cfg.define("ASAN", "1");
+            } else {
+                emit_warning("WARNING: ASAN feature enabled but clang not found. Skipping ASAN.");
+            }
         }
 
         if let Some(cflags) = get_crate_cflags() {
@@ -269,10 +272,10 @@ impl CmakeBuilder {
             } else {
                 sh_script
             };
-            emit_warning(
-                format!(
-                    "Neither script could be tested for execution, falling back to target-based selection: {}",
-                    fallback_script.file_name().unwrap().to_str().unwrap()));
+            emit_warning(format!(
+                "Neither script could be tested for execution, falling back to target-based selection: {}",
+                fallback_script.file_name().unwrap().to_str().unwrap()
+            ));
             fallback_script
         }
     }

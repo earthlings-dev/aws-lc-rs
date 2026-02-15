@@ -27,7 +27,7 @@
 
 use core::fmt::Debug;
 
-use crate::digest::{match_digest_type, AlgorithmID};
+use crate::digest::{AlgorithmID, match_digest_type};
 use crate::error::Unspecified;
 use crate::fips::indicator_check;
 use core::ptr::null;
@@ -188,9 +188,9 @@ fn prf(
 mod tests {
     use alloc::ffi::CString;
 
-    use super::{Secret, P_SHA256, P_SHA384, P_SHA512};
+    use super::{P_SHA256, P_SHA384, P_SHA512, Secret};
 
-    #[cfg(feature = "fips")]
+    #[cfg(all(feature = "fips", not(feature = "non-fips")))]
     mod fips;
 
     #[test]

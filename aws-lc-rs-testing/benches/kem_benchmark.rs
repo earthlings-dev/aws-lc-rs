@@ -1,8 +1,8 @@
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX-License-Identifier: Apache-2.0 OR ISC
 
-use aws_lc_rs::kem::{Algorithm, DecapsulationKey, ML_KEM_1024, ML_KEM_512, ML_KEM_768};
-use criterion::{criterion_group, criterion_main, Criterion};
+use aws_lc_rs::kem::{Algorithm, DecapsulationKey, ML_KEM_512, ML_KEM_768, ML_KEM_1024};
+use criterion::{Criterion, criterion_group, criterion_main};
 
 const KEM_ALGORITHMS: &[Algorithm; 3] = &[ML_KEM_512, ML_KEM_768, ML_KEM_1024];
 

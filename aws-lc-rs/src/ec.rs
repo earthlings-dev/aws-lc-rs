@@ -3,20 +3,20 @@
 // Modifications copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX-License-Identifier: Apache-2.0 OR ISC
 
-#[cfg(feature = "fips")]
+#[cfg(all(feature = "fips", not(feature = "non-fips")))]
 use crate::aws_lc::EC_KEY_check_fips;
-#[cfg(not(feature = "fips"))]
+#[cfg(any(not(feature = "fips"), feature = "non-fips"))]
 use crate::aws_lc::EC_KEY_check_key;
 use crate::aws_lc::{
-    ECDSA_SIG_from_bytes, ECDSA_SIG_get0_r, ECDSA_SIG_get0_s, EC_GROUP_get_curve_name,
-    EC_KEY_get0_group, EC_group_p224, EC_group_p256, EC_group_p384, EC_group_p521,
-    EC_group_secp256k1, EVP_PKEY_CTX_set_ec_paramgen_curve_nid, EVP_PKEY_get0_EC_KEY,
-    NID_X9_62_prime256v1, NID_secp224r1, NID_secp256k1, NID_secp384r1, NID_secp521r1, EC_GROUP,
-    EC_KEY, EVP_PKEY, EVP_PKEY_EC,
+    EC_GROUP, EC_GROUP_get_curve_name, EC_KEY, EC_KEY_get0_group, EC_group_p224, EC_group_p256,
+    EC_group_p384, EC_group_p521, EC_group_secp256k1, ECDSA_SIG_from_bytes, ECDSA_SIG_get0_r,
+    ECDSA_SIG_get0_s, EVP_PKEY, EVP_PKEY_CTX_set_ec_paramgen_curve_nid, EVP_PKEY_EC,
+    EVP_PKEY_get0_EC_KEY, NID_X9_62_prime256v1, NID_secp224r1, NID_secp256k1, NID_secp384r1,
+    NID_secp521r1,
 };
 use crate::ec::signature::AlgorithmID;
 use crate::error::{KeyRejected, Unspecified};
-#[cfg(feature = "fips")]
+#[cfg(all(feature = "fips", not(feature = "non-fips")))]
 use crate::fips::indicator_check;
 use crate::ptr::{ConstPointer, LcPtr};
 use crate::signature::Signature;
@@ -28,7 +28,7 @@ pub(crate) mod key_pair;
 pub(crate) mod signature;
 
 const ELEM_MAX_BITS: usize = 521;
-pub(crate) const ELEM_MAX_BYTES: usize = (ELEM_MAX_BITS + 7) / 8;
+pub(crate) const ELEM_MAX_BYTES: usize = ELEM_MAX_BITS.div_ceil(8);
 
 /// The maximum length, in bytes, of an encoded public key.
 pub(crate) const PUBLIC_KEY_MAX_LEN: usize = 1 + (2 * ELEM_MAX_BYTES);
@@ -48,7 +48,7 @@ fn verify_ec_key_nid(
 }
 
 #[inline]
-#[cfg(not(feature = "fips"))]
+#[cfg(any(not(feature = "fips"), feature = "non-fips"))]
 pub(crate) fn verify_evp_key_nid(
     evp_pkey: &ConstPointer<EVP_PKEY>,
     expected_curve_nid: i32,
@@ -71,12 +71,12 @@ pub(crate) fn validate_ec_evp_key(
     })?;
     verify_ec_key_nid(&ec_key, expected_curve_nid)?;
 
-    #[cfg(not(feature = "fips"))]
+    #[cfg(any(not(feature = "fips"), feature = "non-fips"))]
     if 1 != unsafe { EC_KEY_check_key(ec_key.as_const_ptr()) } {
         return Err(KeyRejected::inconsistent_components());
     }
 
-    #[cfg(feature = "fips")]
+    #[cfg(all(feature = "fips", not(feature = "non-fips")))]
     if 1 != indicator_check!(unsafe { EC_KEY_check_fips(ec_key.as_const_ptr()) }) {
         return Err(KeyRejected::inconsistent_components());
     }
@@ -145,12 +145,12 @@ fn ecdsa_asn1_to_fixed(alg_id: &'static AlgorithmID, sig: &[u8]) -> Result<Signa
 
 #[inline]
 pub(crate) const fn compressed_public_key_size_bytes(curve_field_bits: usize) -> usize {
-    1 + (curve_field_bits + 7) / 8
+    1 + curve_field_bits.div_ceil(8)
 }
 
 #[inline]
 pub(crate) const fn uncompressed_public_key_size_bytes(curve_field_bits: usize) -> usize {
-    1 + 2 * ((curve_field_bits + 7) / 8)
+    1 + 2 * curve_field_bits.div_ceil(8)
 }
 
 #[cfg(test)]
@@ -159,8 +159,8 @@ mod tests {
         AsBigEndian, AsDer, EcPublicKeyCompressedBin, EcPublicKeyUncompressedBin, PublicKeyX509Der,
     };
     use crate::signature::{
-        EcdsaKeyPair, KeyPair, UnparsedPublicKey, ECDSA_P256_SHA256_FIXED,
-        ECDSA_P256_SHA256_FIXED_SIGNING,
+        ECDSA_P256_SHA256_FIXED, ECDSA_P256_SHA256_FIXED_SIGNING, EcdsaKeyPair, KeyPair,
+        UnparsedPublicKey,
     };
     use crate::test::from_dirty_hex;
     use crate::{signature, test};
@@ -177,8 +177,10 @@ mod tests {
         let result = EcdsaKeyPair::from_pkcs8(&ECDSA_P256_SHA256_FIXED_SIGNING, &input);
         assert!(result.is_ok());
         let key_pair = result.unwrap();
-        assert_eq!("EcdsaKeyPair { public_key: EcdsaPublicKey(\"04cf0d13a3a7577231ea1b66cf4021cd54f21f4ac4f5f2fdd28e05bc7d2bd099d1374cd08d2ef654d6f04498db462f73e0282058dd661a4c9b0437af3f7af6e724\") }",
-                   format!("{key_pair:?}"));
+        assert_eq!(
+            "EcdsaKeyPair { public_key: EcdsaPublicKey(\"04cf0d13a3a7577231ea1b66cf4021cd54f21f4ac4f5f2fdd28e05bc7d2bd099d1374cd08d2ef654d6f04498db462f73e0282058dd661a4c9b0437af3f7af6e724\") }",
+            format!("{key_pair:?}")
+        );
         assert_eq!(
             "EcdsaPrivateKey(ECDSA_P256)",
             format!("{:?}", key_pair.private_key())

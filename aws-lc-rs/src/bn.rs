@@ -1,7 +1,7 @@
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX-License-Identifier: Apache-2.0 OR ISC
 
-use crate::aws_lc::{BN_bin2bn, BN_bn2bin, BN_new, BN_num_bytes, BN_set_u64, BIGNUM};
+use crate::aws_lc::{BIGNUM, BN_bin2bn, BN_bn2bin, BN_new, BN_num_bytes, BN_set_u64};
 use crate::ptr::{ConstPointer, DetachableLcPtr, LcPtr};
 use core::ptr::null_mut;
 

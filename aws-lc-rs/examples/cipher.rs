@@ -25,9 +25,9 @@
 //! Hello World
 //! ```
 use aws_lc_rs::cipher::{
-    DecryptingKey, DecryptionContext, EncryptingKey, EncryptionContext, PaddedBlockDecryptingKey,
-    PaddedBlockEncryptingKey, UnboundCipherKey, AES_128, AES_128_KEY_LEN, AES_192, AES_192_KEY_LEN,
-    AES_256, AES_256_KEY_LEN, AES_CBC_IV_LEN, AES_CTR_IV_LEN,
+    AES_128, AES_128_KEY_LEN, AES_192, AES_192_KEY_LEN, AES_256, AES_256_KEY_LEN, AES_CBC_IV_LEN,
+    AES_CTR_IV_LEN, DecryptingKey, DecryptionContext, EncryptingKey, EncryptionContext,
+    PaddedBlockDecryptingKey, PaddedBlockEncryptingKey, UnboundCipherKey,
 };
 use aws_lc_rs::iv::FixedLength;
 use clap::{Parser, Subcommand, ValueEnum};

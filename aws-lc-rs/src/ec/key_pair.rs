@@ -7,9 +7,9 @@ use crate::aws_lc::{EVP_PKEY, EVP_PKEY_EC};
 use crate::digest::Digest;
 use crate::ec::evp_key_generate;
 use crate::ec::signature::{EcdsaSignatureFormat, EcdsaSigningAlgorithm, PublicKey};
-#[cfg(feature = "fips")]
+#[cfg(all(feature = "fips", not(feature = "non-fips")))]
 use crate::ec::validate_ec_evp_key;
-#[cfg(not(feature = "fips"))]
+#[cfg(any(not(feature = "fips"), feature = "non-fips"))]
 use crate::ec::verify_evp_key_nid;
 use core::fmt;
 use core::fmt::{Debug, Formatter};
@@ -94,9 +94,9 @@ impl EcdsaKeyPair {
         // Includes a call to `EC_KEY_check_key`
         let evp_pkey = LcPtr::<EVP_PKEY>::parse_rfc5208_private_key(pkcs8, EVP_PKEY_EC)?;
 
-        #[cfg(not(feature = "fips"))]
+        #[cfg(any(not(feature = "fips"), feature = "non-fips"))]
         verify_evp_key_nid(&evp_pkey.as_const(), alg.id.nid())?;
-        #[cfg(feature = "fips")]
+        #[cfg(all(feature = "fips", not(feature = "non-fips")))]
         validate_ec_evp_key(&evp_pkey.as_const(), alg.id.nid())?;
 
         let key_pair = Self::new(alg, evp_pkey)?;
@@ -151,12 +151,16 @@ impl EcdsaKeyPair {
     /// [SEC 1: Elliptic Curve Cryptography, Version 2.0]:
     ///     http://www.secg.org/sec1-v2.pdf
     ///
+    /// # *ring* Compatibility
+    ///  Our implementation ignores the `SecureRandom` parameter.
+    ///
     /// # Errors
     /// `error::KeyRejected` if parsing failed or key otherwise unacceptable.
     pub fn from_private_key_and_public_key(
         alg: &'static EcdsaSigningAlgorithm,
         private_key: &[u8],
         public_key: &[u8],
+        _rng: &dyn crate::rand::SecureRandom,
     ) -> Result<Self, KeyRejected> {
         let priv_evp_pkey = parse_sec1_private_bn(private_key, alg.id.nid())?;
         let pub_evp_pkey = parse_sec1_public_point(public_key, alg.id.nid())?;
@@ -187,9 +191,9 @@ impl EcdsaKeyPair {
     ) -> Result<Self, KeyRejected> {
         let evp_pkey = LcPtr::<EVP_PKEY>::parse_rfc5208_private_key(private_key, EVP_PKEY_EC)
             .or(parse_rfc5915_private_key(private_key, alg.id.nid()))?;
-        #[cfg(not(feature = "fips"))]
+        #[cfg(any(not(feature = "fips"), feature = "non-fips"))]
         verify_evp_key_nid(&evp_pkey.as_const(), alg.id.nid())?;
-        #[cfg(feature = "fips")]
+        #[cfg(all(feature = "fips", not(feature = "non-fips")))]
         validate_ec_evp_key(&evp_pkey.as_const(), alg.id.nid())?;
 
         Ok(Self::new(alg, evp_pkey)?)
@@ -299,8 +303,8 @@ impl AsDer<EcPrivateKeyRfc5915Der<'static>> for PrivateKey<'_> {
 mod tests {
     use crate::encoding::AsDer;
     use crate::signature::{
-        EcdsaKeyPair, ECDSA_P256K1_SHA256_ASN1_SIGNING, ECDSA_P256_SHA256_FIXED_SIGNING,
-        ECDSA_P384_SHA3_384_FIXED_SIGNING, ECDSA_P521_SHA512_FIXED_SIGNING,
+        ECDSA_P256_SHA256_FIXED_SIGNING, ECDSA_P256K1_SHA256_ASN1_SIGNING,
+        ECDSA_P384_SHA3_384_FIXED_SIGNING, ECDSA_P521_SHA512_FIXED_SIGNING, EcdsaKeyPair,
     };
 
     #[test]

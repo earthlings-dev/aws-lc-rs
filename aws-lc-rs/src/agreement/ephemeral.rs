@@ -1,7 +1,7 @@
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX-License-Identifier: Apache-2.0 OR ISC
 
-use crate::agreement::{agree, Algorithm, ParsedPublicKey, PrivateKey, PublicKey};
+use crate::agreement::{Algorithm, ParsedPublicKey, PrivateKey, PublicKey, agree};
 use crate::error::Unspecified;
 use crate::rand::SecureRandom;
 use core::fmt;
@@ -73,15 +73,11 @@ impl EphemeralPrivateKey {
 /// the key is used for only one key agreement.
 ///
 /// `peer_public_key` is the peer's public key. `agree_ephemeral` will return
-/// `Err(error_value)` if it does not match `my_private_key's` algorithm/curve.
+/// `Err(Unspecified)` if it does not match `my_private_key's` algorithm/curve.
 /// `agree_ephemeral` verifies that it is encoded in the standard form for the
 /// algorithm and that the key is *valid*; see the algorithm's documentation for
 /// details on how keys are to be encoded and what constitutes a valid key for
 /// that algorithm.
-///
-/// `error_value` is the value to return if an error occurs before `kdf` is
-/// called, e.g. when decoding of the peer's public key fails or when the public
-/// key is otherwise invalid.
 ///
 /// After the key agreement is done, `agree_ephemeral` calls `kdf` with the raw
 /// key material from the key agreement operation and then returns what `kdf`
@@ -93,21 +89,23 @@ impl EphemeralPrivateKey {
 // * `ECDH_P521`
 //
 /// # Errors
-/// `error_value` on internal failure.
+/// `Unspecified` on internal failure.
 #[inline]
 #[allow(clippy::needless_pass_by_value)]
 #[allow(clippy::missing_panics_doc)]
 #[allow(clippy::module_name_repetitions)]
-pub fn agree_ephemeral<B: TryInto<ParsedPublicKey>, F, R, E>(
+pub fn agree_ephemeral<B: TryInto<ParsedPublicKey>, R>(
     my_private_key: EphemeralPrivateKey,
     peer_public_key: B,
-    error_value: E,
-    kdf: F,
-) -> Result<R, E>
-where
-    F: FnOnce(&[u8]) -> Result<R, E>,
-{
-    agree(&my_private_key.0, peer_public_key, error_value, kdf)
+    kdf: impl FnOnce(&[u8]) -> R,
+) -> Result<R, Unspecified> {
+    agree(
+        &my_private_key.0,
+        peer_public_key,
+        Unspecified,
+        |key_material| Ok(kdf(key_material)),
+    )
+    .map_err(|_| Unspecified)
 }
 
 #[cfg(test)]
@@ -204,9 +202,8 @@ mod tests {
 
         assert_eq!(computed_public.algorithm(), alg);
 
-        let result = agreement::agree_ephemeral(my_private, &peer_public, (), |key_material| {
+        let result = agreement::agree_ephemeral(my_private, &peer_public, |key_material| {
             assert_eq!(key_material, &output[..]);
-            Ok(())
         });
         assert_eq!(result, Ok(()));
     }
@@ -246,9 +243,8 @@ mod tests {
 
         assert_eq!(computed_public.algorithm(), alg);
 
-        let result = agreement::agree_ephemeral(my_private, &peer_public, (), |key_material| {
+        let result = agreement::agree_ephemeral(my_private, &peer_public, |key_material| {
             assert_eq!(key_material, &output[..]);
-            Ok(())
         });
         assert_eq!(result, Ok(()));
     }
@@ -286,9 +282,8 @@ mod tests {
 
         assert_eq!(computed_public.algorithm(), alg);
 
-        let result = agreement::agree_ephemeral(my_private, &peer_public, (), |key_material| {
+        let result = agreement::agree_ephemeral(my_private, &peer_public, |key_material| {
             assert_eq!(key_material, &output[..]);
-            Ok(())
         });
         assert_eq!(result, Ok(()));
     }
@@ -326,9 +321,8 @@ mod tests {
 
         assert_eq!(computed_public.algorithm(), alg);
 
-        let result = agreement::agree_ephemeral(my_private, &peer_public, (), |key_material| {
+        let result = agreement::agree_ephemeral(my_private, &peer_public, |key_material| {
             assert_eq!(key_material, &output[..]);
-            Ok(())
         });
         assert_eq!(result, Ok(()));
     }
@@ -433,9 +427,8 @@ mod tests {
                     assert_eq!(my_private.algorithm(), alg);
 
                     let result =
-                        agreement::agree_ephemeral(my_private, &peer_public, (), |key_material| {
+                        agreement::agree_ephemeral(my_private, &peer_public, |key_material| {
                             assert_eq!(key_material, &output[..]);
-                            Ok(())
                         });
                     assert_eq!(
                         result,
@@ -444,20 +437,17 @@ mod tests {
                         test::to_hex(my_private_bytes)
                     );
                 } else {
-                    fn kdf_not_called(_: &[u8]) -> Result<(), ()> {
+                    fn kdf_not_called(_: &[u8]) {
                         panic!(
                             "The KDF was called during ECDH when the peer's \
                          public key is invalid."
                         );
                     }
                     let dummy_private_key = agreement::EphemeralPrivateKey::generate(alg, &rng)?;
-                    assert!(agreement::agree_ephemeral(
-                        dummy_private_key,
-                        &peer_public,
-                        (),
-                        kdf_not_called
-                    )
-                    .is_err());
+                    assert!(
+                        agreement::agree_ephemeral(dummy_private_key, &peer_public, kdf_not_called)
+                            .is_err()
+                    );
                 }
 
                 Ok(())
@@ -497,8 +487,8 @@ mod tests {
         let private_key =
             agreement::EphemeralPrivateKey::generate_for_test(&agreement::X25519, &mut rng)?;
         let public_key = agreement::UnparsedPublicKey::new(&agreement::X25519, public_key);
-        agreement::agree_ephemeral(private_key, public_key, Unspecified, |agreed_value| {
-            Ok(Vec::from(agreed_value))
+        agreement::agree_ephemeral(private_key, public_key, |agreed_value| {
+            Vec::from(agreed_value)
         })
     }
 }

@@ -3,12 +3,12 @@
 
 #![cfg(test)]
 
-#[cfg(feature = "fips")]
+#[cfg(all(feature = "fips", not(feature = "non-fips")))]
 mod fips;
 
 use crate::key_wrap::AesKek;
 
-use super::{BlockCipher, BlockCipherId, KeyWrap, KeyWrapPadded, AES_128, AES_256};
+use super::{AES_128, AES_256, BlockCipher, BlockCipherId, KeyWrap, KeyWrapPadded};
 
 macro_rules! block_cipher_test {
     ($name:ident, $alg:expr, $id:expr, $key_len:literal) => {

@@ -3,13 +3,6 @@
 // Modifications copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX-License-Identifier: Apache-2.0 OR ISC
 
-// Needed until MSRV >= 1.70
-#![allow(clippy::unnecessary_map_or)]
-#![allow(clippy::ref_option)]
-// Clippy can only be run on nightly toolchain
-#![cfg_attr(clippy, feature(custom_inner_attributes))]
-#![cfg_attr(clippy, clippy::msrv = "1.77")]
-
 use std::ffi::{OsStr, OsString};
 use std::fmt::Debug;
 use std::path::{Path, PathBuf};
@@ -155,7 +148,7 @@ where
     let target = target().to_lowercase();
     let target = target.replace('-', "_");
     let env_var = format!("{}_{target}", env_var.as_ref().to_str().unwrap());
-    #[allow(unused_unsafe)]
+    // SAFETY: Build scripts are single-threaded; no concurrent env readers.
     unsafe {
         env::set_var(&env_var, &value);
     }
@@ -170,7 +163,7 @@ where
     K: AsRef<OsStr>,
     V: AsRef<OsStr>,
 {
-    #[allow(unused_unsafe)]
+    // SAFETY: Build scripts are single-threaded; no concurrent env readers.
     unsafe {
         env::set_var(&env_var, &value);
     }
@@ -788,7 +781,9 @@ fn main() {
             "If bindgen is unable to locate a header file, use the \
             BINDGEN_EXTRA_CLANG_ARGS environment variable to specify additional include paths.",
         );
-        emit_warning("See: https://github.com/rust-lang/rust-bindgen?tab=readme-ov-file#environment-variables");
+        emit_warning(
+            "See: https://github.com/rust-lang/rust-bindgen?tab=readme-ov-file#environment-variables",
+        );
         emit_warning("######");
         let aws_lc_crypto_dir = Path::new(&manifest_dir).join("aws-lc").join("crypto");
         if !aws_lc_crypto_dir.exists() {
@@ -866,7 +861,7 @@ fn setup_include_paths(out_dir: &Path, manifest_dir: &Path) -> PathBuf {
     // iterate over all the include paths and copy them into the final output
     for path in include_paths {
         for child in std::fs::read_dir(path).into_iter().flatten().flatten() {
-            if child.file_type().map_or(false, |t| t.is_file()) {
+            if child.file_type().is_ok_and(|t| t.is_file()) {
                 let _ = std::fs::copy(
                     child.path(),
                     include_dir.join(child.path().file_name().unwrap()),
@@ -1044,7 +1039,7 @@ fn invoke_external_bindgen(
         "functions,types,vars,methods,constructors,destructors",
         header.as_str(),
         "--rust-target",
-        r"1.70",
+        r"1.93",
         "--output",
         gen_bindings_path.to_str().unwrap(),
         "--formatter",

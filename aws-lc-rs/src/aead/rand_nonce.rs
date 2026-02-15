@@ -6,7 +6,7 @@ use core::fmt::Debug;
 
 use super::aead_ctx::AeadCtx;
 use super::{
-    Aad, Algorithm, AlgorithmID, Nonce, Tag, UnboundKey, AES_128_GCM_SIV, AES_256_GCM_SIV,
+    AES_128_GCM_SIV, AES_256_GCM_SIV, Aad, Algorithm, AlgorithmID, Nonce, Tag, UnboundKey,
 };
 
 /// AEAD Cipher key using a randomized nonce.

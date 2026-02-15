@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0 OR ISC
 
 use aws_lc_rs::{test, test_file};
-use criterion::{criterion_group, criterion_main, Criterion};
+use criterion::{Criterion, criterion_group, criterion_main};
 
 #[derive(Copy, Clone, PartialEq, Eq, Debug)]
 enum Curve {
@@ -74,7 +74,7 @@ macro_rules! benchmark_agreement {
         private_key: EphemeralPrivateKey,
         peer_public_key: &UnparsedPublicKey<Vec<u8>>,
     ) {
-        agree_ephemeral(private_key, peer_public_key, (), |val| Ok(Vec::from(val))).unwrap();
+        agree_ephemeral(private_key, peer_public_key, |val| Vec::from(val)).unwrap();
     }
 }
         }

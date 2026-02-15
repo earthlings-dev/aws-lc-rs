@@ -23,7 +23,7 @@
 //! # FIPS
 //! The APIs offered in this module must not be used.
 
-use super::{poly1305, Nonce, Tag};
+use super::{Nonce, Tag, poly1305};
 use crate::cipher::block::BLOCK_LEN;
 use crate::cipher::chacha::{self, ChaCha20Key};
 use crate::endian::BigEndian;
@@ -203,10 +203,10 @@ pub(super) fn derive_poly1305_key(chacha_key: &ChaCha20Key, nonce: Nonce) -> pol
 
 #[cfg(test)]
 mod tests {
-    use crate::aead::chacha20_poly1305_openssh::{
-        derive_poly1305_key, OpeningKey, SealingKey, KEY_LEN, TAG_LEN,
-    };
     use crate::aead::Nonce;
+    use crate::aead::chacha20_poly1305_openssh::{
+        KEY_LEN, OpeningKey, SealingKey, TAG_LEN, derive_poly1305_key,
+    };
     use crate::cipher::chacha::ChaCha20Key;
     use crate::endian::{BigEndian, FromArray, LittleEndian};
     use crate::test;

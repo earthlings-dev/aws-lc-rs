@@ -1,5 +1,8 @@
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX-License-Identifier: Apache-2.0 OR ISC
+
+#![cfg(not(feature = "no-build"))]
+
 use aws_lc_fips_sys as aws_lc_sys;
 
 #[test]

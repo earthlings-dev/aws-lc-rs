@@ -7,7 +7,7 @@ use crate::digest::Digest;
 use crate::encoding::{AsDer, PublicKeyX509Der};
 use crate::error::Unspecified;
 use crate::evp_pkey::No_EVP_PKEY_CTX_consumer;
-use crate::pqdsa::{parse_pqdsa_public_key, AlgorithmID};
+use crate::pqdsa::{AlgorithmID, parse_pqdsa_public_key};
 use crate::ptr::LcPtr;
 use crate::signature::{ParsedPublicKey, ParsedVerificationAlgorithm, VerificationAlgorithm};
 use crate::{digest, sealed};

@@ -6,7 +6,7 @@
 #[cfg(feature = "ring-sig-verify")]
 use aws_lc_rs::{test, test_file};
 #[cfg(feature = "ring-sig-verify")]
-use criterion::{criterion_group, criterion_main, Criterion};
+use criterion::{Criterion, criterion_group, criterion_main};
 
 #[allow(dead_code)]
 #[derive(Debug)]
@@ -118,9 +118,10 @@ macro_rules! benchmark_ecdsa {
     use signature::{EcdsaKeyPair, EcdsaSigningAlgorithm, VerificationAlgorithm, EcdsaVerificationAlgorithm};
 
     pub fn create_key_pair(config: &EcdsaConfig) -> EcdsaKeyPair {
+        let rng = rand::SystemRandom::new();
         let signing = signing(config.curve, config.digest, config.format);
-        EcdsaKeyPair::from_private_key_and_public_key(signing, &config.d, &config.q)
-            .expect(&format!("Unable to build EcdsaKeyPair: {:?}", config))
+        EcdsaKeyPair::from_private_key_and_public_key(signing, &config.d, &config.q, &rng)
+            .unwrap_or_else(|_| panic!("Unable to build EcdsaKeyPair: {:?}", config))
     }
 
     pub fn signing(

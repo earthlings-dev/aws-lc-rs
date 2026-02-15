@@ -5,7 +5,7 @@
 // SPDX-License-Identifier: Apache-2.0 OR ISC
 
 use crate::aws_lc::CRYPTO_chacha_20;
-use crate::cipher::block::{Block, BLOCK_LEN};
+use crate::cipher::block::{BLOCK_LEN, Block};
 use zeroize::Zeroize;
 
 use crate::error;

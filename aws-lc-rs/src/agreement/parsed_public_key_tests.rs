@@ -2,8 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0 OR ISC
 
 use crate::agreement::{
-    agree, ParsedPublicKey, ParsedPublicKeyFormat, PrivateKey, UnparsedPublicKey, ECDH_P256,
-    ECDH_P384, ECDH_P521, X25519,
+    ECDH_P256, ECDH_P384, ECDH_P521, ParsedPublicKey, ParsedPublicKeyFormat, PrivateKey,
+    UnparsedPublicKey, X25519, agree,
 };
 use crate::encoding::{AsBigEndian, AsDer, EcPublicKeyCompressedBin, PublicKeyX509Der};
 use crate::test;
@@ -47,8 +47,8 @@ fn test_parsed_public_key_x25519_x509() {
 #[test]
 fn test_parsed_public_key_p256_uncompressed() {
     let uncompressed_key = test::from_dirty_hex(
-            "04D12DFB5289C8D4F81208B70270398C342296970A0BCCB74C736FC7554494BF6356FBF3CA366CC23E8157854C13C58D6AAC23F046ADA30F8353E74F33039872AB",
-        );
+        "04D12DFB5289C8D4F81208B70270398C342296970A0BCCB74C736FC7554494BF6356FBF3CA366CC23E8157854C13C58D6AAC23F046ADA30F8353E74F33039872AB",
+    );
     let parsed = ParsedPublicKey::new(&uncompressed_key, ECDH_P256.id.nid()).unwrap();
 
     assert_eq!(parsed.format(), ParsedPublicKeyFormat::Uncompressed);

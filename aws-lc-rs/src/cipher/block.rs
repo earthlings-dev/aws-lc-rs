@@ -50,7 +50,7 @@ impl AsMut<[u8; BLOCK_LEN]> for Block {
 mod tests {
     #[test]
     fn test_block_clone() {
-        use super::{Block, BLOCK_LEN};
+        use super::{BLOCK_LEN, Block};
         let block_a = Block::from([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]);
         #[allow(clippy::clone_on_copy)]
         let block_b = block_a.clone();
@@ -62,7 +62,7 @@ mod tests {
 
     #[test]
     fn test_block_clone_mut_ref() {
-        use super::{Block, BLOCK_LEN};
+        use super::{BLOCK_LEN, Block};
         let mut block_a = Block::from([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]);
         #[allow(clippy::clone_on_copy)]
         let mut block_b = block_a.clone();

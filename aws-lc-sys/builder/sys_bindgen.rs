@@ -1,7 +1,7 @@
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX-License-Identifier: Apache-2.0 OR ISC
 
-use crate::{emit_warning, get_rust_include_path, BindingOptions, COPYRIGHT, PRELUDE};
+use crate::{BindingOptions, COPYRIGHT, PRELUDE, emit_warning, get_rust_include_path};
 use bindgen::callbacks::{ItemInfo, ParseCallbacks};
 use std::fmt::Debug;
 use std::path::Path;
@@ -86,7 +86,7 @@ fn prepare_bindings_builder(manifest_dir: &Path, options: &BindingOptions) -> bi
         .derive_eq(true)
         .allowlist_file(r".*(/|\\)rust_wrapper\.h")
         .rustified_enum(r"point_conversion_form_t")
-        .rust_target(bindgen::RustTarget::stable(70, 0).unwrap())
+        .rust_target(bindgen::RustTarget::stable(93, 0).unwrap())
         .default_macro_constant_type(bindgen::MacroTypeVariation::Signed)
         .generate_comments(true)
         .fit_macro_constants(false)
