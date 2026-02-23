@@ -58,9 +58,9 @@ paste = "1.0.15"
 toml_edit = "0.25.1"
 
 [patch.crates-io]
-clap = { git = "https://github.com/earthlings-dev/clap.git" }
-ring = { git = "https://github.com/earthlings-dev/ring-rs.git" }
-toml_edit = { git = "https://github.com/earthlings-dev/toml.git" }
+clap = { path = "../clap" }
+ring = { path = "../ring-rs" }
+toml_edit = { path = "../toml/crates/toml_edit" }
 
 [profile.bench]
 lto = true
